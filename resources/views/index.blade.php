@@ -14,52 +14,102 @@
 <body>
 
      <header class="top-header">
-    <div class="social-icons">
-        <i class="fab fa-facebook-f"></i>
-        <i class="fab fa-pinterest"></i>
-        <i class="fab fa-instagram"></i>
-        <i class="fab fa-twitter"></i>
-        <i class="fab fa-youtube"></i>
+        <div class="social-icons">
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-pinterest"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-youtube"></i>
+        </div>
+
+        <nav class="menu">
+            <a href="#">About</a>
+            <a href="#">Collaborate</a>
+            <a href="#">Recipe Videos</a>
+            <a href="#" class="active">Super Bowl</a>
+        </nav>
+
+        <div class="search">
+            <input type="text" placeholder="Search....">
+        </div>
+    </header>
+
+    <div class="main-header">
+        <div class="logo">
+            <img src="images/Group 136.png" alt="JF Logo">
+            <h1>JugFeed</h1>
+        </div>
+
+        <!-- Hamburger button -->
+        <button class="hamburger">☰</button>
+
+        <nav class="main-menu">
+
+            <a href="#">RECIPE INDEX</a>
+
+            <!-- COURSE DROPDOWN -->
+            <div class="dropdown">
+                <button class="dropbtn">COURSE ▾</button>
+                <div class="dropdown-content">
+                    <a href="#">Appetizers</a>
+                    <a href="#">Breakfast</a>
+                    <a href="#">Dinner</a>
+                    <a href="#">Soups</a>
+                    <a href="#">Side Dishes</a>
+                    <a href="#">Desserts</a>
+                    <a href="#">Drinks</a>
+                    <a href="#">Holiday</a>
+                    <a href="#">Pet Treats</a>
+                    <a href="#">Most Popular Recipes</a>
+                </div>
+            </div>
+
+            <!-- METHOD DROPDOWN -->
+            <div class="dropdown">
+                <button class="dropbtn">METHOD ▾</button>
+                <div class="dropdown-content">
+                    <a href="#">Oven</a>
+                    <a href="#">Baking</a>
+                    <a href="#">Air Fryer</a>
+                    <a href="#">Instant Pot</a>
+                    <a href="#">Grilled</a>
+                    <a href="#">One Pot/One Pan</a>
+                    <a href="#">Skillet</a>
+                    <a href="#">Sheet Pan</a>
+                    <a href="#">Casseroles</a>
+                    <a href="#">Crock Pot & Slow Cooker</a>
+                    <a href="#">Fried</a>
+                    <a href="#">Easy Recipes</a>
+                    <a href="#">Guides</a>
+                </div>
+            </div>
+
+            <a href="#">LATEST POSTS</a>
+        </nav>
     </div>
 
-    <nav class="menu">
-        <a href="#">About</a>
-        <a href="#">Collaborate</a>
-        <a href="#">Recipe Videos</a>
-        <a href="#" class="active">Super Bowl</a>
-    </nav>
+    <script>
+        // Hamburger toggle
+        const hamburger = document.querySelector(".hamburger");
+        const mainMenu = document.querySelector(".main-menu");
 
-    <div class="search">
-        <input type="text" placeholder="Search....">
-    </div>
-</header>
+        hamburger.addEventListener("click", () => {
+            mainMenu.classList.toggle("show");
+        });
 
-<div class="main-header">
-    <div class="logo">
-        <img src="images/Group 136.png" alt="JF Logo"> 
-        <h1>JugFeed</h1>
-    </div>
+        // Dropdown mở bằng click trên mobile
+        const dropdownBtns = document.querySelectorAll(".dropbtn");
 
-    <!-- NÚT HAMBURGER (THÊM MỚI) -->
-    <button class="hamburger">☰</button>
+        dropdownBtns.forEach(btn => {
+            btn.addEventListener("click", function (e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    this.nextElementSibling.classList.toggle("show");
+                }
+            });
+        });
+    </script>
 
-    <nav class="main-menu">
-        <a href="#">RECIPE INDEX</a>
-        <a href="#">COURSE ▾</a>
-        <a href="#">METHOD ▾</a>
-        <a href="#">LATEST POSTS</a>
-    </nav>
-</div>
-
-<!-- JS Toggle Menu -->
-<script>
-    const hamburger = document.querySelector('.hamburger');
-    const mainMenu = document.querySelector('.main-menu');
-
-    hamburger.addEventListener('click', () => {
-        mainMenu.classList.toggle('show');
-    });
-</script>
 <div class="content-section">
 
     <!-- ảnh và text bên trái -->
