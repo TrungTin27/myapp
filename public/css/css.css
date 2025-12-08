@@ -1,0 +1,1325 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* TOP HEADER */
+.top-header {
+    width: 100%;
+    height: auto; /* Thay đổi thành auto để thích nghi với nội dung */
+    display: flex;
+    flex-wrap: wrap; /* Cho phép các mục xuống dòng */
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px; /* Giảm padding cho điện thoại */
+    box-sizing: border-box;
+    border-bottom: 1px solid #eaeaea;
+}
+
+/* ICONS */
+.social-icons {
+    display: flex;
+    align-items: center;
+}
+
+.social-icons i {
+    font-size: 20px;
+    margin-right: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.social-icons i:hover {
+    color: #ff5c5c;
+}
+
+/* MENU */
+.menu {
+    display: flex;
+    flex-wrap: wrap; /* Cho phép menu xuống dòng */
+    gap: 15px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #000;
+    font-size: 16px; /* Điều chỉnh kích thước chữ */
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+
+.menu a:hover {
+    background: #ffe3e3;
+}
+
+.menu a.active {
+    background: #f3bcbc;
+}
+
+/* SEARCH BOX */
+.search {
+    flex-grow: 1; /* Cho phép hộp tìm kiếm chiếm phần còn lại */
+}
+
+.search input {
+    border: none;
+    border-bottom: 2px solid #ddd;
+    background: transparent;
+    width: 100%; /* Chiếm toàn bộ chiều rộng */
+    padding: 6px 0;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.search input:focus {
+    border-bottom-color: #ff5c5c;
+}
+
+/* MAIN HEADER */
+.main-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px; /* Giảm padding cho điện thoại */
+    box-sizing: border-box;
+    border-bottom: 1px solid #eaeaea;
+    background: white;
+}
+
+/* LOGO */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo img {
+    width: 60px; /* Điều chỉnh kích thước logo */
+    height: auto;
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 28px; /* Thay đổi kích thước chữ nếu cần */
+}
+
+/* MAIN MENU */
+.main-menu {
+    display: flex;
+    flex-wrap: wrap; /* Cho phép menu xuống dòng */
+    gap: 20px; /* Giảm khoảng cách cho thiết bị nhỏ */
+}
+
+.main-menu a {
+    text-decoration: none;
+    color: #000;
+    font-size: 16px; /* Điều chỉnh kích thước chữ */
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.main-menu a:hover {
+    color: #ff5c5c;
+}
+
+/* CONTENT SECTION LAYOUT */
+.content-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+/* Media */
+@media (max-width: 768px) {
+    .top-header, .main-header {
+        flex-direction: column; /* Xếp theo cột trên màn hình nhỏ */
+        align-items: flex-start; /* Căn lề trái */
+    }
+
+    .menu, .main-menu {
+        justify-content: flex-start; /* Căn chỉnh menu bên trái */
+    }
+
+    .search input {
+        font-size: 14px; /* Giảm kích thước chữ cho thiết bị nhỏ */
+    }
+}
+
+/* Content Section */
+.content-section {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Cho phép phần tử xuống dòng */
+    padding: 20px; /* Thêm padding cho khoảng cách */
+    box-sizing: border-box;
+}
+
+/* Side Trái */
+.left-content {
+    flex: 1; /* Chiếm 65% không gian mặc định */
+    min-width: 300px; /* Đảm bảo phần tử không nhỏ hơn 300px */
+    position: relative; /* Để đảm bảo vị trí giống với nội dung ở repository */
+}
+
+.main-food-img {
+    width: 100%;
+    border-radius: 6px;
+}
+
+.food-box {
+    background: white;
+    padding: 25px;
+    margin: -40px auto 0 auto; /* Giữ đúng khoảng cách */
+    border-radius: 6px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+    position: relative;
+    z-index: 1; /* Đặt z-index cao hơn để không bị chồng chéo */
+}
+
+.food-box h2 {
+    font-size: 18px;
+    color: #6b4ba8;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.food-box p {
+    font-size: 14px;
+    color: #444;
+    margin: 0;
+}
+
+/* Side Phải — TRENDING NOW */
+.trending-box {
+    width: 300px; /* Cắt bớt chiều rộng cho không gian nhỏ */
+    background: #f5d6e6;
+    padding: 25px;
+    border-radius: 6px;
+}
+
+.trending-box h3 {
+    font-size: 24px; /* Giảm kích thước chữ cho tiêu đề */
+    margin-bottom: 50px; /* Giảm khoảng cách bên dưới */
+    color: #000;
+    font-weight: 800;
+}
+
+/* TREND ITEMS */
+.trend-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 60px;
+}
+
+.trend-item img {
+    width: 60px;
+    height: 60px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.trend-item p {
+    font-size: 14px;
+    margin: 0;
+    font-weight: 600;
+    color: #333;
+}
+
+/* ICON CENTERING */
+.icon-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+/* ICON MENU LAYOUT  */
+.icon-menu {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .content-section {
+        flex-direction: column; /* Xếp theo cột trên màn hình nhỏ */
+    }
+    
+    .left-content {
+        width: 100%; /* Full width cho màn hình nhỏ */
+    }
+
+    .trending-box {
+        width: 100%; /* Full width cho màn hình nhỏ */
+        margin-top: 20px; /* Thêm khoảng cách trên */
+    }
+    
+    .trending-box h3 {
+        font-size: 20px; /* Giảm kích thước chữ cho tiêu đề */
+    }
+}
+
+/* Handwritten (bên trái, cố định width) */
+.handwritten {
+    width: 170px;
+    flex-shrink: 0;
+}
+
+.handwritten img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Icon list (bên phải) */
+.icon-list {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: nowrap;
+}
+
+/* Icon item (hộp vuông bo nhẹ, viền mảnh) */
+.icon-item {
+    width: 115px;
+    height: 110px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+    padding: 10px;
+}
+
+/* Item active (giống hình: viền tím nhạt + bóng nhẹ) */
+.icon-item.active {
+    border-color: rgba(107, 75, 168, 0.25);
+    background: #fef7ff;
+    box-shadow: 0px 4px 12px rgba(107, 75, 168, 0.15);
+}
+
+.icon-item img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+}
+
+.icon-item p {
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #333;
+}
+
+/* BROWSE ALL */
+.browse-btn {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: #e8b0b0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.browse-btn p {
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    padding: 0 10px;
+    color: #5c3838;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .icon-menu {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .handwritten {
+        width: 150px;
+        margin-bottom: 10px;
+    }
+
+    .icon-list {
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: flex-start; /* Căn chỉnh các mục về bên trái */
+    }
+
+    .icon-item {
+        width: 45%; /* Tăng chiều rộng để hiển thị 2 cột */
+    }
+}
+
+@media (max-width: 600px) {
+    .handwritten {
+        width: 130px;
+    }
+
+    .icon-item {
+        width: 100%; /* Đặt tất cả icon chiếm full chiều rộng */
+    }
+
+    .browse-btn {
+        width: 90px; /* Giảm kích thước nút */
+        height: 90px;
+    }
+
+    .browse-btn p {
+        font-size: 12px; /* Giảm kích thước chữ trong nút */
+    }
+}
+/* chicken recipes */
+/* Tiêu đề */
+.title {
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 2px solid #efb1b1;
+    padding-bottom: 6px;
+    margin-bottom: 20px;
+}
+
+/* MAIN LAYOUT: Left big + right grid */
+.recipe-layout {
+    display: grid;
+    grid-template-columns: 3fr 2fr;  /* trái to – phải nhỏ */
+    gap: 15px;
+}
+
+/* LEFT BIG IMAGE */
+.left-big {
+    position: relative;
+    height: 372px; /* bằng 2 ảnh nhỏ + gap */
+    overflow: hidden;
+}
+
+.left-big img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Side phải: 4 ảnh */
+.right-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.card {
+    position: relative;
+    height: 180px;
+    overflow: hidden;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Overlay text */
+.info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8); /* Mờ một chút cho dễ đọc */
+    color: #000;
+    padding: 10px;
+}
+
+.info h3 {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.info p {
+    margin: 0;
+    font-size: 12px;
+}
+
+/* Button */
+.center-btn {
+    margin-top: 18px;
+    text-align: left;
+}
+
+.more-btn {
+    padding: 10px 18px;
+    background: none;
+    border: 1px solid #000;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* NEWSLETTER (màu hồng) */
+.newsletter {
+    margin-top: 40px;
+    background: #f7d9dc;
+    padding: 40px 20px;
+    text-align: center;
+    border-radius: 6px;
+}
+
+.newsletter h3 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.newsletter p {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.newsletter-form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap; /* Khả năng xuống dòng cho các ô nhập liệu */
+}
+
+.newsletter-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    min-width: 120px; /* Thiết lập chiều rộng tối thiểu */
+}
+
+.subscribe-btn {
+    padding: 10px 20px;
+    background: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* RESPONSIVE STYLES */
+@media (max-width: 900px) {
+    .recipe-layout {
+        grid-template-columns: 1fr; /* Chuyển sang 1 cột */
+    }
+
+    .left-big {
+        height: 250px; /* Giảm chiều cao cho màn hình nhỏ */
+    }
+
+    .right-grid {
+        grid-template-columns: 1fr; /* 1 cột cho các hình ảnh bên phải */
+    }
+
+    .card {
+        height: 150px; /* Giảm chiều cao card */
+    }
+
+    .newsletter-form input {
+        width: 100%; /* Chiếm full chiều ngang cho màn hình nhỏ */
+    }
+
+    .newsletter-form {
+        flex-direction: column; /* Xếp dọc cho kiểu responsive */
+    }
+}
+
+@media (max-width: 600px) {
+    .title {
+        font-size: 18px; /* Giảm kích thước tiêu đề */
+    }
+
+    .newsletter h3 {
+        font-size: 14px; /* Giảm kích thước tiêu đề newsletter */
+    }
+
+    .newsletter p {
+        font-size: 12px; /* Giảm kích thước văn bản trong newsletter */
+    }
+}
+/* chicken recipes */
+
+
+
+
+
+
+/* pasta recipes /*
+/* breakfast recipes /* /* under 10$ /* dung chung css pasta recipes
+/* Rest thân */
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+body { 
+    font-family: "Helvetica Neue", Arial, sans-serif; 
+    color: #111; 
+    line-height: 1.4; 
+    padding: 28px; 
+    background: #fff; 
+}
+
+/* Section tiêu đề */
+.title {
+    font-size: 20px;
+    font-weight: 700;
+    display: inline-block;
+    border-bottom: 2px solid #f4c0c0;
+    padding-bottom: 6px;
+    margin-bottom: 18px;
+}
+
+/* Grid */
+.pasta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px 18px;
+}
+
+/* Card */
+.card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* ảnh */
+.card-image img {
+    width: 100%;
+    height: 110px;
+    object-fit: cover;
+    display: block;
+    border-radius: 4px 4px 0 0;
+}
+
+/* Card Body */
+.card-body {
+    padding: 12px 10px;
+    background: #fff;
+}
+
+.card-title {
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.card-meta {
+    font-size: 11px;
+    color: #666;
+}
+
+/* Button */
+.controls {
+    margin-top: 28px;
+    text-align: left;
+}
+
+.more-btn {
+    padding: 10px 20px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    border: 1.5px solid #111;
+    background: #fff;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .pasta-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 18px; 
+    }
+    .card-image img { 
+        height: 150px; 
+    }
+}
+
+@media (max-width: 480px) {
+    body { 
+        padding: 16px; 
+    }
+    .pasta-grid { 
+        grid-template-columns: 1fr; 
+        gap: 14px; 
+    }
+    .card-image img { 
+        height: 200px; 
+    }
+    .title {
+        font-size: 18px;  /* Giảm kích thước tiêu đề */
+    }
+    .card-title {
+        font-size: 12px;  /* Giảm kích thước tiêu đề card */
+    }
+    .card-meta {
+        font-size: 10px;  /* Giảm kích thước metadata */
+    }
+}
+/* pasta recipes /*
+/* breakfast recipes /* /* under 10$ /* dung chung css pasta recipes
+
+
+
+
+/* reader favorites /*
+/* SECTION */
+.favorites-section-01 {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* BACKGROUND */
+.favorites-bg-01 {
+    position: absolute;
+    inset: 0;
+    background: url("images/320ea1e4696b0f2d5e9cf647d6738acd71a2be3d (1).jpg") center/cover no-repeat;
+    z-index: 1;
+}
+
+/* Chữ và line đè lên ảnh */
+.favorites-overlay-title-01 {
+    position: relative;
+    z-index: 3;
+    max-width: 1200px;
+    margin: auto;
+    padding: 50px 24px 0;
+    display: flex;
+    align-items: center;
+}
+
+/* TITLE */
+.favorites-title-01 {
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-right: 16px;
+    white-space: nowrap;
+    color: #111;
+}
+
+/* LINE ĐỎ */
+.favorites-line-01 {
+    height: 3px;
+    background: #e76b6b;
+    flex: 1;
+    border-radius: 2px;
+}
+
+/* CONTENT */
+.favorites-container-01 {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 24px 60px;
+}
+
+/* GRID CARD */
+.cards-wrapper-01 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+/* CARD */
+.card-item-01, .card-item-02, .card-item-03 {
+    background: #fff;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.card-item-01:hover,
+.card-item-02:hover,
+.card-item-03:hover {
+    transform: translateY(-8px);
+}
+
+/* Ảnh */
+.card-img-01, .card-img-02, .card-img-03 {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+/* BODY */
+.card-body-01, .card-body-02, .card-body-03 {
+    padding: 16px;
+}
+
+.rating-01, .rating-02, .rating-03 {
+    color: #f39c12;
+    font-size: 13px;
+}
+
+.card-body-01 h3,
+.card-body-02 h3,
+.card-body-03 h3 {
+    font-size: 16px;
+    margin: 8px 0;
+}
+
+.card-body-01 p,
+.card-body-02 p,
+.card-body-03 p {
+    font-size: 13px;
+    color: #555;
+}
+
+.card-btn-01,
+.card-btn-02,
+.card-btn-03 {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #111;
+}
+
+/* BUTTON CĂN TRÁI */
+.btn-wrapper-01 {
+    margin-top: 40px;
+}
+
+.find-btn-01 {
+    padding: 12px 28px;
+    border: 2px solid #111;
+    background: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.find-btn-01:hover {
+    background: #111;
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .cards-wrapper-01 { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 18px; 
+    }
+
+    .card-img-01, .card-img-02, .card-img-03 {
+        height: 180px; /* Giảm chiều cao ảnh trên thiết bị nhỏ hơn */
+    }
+
+    .favorites-overlay-title-01 {
+        padding: 30px 20px 0; /* Giảm padding cho header */
+    }
+
+    .favorites-title-01 {
+        font-size: 18px; /* Giảm kích thước tiêu đề */
+    }
+
+    .find-btn-01 {
+        width: 100%; /* Đặt nút chiếm full chiều rộng */
+    }
+}
+
+@media (max-width: 480px) {
+    .favorites-title-01 {
+        font-size: 16px; /* Giảm kích thước tiêu đề cho thiết bị cực nhỏ */
+    }
+
+    .card-body-01 h3,
+    .card-body-02 h3,
+    .card-body-03 h3 {
+        font-size: 14px; /* Giảm kích thước tiêu đề của card */
+    }
+
+    .card-body-01 p,
+    .card-body-02 p,
+    .card-body-03 p {
+        font-size: 12px; /* Giảm kích thước văn bản mô tả */
+    }
+}
+
+
+
+hello
+ 
+.about-section-02 {          
+    width: 100%;
+    background: #fff;
+    padding: 140px 0 60px;   /* Tách khỏi section trên */
+    font-family: Arial, sans-serif;
+}
+
+.about-container-02 {
+    max-width: 1200px;
+    margin: auto;
+    padding: 50px 24px;
+}
+
+/* CARD CHUNG */
+.about-card-02 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 440px;
+}
+
+/* Pha chữ */
+.about-text-02 {
+    width: 200%;
+    background: #fff;
+    padding: 40px 40px 40px 0;
+    position: relative;
+    z-index: 3;
+    margin-right: -50px; /* Để đè lên ảnh */
+}
+
+/* Tiêu đề */
+.about-title-02 {
+    font-size: 34px;
+    margin-bottom: 16px;
+}
+
+.about-intro-02,
+.about-desc-02 {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.about-btn-02 {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #e76b6b;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Ảnh */
+.about-image-wrap-02 {
+    width: 200%;
+    height: 440px;
+    position: relative;
+    z-index: 1;
+}
+
+.about-image-02 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* As Seen As */
+.about-seen-02 {
+    text-align: center;
+    margin-top: 70px;
+}
+
+.about-seen-text-02 {
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+}
+
+.about-logo-single-02 {
+    max-width: 900px;
+    width: 100%;
+    height: auto;
+    filter: grayscale(100%);
+    opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .about-card-02 {
+        flex-direction: column; /* Chuyển sang cột */
+    }
+
+    .about-text-02 {
+        width: 100%;
+        margin-right: 0;   
+        padding-right: 0;
+    }
+
+    .about-image-wrap-02 {
+        width: 100%;
+        height: 300px; /* Giảm chiều cao cho thiết bị nhỏ */
+    }
+}
+
+@media (max-width: 480px) {
+    .about-title-02 {
+        font-size: 28px; /* Giảm kích thước tiêu đề */
+    }
+
+    .about-intro-02,
+    .about-desc-02 {
+        font-size: 12px; /* Giảm kích thước văn bản cho dễ đọc hơn */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+.favorites-section-X100 {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* BACKGROUND */
+.favorites-bg-X100 {
+    position: absolute;
+    inset: 0;
+    background: url("images/320ea1e4696b0f2d5e9cf647d6738acd71a2be3d (1).jpg") center/cover no-repeat;
+    z-index: 1;
+}
+
+/* Tiêu đề + Line */
+.favorites-overlay-title-X100 {
+    position: relative;
+    z-index: 3;
+    max-width: 1200px;
+    margin: auto;
+    padding: 50px 24px 0;
+    display: flex;
+    align-items: center;
+}
+
+.favorites-title-X100 {
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-right: 16px;
+    color: #111;
+    white-space: nowrap;
+}
+
+.favorites-line-X100 {
+    height: 3px;
+    background: #e76b6b;
+    flex: 1;
+}
+
+/* CONTENT */
+.favorites-container-X100 {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 24px 60px;
+}
+
+/* GRID 3x3 */
+.cards-wrapper-X100 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+/* CARD TRONG SUỐT */
+.card-item-X100 {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(6px);
+    transition: 0.3s;
+}
+
+.card-item-X100:hover {
+    transform: translateY(-5px);
+}
+
+/* Ảnh tròn */
+.card-img-wrap-X100 {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 3px solid #fff;
+}
+
+.card-img-X100 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Rating */
+.rating-X100 {
+    color: #f1c40f;
+    font-size: 12px;
+}
+
+.card-body-X100 h3 {
+    font-size: 15px;
+    margin: 4px 0;
+    color: #111;
+}
+
+.card-body-X100 p {
+    font-size: 13px;
+    color: #333;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .cards-wrapper-X100 {
+        grid-template-columns: 1fr; /* Chuyển sang một cột */
+    }
+
+    .favorites-title-X100 {
+        font-size: 20px; /* Giảm kích thước tiêu đề */
+        letter-spacing: 1px; /* Giảm khoảng cách chữ */
+    }
+}
+
+@media (max-width: 480px) {
+    .favorites-title-X100 {
+        font-size: 18px; /* Giảm kích thước tiêu đề cho thiết bị nhỏ hơn */
+    }
+
+    .card-body-X100 h3 {
+        font-size: 14px; /* Giảm kích thước tiêu đề card */
+    }
+
+    .card-body-X100 p {
+        font-size: 12px; /* Giảm kích thước mô tả */
+    }
+}
+
+
+
+
+
+
+
+
+
+:root {
+    --bg: #FBF1BF;
+    --text: #000;
+    --muted: #666;
+    --max-width: 1200px;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.site-footer {
+    background: var(--bg);
+    padding: 30px 20px 60px;
+    text-align: center;
+    position: relative;
+    margin-top: 25px; 
+}
+
+/* MENU TRÊN */
+.footer-nav {
+    max-width: var(--max-width);
+    margin: 0 auto 25px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.footer-nav a {
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 0.5px;
+}
+
+/* HÀNG ICON Ở GIỮA */
+.social-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 55px;
+    margin-bottom: 20px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 18px;
+}
+
+/* icon */
+.sicon {
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sicon svg {
+    width: 100%;
+    height: 100%;
+    fill: #000;
+}
+
+/* Ins */
+.sicon.insta svg {
+    fill: none;
+    stroke: #000;
+    stroke-width: 2;
+}
+
+/* YTB */
+.sicon.yt svg {
+    fill: #000;
+}
+
+/* FB */
+.sicon.fb svg {
+    fill: #000;
+}
+
+.copy {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.4;
+    padding: 0 60px;
+}
+
+/* Button share */
+.share-btn {
+    position: absolute;
+    right: 40px;
+    bottom: 20px;
+    background: #fff;
+    border-radius: 50px;
+    padding: 8px 14px;
+    border: 1px solid #e5e5e5;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+}
+
+.share-count {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.share-icon {
+    width: 16px;
+    height: 16px;
+    background: #000;
+    mask: url('https://cdn-icons-png.flaticon.com/512/786/786205.png') no-repeat center / contain;
+}
+
+/* Hiệu ứng hover active */
+.icon-item {
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.icon-item:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.icon-item.active {
+    border-color: rgba(107, 75, 168, 0.38) !important;
+    background: #fdf2ff !important;
+    box-shadow: 0px 6px 18px rgba(107, 75, 168, 0.25);
+    transform: scale(1.05);
+}
+
+/* Icon bên trong phóng to nhẹ */
+.icon-item img {
+    transition: 0.25s ease;
+}
+
+.icon-item:hover img {
+    transform: scale(1.15);
+}
+
+.browse-btn {
+    transition: 0.25s ease;
+}
+
+.browse-btn:hover {
+    transform: scale(1.08) rotate(2deg);
+    box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.18);
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+    .footer-nav {
+        flex-direction: column;
+        gap: 15px; /* Giảm khoảng cách giữa các mục */
+    }
+
+    .copy {
+        padding: 0 20px; /* Điều chỉnh padding cho màn hình nhỏ */
+        font-size: 10px; /* Giảm kích thước chữ cho dễ đọc */
+    }
+
+    .share-btn {
+        right: 20px; /* Điều chỉnh vị trí nút share */
+    }
+
+    .social-row {
+        gap: 30px; /* Giảm khoảng cách giữa các icon */
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-nav a {
+        font-size: 10px; /* Giảm kích thước chữ cho thiết bị cực nhỏ */
+    }
+}
+
+
+
+
+
+
