@@ -13,7 +13,7 @@
 </head>
 <body>
 
-    <header class="top-header">
+     <header class="top-header">
     <div class="social-icons">
         <i class="fab fa-facebook-f"></i>
         <i class="fab fa-pinterest"></i>
@@ -40,6 +40,9 @@
         <h1>JugFeed</h1>
     </div>
 
+    <!-- NÚT HAMBURGER (THÊM MỚI) -->
+    <button class="hamburger">☰</button>
+
     <nav class="main-menu">
         <a href="#">RECIPE INDEX</a>
         <a href="#">COURSE ▾</a>
@@ -47,6 +50,16 @@
         <a href="#">LATEST POSTS</a>
     </nav>
 </div>
+
+<!-- JS Toggle Menu -->
+<script>
+    const hamburger = document.querySelector('.hamburger');
+    const mainMenu = document.querySelector('.main-menu');
+
+    hamburger.addEventListener('click', () => {
+        mainMenu.classList.toggle('show');
+    });
+</script>
 <div class="content-section">
 
     <!-- ảnh và text bên trái -->

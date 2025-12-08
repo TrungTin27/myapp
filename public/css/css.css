@@ -6,12 +6,12 @@ body {
 /* TOP HEADER */
 .top-header {
     width: 100%;
-    height: auto; /* Thay đổi thành auto để thích nghi với nội dung */
+    height: auto;
     display: flex;
-    flex-wrap: wrap; /* Cho phép các mục xuống dòng */
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    padding: 20px; /* Giảm padding cho điện thoại */
+    padding: 20px;
     box-sizing: border-box;
     border-bottom: 1px solid #eaeaea;
 }
@@ -36,14 +36,14 @@ body {
 /* MENU */
 .menu {
     display: flex;
-    flex-wrap: wrap; /* Cho phép menu xuống dòng */
+    flex-wrap: wrap;
     gap: 15px;
 }
 
 .menu a {
     text-decoration: none;
     color: #000;
-    font-size: 16px; /* Điều chỉnh kích thước chữ */
+    font-size: 16px;
     font-weight: 600;
     padding: 5px 10px;
     border-radius: 4px;
@@ -60,14 +60,14 @@ body {
 
 /* SEARCH BOX */
 .search {
-    flex-grow: 1; /* Cho phép hộp tìm kiếm chiếm phần còn lại */
+    flex-grow: 1;
 }
 
 .search input {
     border: none;
     border-bottom: 2px solid #ddd;
     background: transparent;
-    width: 100%; /* Chiếm toàn bộ chiều rộng */
+    width: 100%;
     padding: 6px 0;
     font-size: 16px;
     outline: none;
@@ -84,7 +84,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px; /* Giảm padding cho điện thoại */
+    padding: 20px;
     box-sizing: border-box;
     border-bottom: 1px solid #eaeaea;
     background: white;
@@ -98,26 +98,26 @@ body {
 }
 
 .logo img {
-    width: 60px; /* Điều chỉnh kích thước logo */
+    width: 60px;
     height: auto;
 }
 
 .logo h1 {
     margin: 0;
-    font-size: 28px; /* Thay đổi kích thước chữ nếu cần */
+    font-size: 28px;
 }
 
 /* MAIN MENU */
 .main-menu {
     display: flex;
-    flex-wrap: wrap; /* Cho phép menu xuống dòng */
-    gap: 20px; /* Giảm khoảng cách cho thiết bị nhỏ */
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .main-menu a {
     text-decoration: none;
     color: #000;
-    font-size: 16px; /* Điều chỉnh kích thước chữ */
+    font-size: 16px;
     font-weight: 600;
     cursor: pointer;
     transition: 0.2s;
@@ -137,28 +137,60 @@ body {
     box-sizing: border-box;
 }
 
-/* Media */
+/* hamburger menu mb  */
+.hamburger {
+    display: none;
+    font-size: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* RESPONSIVE */
 @media (max-width: 768px) {
+
     .top-header, .main-header {
-        flex-direction: column; /* Xếp theo cột trên màn hình nhỏ */
-        align-items: flex-start; /* Căn lề trái */
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .menu, .main-menu {
-        justify-content: flex-start; /* Căn chỉnh menu bên trái */
+        justify-content: flex-start;
     }
 
     .search input {
-        font-size: 14px; /* Giảm kích thước chữ cho thiết bị nhỏ */
+        font-size: 14px;
     }
+
+    /* HIỆN NÚT 3 GẠCH */
+    .hamburger {
+        display: block;
+        margin-top: 10px;
+    }
+
+    /* ẨN MENU CHÍNH */
+    .main-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+        margin-top: 10px;
+        padding-left: 10px;
+    }
+
+    /* HIỆN KHI BẤM */
+    .main-menu.show {
+        display: flex;
+    }
+
 }
 
-/* Content Section */
+/* CONTENT SECTION (MOBILE) */
 .content-section {
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap; /* Cho phép phần tử xuống dòng */
-    padding: 20px; /* Thêm padding cho khoảng cách */
+    flex-wrap: wrap;
+    padding: 20px;
     box-sizing: border-box;
 }
 
