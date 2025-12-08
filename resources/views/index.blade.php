@@ -7,32 +7,40 @@
 
     <link rel="stylesheet" href="{{ asset('css/css.css') }}">
 
-    
+   
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
-     <header class="top-header">
-        <div class="social-icons">
-            <i class="fab fa-facebook-f"></i>
-            <i class="fab fa-pinterest"></i>
-            <i class="fab fa-instagram"></i>
-            <i class="fab fa-twitter"></i>
-            <i class="fab fa-youtube"></i>
-        </div>
+<div class="top-header">
+    <div class="social-icons">
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-youtube"></i>
+    </div>
 
-        <nav class="menu">
-            <a href="#">About</a>
-            <a href="#">Collaborate</a>
-            <a href="#">Recipe Videos</a>
-            <a href="#" class="active">Super Bowl</a>
-        </nav>
+    <div class="menu">
+        <a href="#">Home</a>
+        <a href="#">Shop</a>
+        <a href="#">Blog</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </div>
 
-        <div class="search">
-            <input type="text" placeholder="Search....">
-        </div>
-    </header>
+    <!-- Gạch dọc -->
+    <div class="divider"></div>
+
+    <!-- Search box -->
+    <div class="search-box">
+        <input type="text" placeholder="Search...">
+        <button class="search-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </div>
+</div>
+
 
     <div class="main-header">
         <div class="logo">
@@ -88,27 +96,7 @@
         </nav>
     </div>
 
-    <script>
-        // Hamburger toggle
-        const hamburger = document.querySelector(".hamburger");
-        const mainMenu = document.querySelector(".main-menu");
-
-        hamburger.addEventListener("click", () => {
-            mainMenu.classList.toggle("show");
-        });
-
-        // Dropdown mở bằng click trên mobile
-        const dropdownBtns = document.querySelectorAll(".dropbtn");
-
-        dropdownBtns.forEach(btn => {
-            btn.addEventListener("click", function (e) {
-                if (window.innerWidth <= 768) {
-                    e.preventDefault();
-                    this.nextElementSibling.classList.toggle("show");
-                }
-            });
-        });
-    </script>
+   
 
 <div class="content-section">
 
@@ -805,37 +793,10 @@
     <span class="share-icon"></span>
   </button>
 </footer>
-<script>
-/* icon active */
-document.querySelectorAll(".icon-item").forEach((item) => {
-    item.addEventListener("click", () => {
-        document.querySelectorAll(".icon-item").forEach(i => i.classList.remove("active"));
-        
-        item.classList.add("active");
-
-        // click hiệu ứng
-        item.style.transform = "scale(1.12)";
-        setTimeout(() => {
-            item.style.transform = "scale(1.05)";
-        }, 150);
-    });
-});
-
-//mobile căn lại menu 
-function updateLayout() {
-    const menu = document.querySelector(".icon-menu");
-
-    if (window.innerWidth <= 900) {
-        menu.style.flexDirection = "column";
-        menu.style.alignItems = "flex-start";
-    } else {
-        menu.style.flexDirection = "row";
-        menu.style.alignItems = "center";
-    }
-}
-window.addEventListener("resize", updateLayout);
-updateLayout();
+<script src="{{ asset('js/js.js') }}">
 </script>
+    @yield('script')
+
 </body>
 </html>
 
