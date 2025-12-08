@@ -18,7 +18,7 @@ return new class extends Migration
           ->constrained('products')->onDelete('cascade');
 
     $table->string('title'); // Tiêu đề section (ví dụ: "Nguyên liệu", "Hướng dẫn")
-    $table->longText('content')->nullable(); // Nội dung section (có thể HTML)
+    $table->longText('content')->nullable(); // Nội dung section 
     $table->integer('sort_order')->default(0); // Thứ tự hiển thị trong mục lục
 
     $table->timestamps();

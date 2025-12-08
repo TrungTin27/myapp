@@ -17,9 +17,9 @@ return new class extends Migration
     $table->foreignId('product_id') // Thuộc công thức nào
           ->constrained('products')->onDelete('cascade');
 
-    $table->string('name'); // Tên nguyên liệu (ví dụ: "Olive oil")
-    $table->string('amount')->nullable(); // Số lượng / định lượng (ví dụ: "2 tbsp", "200g")
-    $table->integer('order')->default(0); // Thứ tự hiển thị (nếu cần sắp xếp)
+    $table->string('name'); // Tên nguyên liệu (ví dụ: "dầu oil")
+    $table->string('amount')->nullable(); // Số lượng / định lượng (ví dụ: "2 tb", "200g")
+    $table->integer('order')->default(0); // Thứ tự hiển thị 
 
     $table->timestamps();
 });

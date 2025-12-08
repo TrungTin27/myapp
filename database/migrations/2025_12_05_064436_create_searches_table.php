@@ -15,7 +15,7 @@ return new class extends Migration
     $table->id(); // ID log tìm kiếm
 
     $table->string('keyword'); // Từ khóa người dùng tìm
-    $table->integer('result_count')->default(0); // Số kết quả trả về (nếu muốn lưu)
+    $table->integer('result_count')->default(0); // Số kết quả trả về 
     $table->integer('count')->default(1); // Số lần cùng từ khóa này được tìm
     $table->timestamp('last_searched_at')->nullable(); // Lần tìm cuối
 

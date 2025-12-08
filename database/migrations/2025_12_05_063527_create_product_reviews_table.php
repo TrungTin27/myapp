@@ -17,10 +17,10 @@ return new class extends Migration
     $table->foreignId('product_id') // Thuộc sản phẩm nào
           ->constrained('products')->onDelete('cascade');
 
-    $table->foreignId('user_id')->nullable(); // Nếu có hệ thống user, lưu user_id (nullable nếu guest)
-    $table->tinyInteger('rating')->default(5); // Số sao: 1-5 (tinyInteger đủ)
+    $table->foreignId('user_id')->nullable(); // Nếu có hệ thống user, lưu user_id 
+    $table->tinyInteger('rating')->default(5); // Số sao: 1-5 
     $table->text('comment')->nullable(); // Nội dung đánh giá
-    $table->string('author_name')->nullable(); // Tên người đánh giá (nếu guest)
+    $table->string('author_name')->nullable(); // Tên người đánh giá 
 
     $table->boolean('is_approved')->default(false); // Admin duyệt hay không
     $table->timestamps();

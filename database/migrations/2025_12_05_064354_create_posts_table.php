@@ -17,10 +17,10 @@ return new class extends Migration
     $table->string('title'); // Tiêu đề bài viết
     $table->string('slug')->nullable()->unique(); // Slug cho URL
     $table->string('thumbnail')->nullable(); // Ảnh đại diện
-    $table->longText('content')->nullable(); // Nội dung bài (HTML)
+    $table->longText('content')->nullable(); // Nội dung bài 
     $table->string('excerpt')->nullable(); // Trích đoạn ngắn
     $table->foreignId('author_id')->nullable()->constrained('users')->nullOnDelete();
-    // Nếu có bảng users, liên kết author (nullable nếu không dùng user table)
+    // Nếu có bảng users, liên kết author 
 
     $table->boolean('is_published')->default(true); // Công khai hay draft
     $table->timestamp('published_at')->nullable(); // Thời gian xuất bản

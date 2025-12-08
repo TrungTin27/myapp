@@ -17,9 +17,9 @@ return new class extends Migration
     $table->foreignId('product_id') // Khóa ngoại liên kết tới products.id
           ->constrained('products')->onDelete('cascade');
 
-    $table->longText('content')->nullable(); // Nội dung chi tiết (HTML / full text)
+    $table->longText('content')->nullable(); // Nội dung chi tiết 
     $table->longText('nutrition')->nullable(); // Thông tin dinh dưỡng (nếu có)
-    $table->longText('tips')->nullable(); // Ghi chú và mẹo (notes)
+    $table->longText('tips')->nullable(); // Ghi chú và mẹo 
 
     $table->timestamps();
 });

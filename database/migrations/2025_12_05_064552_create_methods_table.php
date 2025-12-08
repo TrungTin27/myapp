@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('methods', function (Blueprint $table) {
     $table->id(); // ID phương pháp
 
-    $table->string('name'); // Tên phương pháp (ví dụ: "Baking")
+    $table->string('name'); // Tên phương pháp 
     $table->string('icon')->nullable(); // Icon hoặc hình minh hoạ
     $table->text('description')->nullable(); // Mô tả chi tiết về phương pháp
 

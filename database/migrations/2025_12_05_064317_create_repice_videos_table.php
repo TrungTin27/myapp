@@ -18,7 +18,7 @@ return new class extends Migration
           ->constrained('products')->onDelete('cascade');
 
     $table->string('title')->nullable(); // Tiêu đề video
-    $table->string('video_url'); // URL/ID YouTube hoặc đường dẫn file mp4
+    $table->string('video_url'); // URL/ID YouTube 
     $table->string('thumbnail')->nullable(); // Hình thumbnail cho video
     $table->string('duration')->nullable(); // Độ dài (ví dụ: "05:34")
 

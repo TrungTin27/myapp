@@ -17,9 +17,9 @@ return new class extends Migration
     $table->foreignId('product_id') // Thuộc công thức / sản phẩm nào
           ->constrained('products')->onDelete('cascade');
 
-    $table->integer('step_number')->default(1); // Thứ tự bước (1,2,3...)
+    $table->integer('step_number')->default(1); // Thứ tự bước 123
     $table->text('instruction'); // Nội dung hướng dẫn của bước
-    $table->string('image')->nullable(); // Ảnh minh họa cho từng bước (nếu có)
+    $table->string('image')->nullable(); // Ảnh minh họa cho từng bước 
 
     $table->timestamps();
 });
