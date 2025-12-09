@@ -17,7 +17,7 @@ body {
 .social-icons {
     display: flex;
     align-items: center;
-    margin-right: 60px; /* khoảng cách trước menu, tăng thêm 20px */
+    margin-right: 60px; /* khoảng cách trước menu */
 }
 
 .social-icons i {
@@ -34,8 +34,8 @@ body {
 /* MENU */
 .menu {
     display: flex;
-    gap: 60px; /* giữ khoảng cách giữa các mục menu */
-    margin-right: auto; /* tự động căn giữa */
+    gap: 60px; /* khoảng cách giữa các mục */
+    margin-right: auto;
 }
 
 .menu a {
@@ -55,9 +55,9 @@ body {
 /* GẠCH DỌC */
 .divider {
     width: 3px;
-    height: 100%; /* cao full header */
-    background: #D7C7DE; /* tím nhạt */
-    margin: 0 20px; /* khoảng cách giữa divider và các phần khác */
+    height: 100%; /* full chiều cao header */
+    background: #D7C7DE;
+    margin: 0 20px;
 }
 
 /* SEARCH */
@@ -67,10 +67,10 @@ body {
 }
 
 .search-box .divider {
-    width: 3px; /* chiều rộng gạch dọc trước chữ search */
-    height: 20px; /* chiều cao gạch dọc */
-    background: #d7bdf5; /* màu sắc */
-    margin-right: 10px; /* khoảng cách giữa gạch dọc và chữ */
+    width: 3px;
+    height: 20px;
+    background: #d7bdf5;
+    margin-right: 10px;
 }
 
 .search-box input {
@@ -78,22 +78,124 @@ body {
     border: 2px solid #fff; 
     font-size: 16px;
     outline: none;
-    border-radius: 4px 0 0 4px; /* bo góc bên trái */
-    flex: 1; /* tự động mở rộng */
+    border-radius: 4px 0 0 4px;
+    flex: 1;
 }
 
 .search-btn {
-    background: #D7C7DE; /* ô hồng */
+    background: #D7C7DE;
     border: 2px solid #fff;
     border-left: none;
     padding: 8px 12px;
     cursor: pointer;
-    border-radius: 0 4px 4px 0; /* bo góc bên phải */
+    border-radius: 0 4px 4px 0;
 }
 
 .search-btn i {
     font-size: 16px;
 }
+
+/* =======================
+       RESPONSIVE 1024px
+======================= */
+@media (max-width: 1024px) {
+    .social-icons {
+        margin-right: 30px;
+    }
+
+    .menu {
+        gap: 30px;
+    }
+
+    .search-box input {
+        width: 150px;
+    }
+}
+
+/* =======================
+       RESPONSIVE 768px
+======================= */
+@media (max-width: 768px) {
+
+    .top-header {
+        padding: 10px 15px;
+    }
+
+    .menu {
+        gap: 20px;
+    }
+
+    .social-icons i {
+        font-size: 18px;
+        margin-right: 10px;
+    }
+
+    .search-box input {
+        width: 120px;
+        padding: 6px 10px;
+    }
+
+    .search-btn {
+        padding: 6px 10px;
+    }
+}
+
+/* =======================
+      RESPONSIVE 600px
+======================= */
+@media (max-width: 600px) {
+
+    .top-header {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 12px;
+    }
+
+    .social-icons {
+        order: 1;
+        width: 100%;
+        justify-content: center;
+        margin: 0 0 10px 0;
+    }
+
+    .menu {
+        display: none; /* Ẩn menu khi mobile */
+    }
+
+    .search-box {
+        order: 2;
+        width: 100%;
+        justify-content: center;
+        margin-top: 5px;
+    }
+
+    .search-box input {
+        width: 70%;
+    }
+
+    .search-box .divider {
+        height: 20px;
+    }
+}
+
+/* =======================
+      RESPONSIVE 480px
+======================= */
+@media (max-width: 480px) {
+    .search-box input {
+        width: 60%;
+    }
+
+    .social-icons i {
+        font-size: 16px;
+        margin-right: 8px;
+    }
+
+    .search-btn {
+        padding: 5px 8px;
+    }
+}
+
 
         /* MAIN HEADER */
         .main-header {

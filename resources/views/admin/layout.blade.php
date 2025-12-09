@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+    <div>
+        @yield('content')
+    </div>
+</body>
+</html>

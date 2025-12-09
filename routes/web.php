@@ -34,3 +34,18 @@ use App\Http\Controllers\categoriesController;
 Route::resource('categories', categoriesController::class);
 use App\Http\Controllers\bannersController; 
 Route::resource('banners', bannersController::class);
+
+use App\Http\Controllers\CMS\CMSController;
+
+use App\Http\Controllers\Admin\AdminController;
+
+Route::prefix('admin')->group(function () {
+         Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+
+    Route::get('/login', [AdminController::class, 'showLogin'])->name('admin.login');
+    Route::post('/login', [AdminController::class, 'login'])->name('admin.login.post');
+});
+
+Route::prefix('cms ')->group(function () {
+    Route::get('/', [CMSController::class, 'index']);
+});
