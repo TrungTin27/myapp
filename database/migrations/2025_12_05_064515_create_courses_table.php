@@ -12,20 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('courses', function (Blueprint $table) {
-    $table->id(); // ID khoá học
+            $table->id(); // ID khoá học
 
-    $table->string('title'); // Tên khoá học
-    $table->string('slug')->nullable()->unique(); // Slug cho URL
-    $table->string('short_description')->nullable(); // Mô tả ngắn
-    $table->longText('description')->nullable(); // Mô tả chi tiết khoá học
-    $table->string('image')->nullable(); // Ảnh đại diện khoá học
-    $table->integer('price')->default(0); // Giá khoá học (0 = free)
-    $table->string('level')->nullable(); // Trình độ: Beginner/Intermediate/Advanced
-    $table->string('duration')->nullable(); // Thời lượng: "6 weeks", "10 hours"
+            $table->string('title'); // Tên khoá học
+            $table->string('slug')->nullable()->unique(); // Slug cho URL
+            $table->string('short_description')->nullable(); // Mô tả ngắn
+            $table->longText('description')->nullable(); // Mô tả chi tiết khoá học
+            $table->string('image')->nullable(); // Ảnh đại diện khoá học
+            $table->integer('price')->default(0); // Giá khoá học (0 = free)
+            $table->string('level')->nullable(); // Trình độ: Beginner/Intermediate/Advanced
+            $table->string('duration')->nullable(); // Thời lượng: "6 weeks", "10 hours"
 
-    $table->timestamps();
-});
-
+            $table->timestamps();
+        });
     }
 
     /**

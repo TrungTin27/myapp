@@ -180,7 +180,7 @@
       <li class="has-sub">
         <div class="menu-item" data-toggle="sub-foods"><span class="icon"><i class="fa-solid fa-bowl-food"></i></span><span class="label">Món ăn</span><span style="margin-left:auto;color:#8aa0a8"><i class="fa-solid fa-chevron-right"></i></span></div>
         <div class="submenu" id="sub-foods">
-          <div class="sitem" data-page="all-foods">● Tất cả món ăn</div>
+          <div class="sitem" data-page="all-foods"><a href="{{ route('product.index') }} ">● Tất cả món ăn</a></div>
           <div class="sitem" data-page="food-categories">● Danh mục món</div>
           <div class="sitem" data-page="food-recipes">● Công thức</div>
           <div class="sitem" data-page="food-videos">● Video hướng dẫn</div>
@@ -318,7 +318,10 @@
               <p style="font-size:14px;color:var(--muted)">📞 0787 661 600</p>
               <div style="display:flex;gap:8px;justify-content:center;margin-top:10px">
                 <button class="btn btn-outline-secondary" id="openChangePass">Thay đổi mật khẩu</button>
-                <button class="btn btn-outline-danger" id="btnLogout">Đăng xuất</button>
+                <button class="btn btn-outline-danger" onclick="logout()" id="btnLogout">Đăng xuất</button>
+                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                </form>
               </div>
             </div>
 
@@ -380,8 +383,8 @@
 <div class="avatar-menu" id="avatarMenu">
   <div class="item"><strong>Lê Trung Tín</strong></div>
   <div class="item">📞 0787 661 600</div>
-  <div class="item"><a href="#" id="openChangePass2">Đổi mật khẩu</a></div>
-  <div class="item"><a href="#" id="logoutLink">Đăng xuất</a></div>
+  <div class="item"><a href="#" onclick="changePass()"id="openChangePass2">Đổi mật khẩu</a></div>
+  <div class="item"><a href="#" onclick="logout()" id="logoutLink">Đăng xuất</a></div>
 </div>
 
 <!-- NOTIFICATION DROPDOWN (simple) -->
@@ -642,9 +645,9 @@ document.getElementById('saveAddFood').addEventListener('click', ()=>{
   modalAddFood.style.display='none';
 });
 
-/* === Logout demo === */
-document.getElementById('btnLogout').addEventListener('click', ()=> alert('Đăng xuất (demo)'));
-document.getElementById('logoutLink').addEventListener('click', ()=> alert('Đăng xuất (demo)'));
+// Xác nhận đăng xuất //
+document.getElementById('btnLogout').addEventListener('click', ()=> alert('Xác nhận đăng xuất?'));
+document.getElementById('logoutLink').addEventListener('click', ()=> alert('Xác nhận đăng xuất?'));
 
 /* === Demo data initial rows === */
 const demoCourses = [
@@ -698,6 +701,11 @@ document.getElementById('exportExcel').addEventListener('click', ()=> alert('Xu�
 window.addEventListener('resize', ()=>{
   if(window.innerWidth>780) sidebar.classList.remove('open');
 });
+
+function logout() {
+        event.preventDefault();
+        document.getElementById('logout-form').submit();
+    }
 </script>
 </body>
 </html>

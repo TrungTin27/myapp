@@ -33,8 +33,23 @@ class AdminController extends Controller
         return back()->withErrors(['email' => 'Email or password is incorrect']);
     }
 
+    public function logout(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/admin/login');
+    }
+public function changePass(Request $request){
+        Auth::changePass();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/admin/changePass');
+    }
+
     public function index()
     {
-        return view('admin.index');
+        return view('admin.layout.app');
     }
 }

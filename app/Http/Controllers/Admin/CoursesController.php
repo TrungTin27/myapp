@@ -1,23 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\courses;
+use App\Http\Controllers\Controller;
+use App\Models\Courses;
 use Illuminate\Http\Request;
 
-class coursesController extends Controller
+class CoursesController extends Controller
 {
     // Hiển thị toàn bộ sản phẩm
     public function index()
     {
-        $courses = courses::all();
-        return view('courses.index', compact('courses'));
+        $courses = Courses::all();
+        return view('admin.Courses.index', compact('courses'));
     }
 
     // Form tạo mới
     public function create()
     {
-        return view('courses.create');
+        return view('Admin.Courses.create');
     }
 
     // Lưu vào DB
@@ -30,14 +31,15 @@ class coursesController extends Controller
     // Hiển thị chi tiết
     public function show(courses $courses)
     {
-        return view('courses.show', compact('courses'));
+        return view('Courses.show', compact('Courses'));
     }
 
     // Form chỉnh sửa
-    public function edit(courses $courses)
+    public function edit(Courses $course)
     {
-        return view('courses.edit', compact('courses'));
+        return view('admin.Courses.edit', compact('course'));
     }
+
 
     // Update sản phẩm
     public function update(Request $request, courses $courses)
