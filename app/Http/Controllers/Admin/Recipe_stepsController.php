@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\recipe_steps;
 use Illuminate\Http\Request;
 
@@ -10,8 +11,8 @@ class recipe_stepsController extends Controller
     // Hiển thị toàn bộ sản phẩm
     public function index()
     {
-        $recipe_steps = recipe_steps::all();
-        return view('recipe_steps.index', compact('recipe_steps'));
+        $recipe_steps = Recipe_steps::paginate(10);
+        return view('admin.recipe_steps.index', compact('recipe_steps'));
     }
 
     // Form tạo mới

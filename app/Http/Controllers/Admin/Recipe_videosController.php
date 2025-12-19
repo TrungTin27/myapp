@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\recipe_videos;
 use Illuminate\Http\Request;
 
-class recipe_videosController extends Controller
+class Recipe_videosController extends Controller
 {
     // Hiển thị toàn bộ sản phẩm
     public function index()
     {
-        $recipe_videos = recipe_videos::all();
-        return view('recipe_videos.index', compact('recipe_videos'));
+        $recipe_videos = Recipe_videos::paginate(10);
+        return view('admin.recipe_videos.index', compact('recipe_videos'));
     }
 
     // Form tạo mới

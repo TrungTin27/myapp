@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\contact_messages;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,7 @@ class contact_messagesController extends Controller
     public function index()
     {
         $contact_messages = contact_messages::all();
-        return view('contact_messages.index', compact('contact_messages'));
+        return view('admin.contact_messages.index', compact('contact_messages'));
     }
 
     // Form tạo mới

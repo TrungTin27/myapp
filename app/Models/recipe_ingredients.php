@@ -2,9 +2,20 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Illuminate\Database\Eloquent\Model;
 
-class recipe_ingredients extends Model
+class Recipe_ingredients extends Model
 {
-    //
+    use HasFactory;
+
+    protected $table = 'Recipe_ingredients';
+    protected $fillable = [
+        'product_id',
+        'products',
+        'name',
+        'amount',
+        'order',
+    ];
 }

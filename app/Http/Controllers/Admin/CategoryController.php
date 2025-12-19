@@ -12,7 +12,7 @@ class CategoryController extends AdminController
     // Hiển thị toàn bộ danh mục
     public function index()
     {
-        $categories = Category::all();
+        $categories = category::all();
         return view('admin.Category.index', compact('categories'));
     }
 

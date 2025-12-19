@@ -1,55 +1,61 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Product_reviewRequest;
+use App\Http\Controllers\Controller;
 use App\Models\product_reviews;
+use App\Models\Product_reviews as ModelsProduct_reviews;
+use App\Models\ProductReview;
 use Illuminate\Http\Request;
 
-class product_reviewsController extends Controller
+class Product_reviewsController extends Controller
 {
-    // Hiển thị toàn bộ sản phẩm
+    // Hiển thị danh sách
     public function index()
     {
-        $product_reviews = product_reviews::all();
-        return view('product_reviews.index', compact('product_reviews'));
+        $product_reviews = product_reviews::paginate(10);
+
+        return view('admin.Product_reviews.index', compact('product_reviews'));
     }
+
 
     // Form tạo mới
     public function create()
     {
-        return view('product_reviews.create');
+        return view('admin.product_reviews.create');
     }
 
-    // Lưu vào DB
-    public function store(Request $request)
+    // Lưu DB
+
+
+    public function store(Product_reviewRequest $request)
     {
-        product_reviews::create($request->all());
-        return redirect()->route('product_reviews.index');
+        product_reviews::create($request->validated());
+
+        return redirect()
+            ->route('product_reviews.index')
+            ->with('success', 'Thêm đánh giá thành công');
     }
 
-    // Hiển thị chi tiết
-    public function show(product_reviews $product_reviews)
-    {
-        return view('product_reviews.show', compact('product_reviews'));
-    }
 
     // Form chỉnh sửa
-    public function edit(product_reviews $product_reviews)
+    public function edit(product_reviews $productReview)
     {
-        return view('product_reviews.edit', compact('product_reviews'));
+        return view('admin.product_reviews.edit', compact('productReview'));
     }
 
-    // Update sản phẩm
-    public function update(Request $request, product_reviews $product_reviews)
+    // Cập nhật
+    public function update(Request $request, product_reviews $productReview)
     {
-        $product_reviews->update($request->all());
+        $productReview->update($request->all());
         return redirect()->route('product_reviews.index');
     }
 
-    // Xoá sản phẩm
-    public function destroy(product_reviews $product_reviews)
+    // Xoá
+    public function destroy(product_reviews $productReview)
     {
-        $product_reviews->delete();
+        $productReview->delete();
         return redirect()->route('product_reviews.index');
     }
 }

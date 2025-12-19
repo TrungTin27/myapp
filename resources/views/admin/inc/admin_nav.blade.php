@@ -27,12 +27,12 @@
         </div>
         <div class="d-flex justify-content-around align-items-center align-items-stretch">
             <div class="d-flex align-items-center">
-                <a class="btn btn-icon btn-circle btn-light mr-md-2" href="#" >
+                <a class="btn btn-icon btn-circle btn-light mr-md-2" href="#">
                     <i class="fas fa-comments"></i>
-                    {{--  @if(!empty($unreadCount) && $unreadCount > 0)
+                    {{-- @if(!empty($unreadCount) && $unreadCount > 0)
                         <span class="badge-bg-danger-1">{{ $unreadCount }}</span>
                     @endif --}}
-                   
+
                 </a>
             </div>
             <div class="d-flex align-items-center">
@@ -48,25 +48,25 @@
                         @forelse(auth()->user()->notifications as $notification)
                             <li>
                                 <a href="{{ route('admin.notifications.read', $notification->id) }}"
-                                    class="dropdown-item d-flex align-items-start {{ is_null($notification->read_at) ? 'fw-bold' : '' }}">
-                                    @if(is_null($notification->read_at))
-                                        <span class="text-primary me-2 mr-md-2">●</span>
-                                    @endif
-                                    <div>
-                                        {{ $notification->data['message'] }}<br>
-                                        <small
-                                            class="text-muted">{{ \Illuminate\Support\Str::limit($notification->data['comment'], 50) }}</small>
-                                    </div>
-                                </a>
-                            </li>
+                    class="dropdown-item d-flex align-items-start {{ is_null($notification->read_at) ? 'fw-bold' : '' }}">
+                    @if(is_null($notification->read_at))
+                    <span class="text-primary me-2 mr-md-2">●</span>
+                    @endif
+                    <div>
+                        {{ $notification->data['message'] }}<br>
+                        <small
+                            class="text-muted">{{ \Illuminate\Support\Str::limit($notification->data['comment'], 50) }}</small>
+                    </div>
+                    </a>
+                </li>
 
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                        @empty
-                            <li><span class="dropdown-item">Không có thông báo mới</span></li>
-                        @endforelse
-                    </ul> --}}
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                @empty
+                <li><span class="dropdown-item">Không có thông báo mới</span></li>
+                @endforelse
+                </ul> --}}
                 </li>
             </div>
             <div class="aiz-topbar-item ml-2">
@@ -76,10 +76,10 @@
                         {{-- <span class="d-flex align-items-center">
                             <span class="avatar avatar-sm mr-md-2">
                                 <img src="{{getImage(optional(Auth::user())->avatar)}}">
-                            </span>
-                            <span class="d-none d-md-block">
-                                <span class="d-block fw-500">{{optional(Auth::user())->name}}</span>
-                            </span>
+                        </span>
+                        <span class="d-none d-md-block">
+                            <span class="d-block fw-500">{{optional(Auth::user())->name}}</span>
+                        </span>
                         </span> --}}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated dropdown-menu-md">

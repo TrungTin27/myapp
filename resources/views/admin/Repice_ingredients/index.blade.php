@@ -1,15 +1,15 @@
 @extends('admin.layout.app')
 @section('title')
-@lang('Quản lí sản phẩm')
+@lang('Thành phần công thức')
 @endsection
 @section('content')
 <div class="aiz-titlebar text-left mt-2 mb-3">
     <div class="align-items-center">
-        <h1 class="h3"><strong>@lang('Danh sách sản phẩm')</strong></h1>
+        <h1 class="h3"><strong>@lang('Danh sách thành phần công thức')</strong></h1>
     </div>
 </div>
 <div class="filter">
-    <form class="" id="food" action="{{ route('product.index') }}" method="GET">
+    <form class="" id="food" action="{{ route('ingredients.index') }}" method="GET">
         <div class="row gutters-5 mb-2 gap-4" style="row-gap: 10px">
             <div class="col-md-8 d-flex search">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 search_icon" fill="none" viewBox="0 0 24 24"
@@ -21,7 +21,7 @@
                     value="{{ request('search') }}" placeholder="@lang('Tìm kiếm theo tên')">
             </div>
             <div class="col-md-4 text-md-right add-new ">
-                <a href="{{ route('product.create') }}"
+                <a href="{{ route('ingredients.index') }}"
                     class="btn btn-info btn-add-food d-flex justify-content-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
@@ -85,17 +85,18 @@
             <thead>
                 <tr class="text-center">
                     <th class="w-60 font-weight-800">STT</th>
-                    <th>@lang('Ảnh')</th>
-                    <th>@lang('Tên')</th>
-                    <th>@lang('Nhà cung cấp')</th>
-                    <th>@lang('Giá')</th>
+                    <th>@lang('product_id')</th>
+                    <th>@lang('products')</th>
+                    <th>@lang('name')</th>
+                    <th>@lang('amount')</th>
+                    <th>@lang('order')</th>
                     <th class="w-140">@lang('Trạng thái')</th>
                     <th class="" style="width: 15%;">@lang('Điều chỉnh')</th>
                 </tr>
             </thead>
             <tbody>
-                @php($stt = ($products->currentPage() - 1) * $products->perPage())
-                @forelse ($products as $key => $item)
+                @php($stt = ($recipe_ingredients->currentPage() - 1) * $recipe_ingredients->perPage())
+                @forelse ($recipe_ingredients as $key => $item)
                 <tr class="text-center">
                     <td>{{ ++$stt }}</td>
                     <td class="font-weight-400 align-middle"><img src="{{ asset('storage/' . $item->image) }}" alt="image" width="100"></td>

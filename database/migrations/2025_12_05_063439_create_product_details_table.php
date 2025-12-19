@@ -12,18 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('product_details', function (Blueprint $table) {
-    $table->id(); // ID bản ghi chi tiết
+            $table->id(); // ID bản ghi chi tiết
 
-    $table->foreignId('product_id') // Khóa ngoại liên kết tới products.id
-          ->constrained('products')->onDelete('cascade');
+            $table->foreignId('product_id') // Khóa ngoại liên kết tới products.id
+                ->constrained('products')->onDelete('cascade');
 
-    $table->longText('content')->nullable(); // Nội dung chi tiết 
-    $table->longText('nutrition')->nullable(); // Thông tin dinh dưỡng (nếu có)
-    $table->longText('tips')->nullable(); // Ghi chú và mẹo 
+            $table->longText('content')->nullable(); // Nội dung chi tiết 
+            $table->longText('nutrition')->nullable(); // Thông tin dinh dưỡng (nếu có)
+            $table->longText('tips')->nullable(); // Ghi chú và mẹo 
 
-    $table->timestamps();
-});
-
+            $table->timestamps();
+        });
     }
 
     /**

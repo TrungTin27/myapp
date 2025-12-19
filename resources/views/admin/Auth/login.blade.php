@@ -18,7 +18,7 @@
         <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">
             Đăng nhập Admin
         </h2>
-
+        
         {{-- Form login --}}
         <form action="/admin/login" method="POST">
             @csrf

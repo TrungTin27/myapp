@@ -1,6 +1,6 @@
 @extends('admin.layout.app')
 @section('title')
-@lang('Đăng ký banner')
+@lang('Banner')
 @endsection
 @section('content')
 <div class="aiz-titlebar text-left mt-2 mb-3">

@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\recipe_sections;
+use App\Models\Recipe_sections as ModelsRecipe_sections;
 use Illuminate\Http\Request;
 
 class recipe_sectionsController extends Controller
@@ -10,8 +12,9 @@ class recipe_sectionsController extends Controller
     // Hiển thị toàn bộ sản phẩm
     public function index()
     {
-        $recipe_sections = recipe_sections::all();
-        return view('recipe_sections.index', compact('recipe_sections'));
+        $recipe_sections = Recipe_sections::paginate(10); // hoặc 5, 15
+
+        return view('admin.recipe_sections.index', compact('recipe_sections'));
     }
 
     // Form tạo mới

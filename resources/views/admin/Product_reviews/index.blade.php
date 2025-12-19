@@ -1,15 +1,15 @@
 @extends('admin.layout.app')
 @section('title')
-@lang('Quản lí sản phẩm')
+@lang('Đánh giá sản phẩm')
 @endsection
 @section('content')
 <div class="aiz-titlebar text-left mt-2 mb-3">
     <div class="align-items-center">
-        <h1 class="h3"><strong>@lang('Danh sách sản phẩm')</strong></h1>
+        <h1 class="h3"><strong>@lang('Đánh giá sản phẩm')</strong></h1>
     </div>
 </div>
 <div class="filter">
-    <form class="" id="food" action="{{ route('product.index') }}" method="GET">
+    <form class="" id="food" action="{{ route('product_reviews.index') }}" method="GET">
         <div class="row gutters-5 mb-2 gap-4" style="row-gap: 10px">
             <div class="col-md-8 d-flex search">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 search_icon" fill="none" viewBox="0 0 24 24"
@@ -21,7 +21,7 @@
                     value="{{ request('search') }}" placeholder="@lang('Tìm kiếm theo tên')">
             </div>
             <div class="col-md-4 text-md-right add-new ">
-                <a href="{{ route('product.create') }}"
+                <a href="{{ route('product_reviews.create') }}"
                     class="btn btn-info btn-add-food d-flex justify-content-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
@@ -40,15 +40,6 @@
                 <input type="date" onkeypress='return event.charCode >=48 && event.charCode<=57' autocomplete="off"
                     class="form-control custom-placeholder" name="end_date" id="end_date"
                     placeholder="{{ __('Ngày kết thúc') }}" value="{{ request('end_date') }}">
-            </div>
-            <div class="col-md-4 res-stock">
-                <select class="form-control form-control-sm aiz-selectpicker mb-2 mb-md-0 font-weight-500" id="stock"
-                    name="stock">
-                    <option value="">@lang('Trạng thái')</option>
-                    <option value="in_stock" {{ request('stock') == 'in_stock' ? 'selected' : '' }}>@lang('Còn hàng')</option>
-                    <option value="out_of_stock" {{ request('stock') == 'out_of_stock' ? 'selected' : '' }}>@lang('Hết hàng')</option>
-                </select>
-                <div class="custom-down"><i class="fas fa-chevron-down"></i></div>
             </div>
             <div class="col-md-2 res-status">
                 <button type="submit" class="pl-0 pr-0 btn btn-info w-100 d-flex btn-responsive justify-content-center">
@@ -81,33 +72,36 @@
 </form>
 <div class="card">
     <div class="custom-overflow repon">
-        <table class="table">
+        <table class="table ">
             <thead>
                 <tr class="text-center">
                     <th class="w-60 font-weight-800">STT</th>
-                    <th>@lang('Ảnh')</th>
-                    <th>@lang('Tên')</th>
-                    <th>@lang('Nhà cung cấp')</th>
-                    <th>@lang('Giá')</th>
+                    <th>@lang('Thuộc sản phẩm')</th>
+                    <th>@lang('Id user')</th>
+                    <th>@lang('Số sao')</th>
+                    <th>@lang('Nội dung đánh giá')</th>
+                    <th>@lang('Tên người đánh giá')</th>
                     <th class="w-140">@lang('Trạng thái')</th>
                     <th class="" style="width: 15%;">@lang('Điều chỉnh')</th>
                 </tr>
             </thead>
             <tbody>
-                @php($stt = ($products->currentPage() - 1) * $products->perPage())
-                @forelse ($products as $key => $item)
+                {{-- @php($stt = ($products->currentPage() - 1) * $products->perPage())--}}
+                @php($stt = ($product_reviews->currentPage() - 1) * $product_reviews->perPage())
+                @forelse ($product_reviews as $key => $item)
                 <tr class="text-center">
                     <td>{{ ++$stt }}</td>
                     <td class="font-weight-400 align-middle"><img src="{{ asset('storage/' . $item->image) }}" alt="image" width="100"></td>
-                    <td class="font-weight-400 align-middle text-overflow">{{ $item->name }}</td>
-                    <td class="font-weight-400 align-middle">{{ $item->supplier->name }}</td>
-                    <td class="font-weight-400 align-middle">{{number_format($item->price, 0, ',', ',') }} VND</td>
+                    <td class="font-weight-400 align-middle text-overflow">{{ $item->title }}</td>
+                    <td class="font-weight-400 align-middle">{{ $item->subtitle}}</td>
+                    <td class="font-weight-400 align-middle">{{$item->link}}</td>
+                    <td class="font-weight-400 align-middle">{{$item->sort_order}}</td>
 
-                    <td>{{ $item->stock == 0 ? 'Hết hàng' : 'Còn hàng' }}</td>
+                    <td>{{ $item->is_active == 0 ? 'Không hoạt động' : 'Hoạt động' }}</td>
                     <td class="text-center">
 
                         <a class="btn mb-1 btn-soft-primary btn-icon btn-circle btn-sm"
-                            href="{{ route('admin.products.edit', $item->id) }}" title="@lang('Chỉnh sửa')">
+                            href="{{ route('banners.edit', $item->id) }}" title="@lang('Chỉnh sửa')">
                             <i class="las la-edit"></i>
                         </a>
                         <a class="btn mb-1 btn-soft-danger btn-icon btn-circle click-modal-delete btn-sm" data-id="{{ $item->id }}"
@@ -135,7 +129,7 @@
             text: "{{ __('Bạn có chắc chắn muốn xóa phần từ này không?') }}"
         }).then((result) => {
             $.ajax({
-                url: "/admin/products/" + id,
+                url: "/admin/product_reviews/" + id,
                 type: "POST",
                 data: {
                     _method: "DELETE",

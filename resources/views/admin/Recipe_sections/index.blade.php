@@ -1,6 +1,6 @@
 @extends('admin.layout.app')
 @section('title')
-@lang('Quản lí sản phẩm')
+@lang('Đăng ký sản phẩm')
 @endsection
 @section('content')
 <div class="aiz-titlebar text-left mt-2 mb-3">
@@ -94,8 +94,8 @@
                 </tr>
             </thead>
             <tbody>
-                @php($stt = ($products->currentPage() - 1) * $products->perPage())
-                @forelse ($products as $key => $item)
+                @php($stt = ($recipe_sections->currentPage() - 1) * $recipe_sections->perPage())
+                @forelse ($recipe_sections as $key => $item)
                 <tr class="text-center">
                     <td>{{ ++$stt }}</td>
                     <td class="font-weight-400 align-middle"><img src="{{ asset('storage/' . $item->image) }}" alt="image" width="100"></td>
