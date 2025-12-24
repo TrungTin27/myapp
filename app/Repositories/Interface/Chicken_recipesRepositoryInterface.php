@@ -1,6 +1,6 @@
 <?php
 namespace App\Repositories\Interface;
-interface SupplierRepositoryInterface{
+interface Chicken_recipesRepositoryInterface{
     public function create(array $data);
     public function update($id,array $data);
     public function delete($id);

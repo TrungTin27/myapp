@@ -7,16 +7,19 @@
     <h1 class="h3">Cập nhật banner</h1>
 </div>
 
-<form action="{{ route('banners.update',$banner->id) }}" method="PUT" enctype="multipart/form-data">
+<form action="{{ route('banners.update', $banner->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
+
+
     @include('admin.Banners.form', [
     "title" => $banner->title,
     "link" => $banner->link,
     "is_active" => $banner->is_active,
     "image" => $banner->image,
     "subtitle" => $banner->subtitle,
-    "sort_order"=>$banner->sort_order,
+    "sort_order" => $banner->sort_order,
     ])
 </form>
-@endsection
+
+@endsection 

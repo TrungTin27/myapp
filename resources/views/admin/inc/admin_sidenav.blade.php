@@ -154,15 +154,67 @@
                     </a>
                 </li>
 
-                <!-- Tips messenger -->
+                <!-- Trending now/latest posts/posts -->
+                <li class="aiz-side-nav-item mb-1">
+                    <a href="{{ route('posts.index') }}"
+                        class="aiz-side-nav-link d-flex align-items-center gap-2 px-3 py-2 rounded
+                       {{ request()->is('Posts.*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
+                        <i class="las la-list-ol aiz-side-nav-icon"></i>
+                        <span class="aiz-side-nav-text">TRENDING NOW/LATEST POSTS/POSTS</span>
+                    </a>
+                </li>
+
+                <!-- Contact messages -->
                 <li class="aiz-side-nav-item mb-1">
                     <a href="{{ route('contact_messages.index') }}"
                         class="aiz-side-nav-link d-flex align-items-center gap-2 px-3 py-2 rounded
-                       {{ request()->is('messages*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
+                       {{ request()->is('contact_messages*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
                         <i class="las la-comments aiz-side-nav-icon"></i>
-                        <span class="aiz-side-nav-text">Tips messenger</span>
+                        <span class="aiz-side-nav-text">Contact Messages</span>
                     </a>
                 </li>
+
+                <!-- Chicken_recipes -->
+                <li class="aiz-side-nav-item mb-1">
+                    <a href="{{ route('chicken_recipes.index') }}"
+                        class="aiz-side-nav-link d-flex align-items-center gap-2 px-3 py-2 rounded
+                       {{ request()->is('Chicken_recipes*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
+                        <i class="las la-comments aiz-side-nav-icon"></i>
+                        <span class="aiz-side-nav-text">CHICKEN RECIPES</span>
+                    </a>
+                </li>
+
+                <!-- Pasta_recipes -->
+                <li class="aiz-side-nav-item mb-1">
+                    <a href="{{ route('pasta_recipes.index') }}"
+                        class="aiz-side-nav-link d-flex align-items-center gap-2 px-3 py-2 rounded
+                       {{ request()->is('Pasta_recipes*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
+                        <i class="las la-comments aiz-side-nav-icon"></i>
+                        <span class="aiz-side-nav-text">PASTA RECIPES</span>
+                    </a>
+                </li>
+
+                <!-- Breakfast_recipes -->
+                <li class="aiz-side-nav-item mb-1">
+                    <a href="{{ route('breakfast_recipes.index') }}"
+                        class="aiz-side-nav-link d-flex align-items-center gap-2 px-3 py-2 rounded
+                       {{ request()->is('Breakfast_recipes*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
+                        <i class="las la-comments aiz-side-nav-icon"></i>
+                        <span class="aiz-side-nav-text">BREAKFAST RECIPES</span>
+                    </a>
+                </li>
+
+                <!-- Under_recipes -->
+                <li class="aiz-side-nav-item mb-1">
+                    <a href="{{ route('under_recipes.index') }}"
+                        class="aiz-side-nav-link d-flex align-items-center gap-2 px-3 py-2 rounded
+                       {{ request()->is('Under_recipes*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
+                        <i class="las la-comments aiz-side-nav-icon"></i>
+                        <span class="aiz-side-nav-text">UNDER 10$</span>
+                    </a>
+                </li>
+
+
 
             </ul>
         </div>

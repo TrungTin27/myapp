@@ -7,15 +7,14 @@
     <h1 class="h3">Thêm nguyên liệu công thức</h1>
 </div>
 
-<form action="{{ route('recipe_ingredients.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('recipe_ingredients.create') }}" method="POST" enctype="multipart/form-data">
     @csrf
-    @include('admin.recipe_ingredients.form', [
-    "title" => old('title'),
-    "link" => old('link'),
-    "is_active" => old('is_active'),
-    "image" => old('image'),
-    "subtitle" => old('subtitle'),
-    "sort_order"=>old("sort_order"),
+    @include('admin.recipe_ingredients.create', [
+    "product_id" => old('title'),
+    "products" => old('link'),
+    "name" => old('is_active'),
+    "amount" => old('image'),
+    "order" => old('subtitle'),
     ])
 </form>
 @endsection

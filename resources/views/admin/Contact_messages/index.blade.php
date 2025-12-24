@@ -1,73 +1,78 @@
-<!-- BOOTSTRAP + LINE AWESOME -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet"
-    href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+@extends('admin.layout.app')
 
-<div class="container my-5">
-    <div class="card border-0" style="background:#fff7f5">
-        <div class="card-body p-4">
+@section('title', 'Contact')
 
-            <h5 class="fw-bold mb-1 text-uppercase">
-                Leave a Comment & Rate This Recipe
-            </h5>
-            <p class="text-muted small mb-4">
-                Your email address will not be published. Required fields are marked *
-            </p>
+@section('content')
 
-            <!-- RATE BOX -->
-            <div class="d-flex justify-content-between align-items-center p-3 mb-4 rounded"
-                style="background:#e9f3f2">
-                <span class="fw-semibold">Click the Stars to Rate This Recipe</span>
-                <div class="fs-4 text-warning">
-                    <i class="las la-star"></i>
-                    <i class="las la-star"></i>
-                    <i class="las la-star"></i>
-                    <i class="las la-star"></i>
-                    <i class="las la-star text-secondary"></i>
+<div class="aiz-titlebar mt-2 mb-3">
+    <h1 class="h3"><strong>Contact</strong></h1>
+</div>
+
+{{-- SEARCH ONLY --}}
+<div class="filter mb-3" style="display: flex;">
+    <div style="width: 70%">
+        <form action="{{ route('contact_messages.index') }}" method="GET">
+            <div class="row">
+                <div class="col-md-8">
+                    <input type="text"
+                        name="search"
+                        class="form-control"
+                        value="{{ request('search') }}"
+                        placeholder="Tìm theo First name hoặc Email">
                 </div>
             </div>
-
-            <!-- FORM -->
-            <form action="{{ route('contact_messages.store') }}" method="POST">
-                @csrf
-
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold">Name *</label>
-                        <input type="text"
-                            name="name"
-                            class="form-control"
-                            placeholder="First Name"
-                            required>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold">Email *</label>
-                        <input type="email"
-                            name="email"
-                            class="form-control"
-                            placeholder="Email"
-                            required>
-                    </div>
-                </div>
-
-                <div class="mt-3">
-                    <label class="form-label fw-semibold">Comment *</label>
-                    <textarea name="message"
-                        rows="5"
-                        class="form-control"
-                        placeholder="Write your comment..."
-                        required></textarea>
-                </div>
-
-                <div class="text-center mt-4">
-                    <button type="submit"
-                        class="btn btn-outline-dark px-4 fw-semibold">
-                        POST COMMENT
-                    </button>
-                </div>
-            </form>
-
-        </div>
+        </form>
+    </div>
+    <div class="col-md-1" style="width: 30%;">
+        <button type="button"
+            class="btn btn-info btn-sm w-100 d-flex justify-content-center align-items-center"
+            disabled>
+            <i class="las la-search"></i>
+        </button>
     </div>
 </div>
+
+{{-- TABLE --}}
+<div class="card">
+    <div class="custom-overflow">
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+                    <th class="w-60">STT</th>
+                    <th>First name</th>
+                    <th>Email address</th>
+                    <th>Tùy chỉnh</th>
+                </tr>
+            </thead>
+            <tbody>
+                @php($stt = ($contacts->currentPage() - 1) * $contacts->perPage())
+                @forelse ($contacts as $item)
+                <tr>
+                    <td>{{ ++$stt }}</td>
+                    <td>{{ $item->name }}</td>
+                    <td>{{ $item->email }}</td>
+                    <td class="text-center">
+                        <form action="{{ route('contact.delete', $item->id) }}"
+                            method="POST"
+                            class="d-inline"
+                            onsubmit="return confirm('Bạn chắc chắn muốn xoá?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                class="btn btn-soft-danger btn-icon btn-circle btn-sm">
+                                <i class="las la-trash"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="3">Không có dữ liệu</td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@endsection

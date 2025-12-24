@@ -3,54 +3,48 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\contact_messages;
+use App\Http\Requests\ContactRequest;
+use App\Models\Contact_messages;
 use Illuminate\Http\Request;
+use App\Services\ContactService;
 
 class contact_messagesController extends Controller
 {
+     private $contactService;
+
+    public function __construct(ContactService $contactService)
+    {
+        $this->contactService = $contactService;
+    }
     // Hiển thị toàn bộ sản phẩm
     public function index()
     {
-        $contact_messages = contact_messages::all();
-        return view('admin.contact_messages.index', compact('contact_messages'));
+        $contacts = Contact_messages::latest()->paginate(10);
+        return view('admin.contact_messages.index', compact('contacts'));
     }
 
-    // Form tạo mới
-    public function create()
-    {
-        return view('contact_messages.create');
-    }
 
     // Lưu vào DB
-    public function store(Request $request)
+    public function store(ContactRequest $request)
     {
         contact_messages::create($request->all());
-        return redirect()->route('contact_messages.index');
-    }
-
-    // Hiển thị chi tiết
-    public function show(contact_messages $contact_messages)
-    {
-        return view('contact_messages.show', compact('contact_messages'));
-    }
-
-    // Form chỉnh sửa
-    public function edit(contact_messages $contact_messages)
-    {
-        return view('contact_messages.edit', compact('contact_messages'));
-    }
-
-    // Update sản phẩm
-    public function update(Request $request, contact_messages $contact_messages)
-    {
-        $contact_messages->update($request->all());
-        return redirect()->route('contact_messages.index');
+        return redirect()->route('home');
     }
 
     // Xoá sản phẩm
-    public function destroy(contact_messages $contact_messages)
+   public function destroy($id)
     {
-        $contact_messages->delete();
-        return redirect()->route('contact_messages.index');
+        try {
+        $delete = $this->contactService->delete($id);
+
+        if ($delete) {
+            return redirect()->route('contact_messages.index');
+        }
+
+        return back()->with('error', 'Xóa thất bại');
+
+    } catch (\Throwable $e) {
+        return back()->with('error', $e->getMessage());
+    }
     }
 }

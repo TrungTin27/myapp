@@ -7,31 +7,46 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Tạo bảng posts
      */
     public function up(): void
     {
         Schema::create('posts', function (Blueprint $table) {
-    $table->id(); // ID bài viết
 
-    $table->string('title'); // Tiêu đề bài viết
-    $table->string('slug')->nullable()->unique(); // Slug cho URL
-    $table->string('thumbnail')->nullable(); // Ảnh đại diện
-    $table->longText('content')->nullable(); // Nội dung bài 
-    $table->string('excerpt')->nullable(); // Trích đoạn ngắn
-    $table->foreignId('author_id')->nullable()->constrained('users')->nullOnDelete();
-    // Nếu có bảng users, liên kết author 
+            // ID tự tăng (khóa chính)
+            $table->id();
 
-    $table->boolean('is_published')->default(true); // Công khai hay draft
-    $table->timestamp('published_at')->nullable(); // Thời gian xuất bản
+            // Tiêu đề bài viết (hiển thị ngoài FE & admin)
+            $table->string('title');
 
-    $table->timestamps();
-});
+            // Slug dùng cho URL: /post/slug-bai-viet
+            $table->string('slug')->unique();
 
+            // Ảnh đại diện (Trending Now chỉ cần cái này)
+            $table->string('thumbnail')->nullable();
+
+            // Nội dung bài viết (chi tiết, có thể dùng cho trang post riêng)
+            $table->longText('content')->nullable();
+
+            // Mô tả ngắn (dùng cho list bài, SEO)
+            $table->string('excerpt')->nullable();
+
+            // Đánh dấu bài này có nằm trong "Trending Now" hay không
+            $table->boolean('is_trending')->default(false);
+
+            // Trạng thái bài viết: hiển thị hay ẩn
+            $table->enum('status', ['draft', 'published'])->default('published');
+
+            // Ngày xuất bản (để sắp xếp bài mới)
+            $table->timestamp('published_at')->nullable();
+
+            // created_at & updated_at
+            $table->timestamps();
+        });
     }
 
     /**
-     * Reverse the migrations.
+     * Xóa bảng posts
      */
     public function down(): void
     {

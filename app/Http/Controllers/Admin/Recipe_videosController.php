@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\recipe_videos;
 use Illuminate\Http\Request;
 
-class Recipe_videosController extends Controller
+class recipe_videosController extends Controller
 {
     // Hiển thị toàn bộ sản phẩm
     public function index()

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Services\BannerService;
 use App\Http\Requests\BannerRequest;
 use Illuminate\Support\Facades\Storage;
+
 class BannersController extends Controller
 {
     public function __construct(public readonly BannerService $bannerService) {}

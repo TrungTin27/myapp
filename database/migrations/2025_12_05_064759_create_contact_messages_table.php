@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contact_messages', function (Blueprint $table) {
+        Schema::create('contact', function (Blueprint $table) {
             $table->id(); // ID message
 
             $table->string('name'); // Tên người gửi
             $table->string('email'); // Email người gửi
-            $table->string('subject')->nullable(); // Tiêu đề
-            $table->text('message'); // Nội dung tin nhắn
-            $table->tinyInteger('rating')->default(5); // Số sao: 1-5
-            $table->boolean('is_read')->default(false); // Đánh dấu đã đọc
             $table->timestamps();
         });
     }
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contact_messages');
+        Schema::dropIfExists('contact');
     }
 };
