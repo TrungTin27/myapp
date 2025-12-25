@@ -45,44 +45,44 @@
         <div class="aiz-side-nav-wrap">
             <ul class="aiz-side-nav-list" id="main-menu" data-toggle="aiz-side-menu">
 
-                <!-- Trang chủ -->
+                <!-- HOME -->
                 <li class="aiz-side-nav-item mb-1">
                     <a href="#"
                         class="aiz-side-nav-link d-flex align-items-center gap-2 px-3 py-2 rounded text-secondary">
                         <i class="las la-home aiz-side-nav-icon"></i>
-                        <span class="aiz-side-nav-text">Trang chủ</span>
+                        <span class="aiz-side-nav-text">HOME</span>
                     </a>
                 </li>
 
                 <!-- Quản lý sản phẩm -->
-                <li class="aiz-side-nav-item mb-1">
+                <!--<li class="aiz-side-nav-item mb-1">
                     <a href="{{ route('product.index') }}"
                         class="aiz-side-nav-link d-flex align-items-center gap-2 px-3 py-2 rounded
                        {{ request()->is('product.*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
                         <i class="las la-box aiz-side-nav-icon"></i>
                         <span class="aiz-side-nav-text">Quản lý sản phẩm</span>
                     </a>
-                </li>
+                </li> -->
 
                 <!-- Courses -->
-                <li class="aiz-side-nav-item mb-1">
+                <!--<li class="aiz-side-nav-item mb-1">
                     <a href="{{ route('courses.index') }}"
                         class="aiz-side-nav-link d-flex align-items-center gap-2 px-3 py-2 rounded
                        {{ request()->is('courses*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
                         <i class="las la-graduation-cap aiz-side-nav-icon"></i>
                         <span class="aiz-side-nav-text">Courses</span>
                     </a>
-                </li>
+                </li> -->
 
                 <!-- Category -->
-                <li class="aiz-side-nav-item mb-1">
+                <!--<li class="aiz-side-nav-item mb-1">
                     <a href="{{ route('category.index') }}"
                         class="aiz-side-nav-link d-flex align-items-center gap-2 px-3 py-2 rounded
                        {{ request()->is('category*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
                         <i class="las la-tags aiz-side-nav-icon"></i>
                         <span class="aiz-side-nav-text">Category</span>
                     </a>
-                </li>
+                </li> -->
 
                 <!-- Banner -->
                 <li class="aiz-side-nav-item mb-1">
@@ -95,64 +95,64 @@
                 </li>
 
                 <!-- Đánh giá sản phẩm -->
-                <li class="aiz-side-nav-item mb-1">
+                <!-- <li class="aiz-side-nav-item mb-1">
                     <a href="{{ route('product_reviews.index') }}"
                         class="aiz-side-nav-link d-flex align-items-center gap-2 px-3 py-2 rounded
                        {{ request()->is('product_reviews.*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
                         <i class="las la-star aiz-side-nav-icon"></i>
                         <span class="aiz-side-nav-text">Đánh giá sản phẩm</span>
                     </a>
-                </li>
+                </li> -->
 
                 <!-- Chi tiết sản phẩm -->
-                <li class="aiz-side-nav-item mb-1">
+                <!--<li class="aiz-side-nav-item mb-1">
                     <a href="{{ route('product_details.index') }}"
                         class="aiz-side-nav-link d-flex align-items-center gap-2 px-3 py-2 rounded
                        {{ request()->is('product_details.*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
                         <i class="las la-star aiz-side-nav-icon"></i>
                         <span class="aiz-side-nav-text">Chi tiết sản phẩm</span>
                     </a>
-                </li>
+                </li> -->
 
                 <!-- Thành phần công thức -->
-                <li class="aiz-side-nav-item mb-1">
+                <!--<li class="aiz-side-nav-item mb-1">
                     <a href="{{ route('ingredients.index') }}"
                         class="aiz-side-nav-link d-flex align-items-center gap-2 px-3 py-2 rounded
                        {{ request()->is('recipe_ingredients*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
                         <i class="las la-carrot aiz-side-nav-icon"></i>
                         <span class="aiz-side-nav-text">Thành phần công thức </span>
                     </a>
-                </li>
+                </li> -->
 
                 <!-- Phần công thức nấu ăn -->
-                <li class="aiz-side-nav-item mb-1">
+                <!-- <li class="aiz-side-nav-item mb-1">
                     <a href="{{ route('recipe_sections.index') }}"
                         class="aiz-side-nav-link d-flex align-items-center gap-2 px-3 py-2 rounded
                        {{ request()->is('recipe_sections*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
                         <i class="las la-layer-group aiz-side-nav-icon"></i>
                         <span class="aiz-side-nav-text">Phần công thức nấu ăn </span>
                     </a>
-                </li>
+                </li> -->
 
                 <!-- Video công thức -->
-                <li class="aiz-side-nav-item mb-1">
+                <!--<li class="aiz-side-nav-item mb-1">
                     <a href="{{ route('recipe_videos.index') }}"
                         class="aiz-side-nav-link d-flex align-items-center gap-2 px-3 py-2 rounded
                        {{ request()->is('recipe_videos*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
                         <i class="las la-video aiz-side-nav-icon"></i>
                         <span class="aiz-side-nav-text">Video công thức</span>
                     </a>
-                </li>
+                </li> -->
 
                 <!-- Các bước công thức -->
-                <li class="aiz-side-nav-item mb-1">
+                <!--<li class="aiz-side-nav-item mb-1">
                     <a href="{{ route('recipe_steps.index') }}"
                         class="aiz-side-nav-link d-flex align-items-center gap-2 px-3 py-2 rounded
                        {{ request()->is('recipe_steps*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
                         <i class="las la-list-ol aiz-side-nav-icon"></i>
                         <span class="aiz-side-nav-text">Các bước công thức</span>
                     </a>
-                </li>
+                </li> -->
 
                 <!-- Trending now/latest posts/posts -->
                 <li class="aiz-side-nav-item mb-1">
@@ -161,16 +161,6 @@
                        {{ request()->is('Posts.*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
                         <i class="las la-list-ol aiz-side-nav-icon"></i>
                         <span class="aiz-side-nav-text">TRENDING NOW/LATEST POSTS/POSTS</span>
-                    </a>
-                </li>
-
-                <!-- Contact messages -->
-                <li class="aiz-side-nav-item mb-1">
-                    <a href="{{ route('contact_messages.index') }}"
-                        class="aiz-side-nav-link d-flex align-items-center gap-2 px-3 py-2 rounded
-                       {{ request()->is('contact_messages*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
-                        <i class="las la-comments aiz-side-nav-icon"></i>
-                        <span class="aiz-side-nav-text">Contact Messages</span>
                     </a>
                 </li>
 
@@ -184,6 +174,16 @@
                     </a>
                 </li>
 
+                <!-- Contact messages -->
+                <li class="aiz-side-nav-item mb-1">
+                    <a href="{{ route('contact_messages.index') }}"
+                        class="aiz-side-nav-link d-flex align-items-center gap-2 px-3 py-2 rounded
+                       {{ request()->is('contact_messages*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
+                        <i class="las la-comments aiz-side-nav-icon"></i>
+                        <span class="aiz-side-nav-text">Contact Messages</span>
+                    </a>
+                </li>
+
                 <!-- Pasta_recipes -->
                 <li class="aiz-side-nav-item mb-1">
                     <a href="{{ route('pasta_recipes.index') }}"
@@ -191,6 +191,37 @@
                        {{ request()->is('Pasta_recipes*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
                         <i class="las la-comments aiz-side-nav-icon"></i>
                         <span class="aiz-side-nav-text">PASTA RECIPES</span>
+                    </a>
+                </li>
+
+                <!-- Reader_favorites -->
+                <li class="aiz-side-nav-item mb-1">
+                    <a href="{{ route('reader_favorites.index') }}"
+                        class="aiz-side-nav-link d-flex align-items-center gap-2 px-3 py-2 rounded
+                       {{ request()->is('Reader_favorites*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
+                        <i class="las la-comments aiz-side-nav-icon"></i>
+                        <span class="aiz-side-nav-text">READER'S FAVORITES</span>
+                    </a>
+                </li>
+
+                <!-- Author_sections -->
+                <li class="aiz-side-nav-item mb-1">
+                    <a href="{{ route('author_sections.index') }}"
+                        class="aiz-side-nav-link d-flex align-items-center gap-2 px-3 py-2 rounded
+                       {{ request()->is('Author_sections*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
+                        <i class="las la-comments aiz-side-nav-icon"></i>
+                        <span class="aiz-side-nav-text">AUTHOR</span>
+                    </a>
+                </li>
+
+
+                <!-- How_tos -->
+                <li class="aiz-side-nav-item mb-1">
+                    <a href="{{ route('how_tos.index') }}"
+                        class="aiz-side-nav-link d-flex align-items-center gap-2 px-3 py-2 rounded
+                       {{ request()->is('Author_sections*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
+                        <i class="las la-comments aiz-side-nav-icon"></i>
+                        <span class="aiz-side-nav-text">LEARN HOW TO</span>
                     </a>
                 </li>
 

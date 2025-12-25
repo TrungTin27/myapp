@@ -6,19 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Database\Eloquent\Model;
 
-class reader_favorites extends Model
+class how_tos extends Model
 {
     use HasFactory;
 
-    protected $table = 'reader_favorites';
+    protected $table = 'how_tos';
     protected $fillable = [
         'title',
         'slug',
         'thumbnail',
-        'rating',
-        'excerpt',
         'is_active',
         'sort_order',
     ];
 }
-

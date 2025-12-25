@@ -21,25 +21,25 @@ class Reader_favoritesRequest extends FormRequest
 
             'thumbnail' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
 
-            'recipe_price' => ['nullable', 'numeric', 'min:0'],
+            'rating' => ['nullable', 'numeric', 'min:0'],
 
-            'serving_price' => ['nullable', 'numeric', 'min:0'],
+            'excerpt' => ['nullable', 'numeric', 'min:0'],
 
-            'is_featured' => ['nullable', 'boolean'],
+            'is_active' => ['nullable', 'boolean'],
 
-            'status' => ['required', 'in:draft,published'],
+            'sort_order' => ['required', 'in:draft,published'],
         ];
     }
     public function attributes()
     {
         return [
-            'title' => 'Tên món',
-            'slug' => 'URL',
+            'title' => 'Tiêu đề món / bài viết',
+            'slug' => 'Dùng cho URL GET RECIPE',
             'thumbnail' => 'Ảnh',
-            'recipe_price' => "Giá công thức",
-            'serving_price' => 'Giá phục vụ serving',
-            'is_featured' => 'Món nổi bật',
-            'status' => 'published / draft'
+            'rating' => 'Số sao (0 → 5)',
+            'excerpt' => 'Mô tả ngắn',
+            'is_active' => 'Bật / tắt hiển thị ngoài home',
+            'sort_order' => 'Sắp xếp hiển thị'
         ];
     }
 }

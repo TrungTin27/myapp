@@ -22,6 +22,9 @@ use App\Http\Controllers\Admin\Chicken_recipesController;
 use App\Http\Controllers\Admin\Pasta_recipesController;
 use App\Http\Controllers\Admin\Product_reviewsController;
 use App\Http\Controllers\Admin\Under_recipesController;
+use App\Http\Controllers\Admin\Reader_favoritesController;
+use App\Http\Controllers\Admin\Author_sectionsController;
+use App\Http\Controllers\Admin\How_tosController;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::resource('posts', PostsController::class);
@@ -95,11 +98,30 @@ Route::prefix('admin')->group(function () {
     Route::get('/under_recipes/edit/{id}', [under_recipesController::class, 'edit'])->name('under_recipes.edit');
     Route::put('/under_recipes/{id}', [under_recipesController::class, 'update'])->name('under_recipes.update');
     //Trending now//latest posts//post//
+    Route::resource('posts', PostsController::class);
     Route::get('/posts', [PostsController::class, 'index'])->name('posts.index');
     Route::get('/posts/create', [PostsController::class, 'create'])->name('posts.create');
     Route::post('/posts/store', [PostsController::class, 'store'])->name('posts.store');
     Route::get('/posts/edit/{id}', [PostsController::class, 'edit'])->name('posts.edit');
     Route::put('/posts/{id}', [PostsController::class, 'update'])->name('posts.update');
+    //Reader_favorites//
+    Route::get('/reader_favorites', [Reader_favoritesController::class, 'index'])->name('reader_favorites.index');
+    Route::get('/reader_favorites/create', [reader_favoritesController::class, 'create'])->name('reader_favorites.create');
+    Route::post('/reader_favorites/store', [reader_favoritesController::class, 'store'])->name('reader_favorites.store');
+    Route::get('/reader_favorites/edit/{id}', [reader_favoritesController::class, 'edit'])->name('reader_favorites.edit');
+    Route::put('/reader_favorites/{id}', [reader_favoritesController::class, 'update'])->name('reader_favorites.update');
+    //Author_sections//
+    Route::get('/author_sections', [Author_sectionsController::class, 'index'])->name('author_sections.index');
+    Route::get('/author_sections/create', [author_sectionsController::class, 'create'])->name('author_sections.create');
+    Route::post('/author_sections/store', [author_sectionsController::class, 'store'])->name('author_sections.store');
+    Route::get('/author_sections/edit/{id}', [author_sectionsController::class, 'edit'])->name('author_sections.edit');
+    Route::put('/author_sections/{id}', [author_sectionsController::class, 'update'])->name('author_sections.update');
+    //How_tos//
+    Route::get('/how_tos', [How_tosController::class, 'index'])->name('how_tos.index');
+    Route::get('/how_tos/create', [how_tosController::class, 'create'])->name('how_tos.create');
+    Route::post('/how_tos/store', [how_tosController::class, 'store'])->name('how_tos.store');
+    Route::get('/how_tos/edit/{id}', [how_tosController::class, 'edit'])->name('how_tos.edit');
+    Route::put('/how_tos/{id}', [how_tosController::class, 'update'])->name('how_tos.update');
 });
 
 

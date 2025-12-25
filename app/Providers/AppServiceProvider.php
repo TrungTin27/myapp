@@ -27,7 +27,15 @@ use App\Repositories\Interface\ContactRepositoryInterface;
 //Trending now posts latest posts//
 use App\Repositories\PostsRepository;
 use App\Repositories\Interface\PostsRepositoryInterface;
-
+//Reader_favorites//
+use App\Repositories\Reader_favoritesRepository;
+use App\Repositories\Interface\Reader_favoritesRepositoryInterface;
+//Author_sections//
+use App\Repositories\Author_sectionsRepository;
+use App\Repositories\Interface\Author_sectionsRepositoryInterface;
+//How_tos//
+use App\Repositories\How_tosRepository;
+use App\Repositories\Interface\How_tosRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -44,6 +52,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(Under_recipesRepositoryInterface::class, Under_recipesRepository::class);
         $this->app->bind(ContactRepositoryInterface::class, ContactRepository::class);
         $this->app->bind(PostsRepositoryInterface::class, PostsRepository::class);
+        $this->app->bind(Reader_favoritesRepositoryInterface::class, Reader_favoritesRepository::class);
+        $this->app->bind(Author_sectionsRepositoryInterface::class, Author_sectionsRepository::class);
+        $this->app->bind(How_tosRepositoryInterface::class, How_tosRepository::class);
     }
 
     /**
