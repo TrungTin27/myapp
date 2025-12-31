@@ -45,15 +45,15 @@
                         <label class="small mb-1">@lang('Từ ngày')</label>
                         <input type="date"
                             class="form-control"
-                            name="from_date"
-                            value="{{ request('from_date') }}">
+                            name="start_date"
+                            value="{{ request('start_date') }}">
                     </div>
                     <div class="col-md-6">
                         <label class="small mb-1">@lang('Đến ngày')</label>
                         <input type="date"
                             class="form-control"
-                            name="to_date"
-                            value="{{ request('to_date') }}">
+                            name="end_date"
+                            value="{{ request('end_date') }}">
                     </div>
                 </div>
             </div>
@@ -141,9 +141,8 @@
                             <i class="las la-edit"></i>
                         </a>
 
-                        <a class="btn btn-soft-danger btn-icon btn-circle btn-sm click-modal-delete"
-                            data-id="{{ $item->id }}"
-                            href="javascript:void(0);">
+                        <a class="btn mb-1 btn-soft-danger btn-icon btn-circle click-modal-delete btn-sm" data-id="{{ $item->id }}"
+                            href="javascript:void(0);" title="@lang('Xóa')">
                             <i class="las la-trash"></i>
                         </a>
                     </td>
@@ -168,7 +167,7 @@
         if (!confirm('Bạn có chắc chắn muốn xóa bài viết này?')) return;
 
         $.ajax({
-            url: "/admin/posts/" + id,
+            url: "admin/posts/" + id + "/delete",
             type: "POST",
             data: {
                 _method: "DELETE",
@@ -176,6 +175,9 @@
             },
             success: function() {
                 location.reload();
+            },
+            error: function(err) {
+                console.error(err);
             }
         });
     });

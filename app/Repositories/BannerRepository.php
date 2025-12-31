@@ -1,7 +1,11 @@
 <?php
+
 namespace App\Repositories;
+
 use App\Models\Banner;
 use App\Repositories\Interface\BannerRepositoryInterface;
+
+
 class BannerRepository implements BannerRepositoryInterface
 {
     public function create(array $data)
@@ -10,16 +14,17 @@ class BannerRepository implements BannerRepositoryInterface
     }
     public function update($id, $data)
     {
-        $banner = Banner::findOrFail($id);
-        $banner->update($data);
-        return $banner;
+        $Banner = Banner::findOrFail($id);
+        $Banner->update($data);
+        return $Banner;
     }
     public function delete($id)
     {
-        $banner = Banner::findOrFail($id);
-        return $banner->delete($id);
+        $Banner = Banner::findOrFail($id);
+        return $Banner->delete($id);
     }
-    public function search($keyword){
+    public function search($keyword)
+    {
         $query = Banner::query();
 
         if (!empty($keyword)) {

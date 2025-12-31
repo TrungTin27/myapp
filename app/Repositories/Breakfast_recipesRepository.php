@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Breakfast_recipes;
 use App\Repositories\Interface\Breakfast_recipesRepositoryInterface;
 
+
 class Breakfast_recipesRepository implements Breakfast_recipesRepositoryInterface
 {
     public function create(array $data)

@@ -1,7 +1,7 @@
 <?php
 namespace App\Services;
 
-use App\Models\Banner;
+use App\Models\Contact;
 use App\Repositories\Interface\ContactRepositoryInterface;
 class ContactService
 {
@@ -11,21 +11,15 @@ class ContactService
     {
         $this->contactRepository = $contactRepository;
     }
-    public function create(array $data)
-    {
-        return $this->contactRepository->create($data);
-
-    }
-
    
     public function delete($id)
     {
         return $this->contactRepository->delete($id);
 
     }
-    public function store($data)
+ public function search($keyword)
     {
-        return Banner::create($data);
+        return $this->contactRepository->search($keyword);
+
     }
-    
 }

@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Breakfast_recipes;
 use App\Repositories\Interface\Breakfast_recipesRepositoryInterface;
 
+
 class Breakfast_recipesService
 {
     protected $Breakfast_recipesRepository;
@@ -30,5 +31,9 @@ class Breakfast_recipesService
     public function store($data)
     {
         return Breakfast_recipes::create($data);
+    }
+    public function search($keyword)
+    {
+        return $this->Breakfast_recipesRepository->search($keyword);
     }
 }

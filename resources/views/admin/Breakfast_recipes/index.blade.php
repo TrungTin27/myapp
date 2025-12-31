@@ -154,17 +154,21 @@
     $(document).on('click', '.click-modal-delete', function() {
         let id = $(this).data('id');
 
-        if (!confirm('Bạn có chắc chắn muốn xóa?')) return;
+        if (!confirm('Bạn có chắc chắn muốn xóa banner này?')) return;
 
         $.ajax({
-            url: "/admin/breakfast_recipes/" + id,
+            url: "{{ url('admin/breakfast_recipes') }}/" + id + "/delete",
             type: "POST",
             data: {
                 _method: "DELETE",
-                _token: $('meta[name="csrf-token"]').attr('content')
+                _token: "{{ csrf_token() }}"
             },
             success: function() {
                 location.reload();
+            },
+            error: function(err) {
+                console.error(err);
+                alert('Xóa thất bại');
             }
         });
     });

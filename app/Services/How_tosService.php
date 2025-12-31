@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\How_tos;
 use App\Repositories\Interface\How_tosRepositoryInterface;
 
+
 class How_tosService
 {
     protected $How_tosRepository;
@@ -30,5 +31,9 @@ class How_tosService
     public function store($data)
     {
         return How_tos::create($data);
+    }
+    public function search($keyword)
+    {
+        return $this->How_tosRepository->search($keyword);
     }
 }

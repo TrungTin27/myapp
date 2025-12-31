@@ -10,9 +10,9 @@ class Pasta_recipesService
 {
     protected $Pasta_recipesRepository;
 
-    public function __construct(Pasta_recipesRepositoryInterface $Pasta_recipesRepository)
+    public function __construct(Pasta_recipesRepositoryInterface $PostsRepository)
     {
-        $this->Pasta_recipesRepository = $Pasta_recipesRepository;
+        $this->Pasta_recipesRepository = $PostsRepository;
     }
     public function create(array $data)
     {
@@ -31,5 +31,9 @@ class Pasta_recipesService
     public function store($data)
     {
         return Pasta_recipes::create($data);
+    }
+    public function search($keyword)
+    {
+        return $this->Pasta_recipesRepository->search($keyword);
     }
 }

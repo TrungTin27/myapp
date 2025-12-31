@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Under_recipes;
 use App\Repositories\Interface\Under_recipesRepositoryInterface;
 
+
 class Under_recipesRepository implements Under_recipesRepositoryInterface
 {
     public function create(array $data)

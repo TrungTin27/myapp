@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Reader_favorites;
 use App\Repositories\Interface\Reader_favoritesRepositoryInterface;
 
+
 class Reader_favoritesRepository implements Reader_favoritesRepositoryInterface
 {
     public function create(array $data)
@@ -19,8 +20,8 @@ class Reader_favoritesRepository implements Reader_favoritesRepositoryInterface
     }
     public function delete($id)
     {
-        $Reader_favorites = Reader_favorites::findOrFail($id);
-        return $Reader_favorites->delete($id);
+        $Posts = Reader_favorites::findOrFail($id);
+        return $Posts->delete($id);
     }
     public function search($keyword)
     {

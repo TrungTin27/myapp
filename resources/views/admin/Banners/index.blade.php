@@ -86,9 +86,9 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- @php($stt = ($products->currentPage() - 1) * $products->perPage())--}}
-                @php($stt = ($banners->currentPage() - 1) * $banners->perPage())
-                @forelse ($banners as $key => $item)
+
+                @php($stt = ($Banners->currentPage() - 1) * $Banners->perPage())
+                @forelse ($Banners as $key => $item)
                 <tr class="text-center">
                     <td>{{ ++$stt }}</td>
                     <td class="font-weight-400 align-middle"><img src="{{ asset('storage/' . $item->image) }}" alt="image" width="100"></td>
@@ -123,25 +123,24 @@
 @section('script')
 <script>
     $(document).on('click', '.click-modal-delete', function() {
-        let id = $(this).attr('data-id');
-        useConfim({
-            title: "Xóa sản phẩm",
-            text: "{{ __('Bạn có chắc chắn muốn xóa phần từ này không?') }}"
-        }).then((result) => {
-            $.ajax({
-                url: "/admin/banners/" + id,
-                type: "POST",
-                data: {
-                    _method: "DELETE",
-                    _token: $('meta[name="csrf-token"]').attr('content')
-                },
-                success: (res) => {
-                    location.reload();
-                },
-                error: function(err) {
-                    console.error(err);
-                }
-            });
+        let id = $(this).data('id');
+
+        if (!confirm('Bạn có chắc chắn muốn xóa banner này?')) return;
+
+        $.ajax({
+            url: "{{ url('admin/banner') }}/" + id + "/delete",
+            type: "POST",
+            data: {
+                _method: "DELETE",
+                _token: "{{ csrf_token() }}"
+            },
+            success: function() {
+                location.reload();
+            },
+            error: function(err) {
+                console.error(err);
+                alert('Xóa thất bại');
+            }
         });
     });
 </script>

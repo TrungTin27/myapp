@@ -4,21 +4,33 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Reader_favorites;
-use Illuminate\Http\Request;
 use App\Services\Reader_favoritesService;
 use App\Http\Requests\Reader_favoritesRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class Reader_favoritesController extends Controller
 {
-    public function __construct(public readonly Reader_favoritesService $reader_favoritesService) {}
+    public function __construct(public readonly Reader_favoritesService $Reader_favoritesService) {}
     // Hiển thị toàn bộ sản phẩm
-    public function index()
+    public function index(Request $request)
     {
-        $Reader_favorites = Reader_favorites::latest()->paginate(10);
+        $query = Reader_favorites::query()
+            ->when($request->search, function ($query) use ($request) {
+                $query->where(function ($q) use ($request) {
+                    $q->where('title', 'like', '%' . $request->search . '%');
+                });
+            })
+            ->when($request->filled('start_date'), function ($query) use ($request) {
+                $query->whereDate('created_at', '>=', $request->start_date);
+            })
+            ->when($request->filled('end_date'), function ($query) use ($request) {
+                $query->whereDate('created_at', '<=', $request->end_date);
+            });
+
+        $Reader_favorites = $query->latest()->paginate(10);
         return view('admin.Reader_favorites.index', compact('Reader_favorites'));
     }
-
     // Form tạo mới
     public function create()
     {
@@ -33,7 +45,7 @@ class Reader_favoritesController extends Controller
             if ($request->hasFile('thumbnail')) {
                 $data['thumbnail'] = $request->file('thumbnail')->store('avatars', 'public');
             }
-            $Reader_favorites = $this->reader_favoritesService->store($data);
+            $Reader_favorites = $this->Reader_favoritesService->store($data);
             if ($Reader_favorites) {
                 flash('Thêm thành công')->success();
                 return redirect()->route('reader_favorites.index');
@@ -80,9 +92,11 @@ class Reader_favoritesController extends Controller
     }
 
     // Xoá sản phẩm
-    public function destroy(Reader_favorites $Reader_favorites)
+    public function delete($id)
     {
+
+        $Reader_favorites = Reader_favorites::findOrFail($id);
         $Reader_favorites->delete();
-        return redirect()->route('Reader_favorites.index');
+        return redirect()->back();
     }
 }

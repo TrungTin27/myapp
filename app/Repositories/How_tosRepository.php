@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\How_tos;
 use App\Repositories\Interface\How_tosRepositoryInterface;
 
+
 class How_tosRepository implements How_tosRepositoryInterface
 {
     public function create(array $data)

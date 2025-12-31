@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Under_recipes;
 use App\Repositories\Interface\Under_recipesRepositoryInterface;
 
+
 class Under_recipesService
 {
     protected $Under_recipesRepository;
@@ -30,5 +31,9 @@ class Under_recipesService
     public function store($data)
     {
         return Under_recipes::create($data);
+    }
+    public function search($keyword)
+    {
+        return $this->Under_recipesRepository->search($keyword);
     }
 }

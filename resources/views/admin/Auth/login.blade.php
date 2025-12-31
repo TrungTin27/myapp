@@ -20,7 +20,7 @@
         </h2>
         
         {{-- Form login --}}
-        <form action="/admin/login" method="POST">
+        <form action="{{ route('admin.login.post') }}" method="POST">
             @csrf
 
             {{-- Email --}}

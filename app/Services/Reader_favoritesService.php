@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Reader_favorites;
 use App\Repositories\Interface\Reader_favoritesRepositoryInterface;
 
+
 class Reader_favoritesService
 {
     protected $Reader_favoritesRepository;
@@ -30,5 +31,9 @@ class Reader_favoritesService
     public function store($data)
     {
         return Reader_favorites::create($data);
+    }
+    public function search($keyword)
+    {
+        return $this->Reader_favoritesRepository->search($keyword);
     }
 }

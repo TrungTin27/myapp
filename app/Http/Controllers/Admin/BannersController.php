@@ -4,21 +4,33 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
-use Illuminate\Http\Request;
 use App\Services\BannerService;
 use App\Http\Requests\BannerRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class BannersController extends Controller
 {
-    public function __construct(public readonly BannerService $bannerService) {}
+    public function __construct(public readonly BannerService $BannerService) {}
     // Hiển thị toàn bộ sản phẩm
-    public function index()
+    public function index(Request $request)
     {
-        $banners = Banner::latest()->paginate(10);
-        return view('admin.Banners.index', compact('banners'));
-    }
+        $query = Banner::query()
+            ->when($request->search, function ($query) use ($request) {
+                $query->where(function ($q) use ($request) {
+                    $q->where('title', 'like', '%' . $request->search . '%');
+                });
+            })
+            ->when($request->filled('start_date'), function ($query) use ($request) {
+                $query->whereDate('created_at', '>=', $request->start_date);
+            })
+            ->when($request->filled('end_date'), function ($query) use ($request) {
+                $query->whereDate('created_at', '<=', $request->end_date);
+            });
 
+        $Banners = $query->latest()->paginate(10);
+        return view('admin.Banners.index', compact('Banners'));
+    }
     // Form tạo mới
     public function create()
     {
@@ -33,15 +45,15 @@ class BannersController extends Controller
             if ($request->hasFile('image')) {
                 $data['image'] = $request->file('image')->store('avatars', 'public');
             }
-            $banner = $this->bannerService->store($data);
-            if ($banner) {
-                flash('Thêm banner thành công')->success();
+            $Banner = $this->BannerService->store($data);
+            if ($Banner) {
+                flash('Thêm thành công')->success();
                 return redirect()->route('banners.index');
             }
-            flash('Thêm banner thất bại')->error();
+            flash('Thêm  thất bại')->error();
             return redirect()->back();
         } catch (\Exception $e) {
-            flash('Thêm banner thất bại')->error();
+            flash('Thêm thất bại')->error();
             return redirect()->back();
         }
     }
@@ -57,32 +69,35 @@ class BannersController extends Controller
         return view('admin.Banners.edit', compact('banner'));
     }
 
+
     // Update sản phẩm
     public function update(BannerRequest $request, $id)
     {
         try {
-            $banner = Banner::findOrFail($id);
+            $Banner = Banner::findOrFail($id);
             $data = $request->validated();
             if ($request->hasFile('image')) {
-                if ($banner->image) {
-                    Storage::disk('public')->delete($banner->image);
+                if ($Banner->image) {
+                    Storage::disk('public')->delete($Banner->image);
                 }
                 $data['image'] = $request->file('image')->store('avatars', 'public');
             }
 
-            $banner->update($data);
-            flash('Chỉnh sửa sản phẩm thành công')->success();
-            return redirect()->route('banners.index');
+            $Banner->update($data);
+            flash('Chỉnh sửa  thành công')->success();
+            return redirect()->route('Banners.index');
         } catch (\Exception $e) {
-            flash('Chỉnh sửa sản phẩm thất bại')->error();
+            flash('Chỉnh sửa thất bại')->error();
             return redirect()->back();
         }
     }
 
     // Xoá sản phẩm
-    public function destroy(banner $banners)
+    public function delete($id)
     {
-        $banners->delete();
-        return redirect()->route('banners.index');
+
+        $Banner = Banner::findOrFail($id);
+        $Banner->delete();
+        return redirect()->back();
     }
 }

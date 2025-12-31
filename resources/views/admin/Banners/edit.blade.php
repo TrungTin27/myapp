@@ -8,6 +8,7 @@
 </div>
 
 <form action="{{ route('banners.update', $banner->id) }}" method="POST" enctype="multipart/form-data">
+
     @csrf
     @method('PUT')
 
@@ -22,4 +23,4 @@
     ])
 </form>
 
-@endsection 
+@endsection

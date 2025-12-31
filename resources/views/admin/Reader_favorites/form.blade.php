@@ -8,7 +8,6 @@
             class="form-control"
             value="{{ old('title', $post->title ?? '') }}"
             required>
-        {{-- title: tên món / bài viết hiển thị ngoài web --}}
     </div>
 
     {{-- ================= SLUG ================= --}}
@@ -18,7 +17,6 @@
             name="slug"
             class="form-control"
             value="{{ old('slug', $post->slug ?? '') }}">
-        {{-- slug: dùng cho đường dẫn SEO --}}
     </div>
 
     {{-- ================= HÌNH ẢNH ================= --}}
@@ -28,7 +26,6 @@
             name="thumbnail"
             class="form-control"
             accept="image/*">
-        {{-- thumbnail: ảnh hiển thị card Reader’s Favorites --}}
 
         @if (!empty($post->thumbnail))
         <img src="{{ asset('storage/'.$post->thumbnail) }}"
@@ -39,54 +36,45 @@
 
     {{-- ================= RATING ================= --}}
     <div class="form-group mt-3">
-        <label>Đánh giá (1 - 5 sao)</label>
+        <label>Đánh giá (0 - 5 sao)</label>
         <select name="rating" class="form-control">
             <option value="">-- Chọn số sao --</option>
-            @for ($i = 1; $i <= 5; $i++)
+            @for ($i = 0; $i <= 5; $i++)
                 <option value="{{ $i }}"
-                @selected(old('rating', $post->rating ?? '') == $i)>
+                @selected(old('rating', $post->rating ?? 0) == $i)>
                 {{ $i }} sao
                 </option>
                 @endfor
         </select>
-        {{-- rating: số sao hiển thị dưới ảnh --}}
     </div>
 
     {{-- ================= MÔ TẢ ================= --}}
     <div class="form-group mt-3">
         <label>Mô tả ngắn</label>
-        <textarea name="description"
+        <textarea name="excerpt"
             rows="3"
-            class="form-control">{{ old('description', $post->description ?? '') }}</textarea>
-        {{-- description: đoạn text ngắn dưới tiêu đề --}}
+            class="form-control">{{ old('excerpt', $post->excerpt ?? '') }}</textarea>
     </div>
 
-    {{-- ================= READER'S FAVORITES ================= --}}
+    {{-- ================= HIỂN THỊ HOME ================= --}}
     <div class="form-group mt-3">
         <label>
             <input type="checkbox"
-                name="is_featured"
+                name="is_active"
                 value="1"
-                {{ old('is_featured', $post->is_featured ?? false) ? 'checked' : '' }}>
-            Hiển thị trong Reader’s Favorites
+                {{ old('is_active', $post->is_active ?? true) ? 'checked' : '' }}>
+            Hiển thị ngoài trang chủ
         </label>
-        {{-- is_featured: đánh dấu để show ở section này --}}
     </div>
 
-    {{-- ================= TRẠNG THÁI ================= --}}
+    {{-- ================= SORT ORDER ================= --}}
     <div class="form-group mt-3">
-        <label>Trạng thái</label>
-        <select class="form-control" name="status">
-            <option value="draft"
-                @selected(old('status', $post->status ?? 'draft') == 'draft')>
-                Nháp
-            </option>
-            <option value="published"
-                @selected(old('status', $post->status ?? '') == 'published')>
-                Xuất bản
-            </option>
-        </select>
-        {{-- status: kiểm soát bài có hiện ra web hay không --}}
+        <label>Thứ tự hiển thị</label>
+        <input type="number"
+            name="sort_order"
+            class="form-control"
+            value="{{ old('sort_order', $post->sort_order ?? 0) }}"
+            min="0">
     </div>
 
     {{-- ================= BUTTON ================= --}}

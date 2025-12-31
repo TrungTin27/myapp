@@ -7,8 +7,8 @@ use Illuminate\Support\ServiceProvider;
 use App\Repositories\BannerRepository;
 use App\Repositories\Interface\BannerRepositoryInterface;
 //Product//
-use App\Repositories\Interface\ProductRepositoryInterface;
-use App\Repositories\ProductRepository;
+//use App\Repositories\Interface\ProductRepositoryInterface;
+//use App\Repositories\ProductRepository;
 //Chicken recipes//
 use App\Repositories\Chicken_recipesRepository;
 use App\Repositories\Interface\Chicken_recipesRepositoryInterface;
@@ -44,7 +44,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
+        //$this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
         $this->app->bind(BannerRepositoryInterface::class, BannerRepository::class);
         $this->app->bind(Chicken_recipesRepositoryInterface::class, Chicken_recipesRepository::class);
         $this->app->bind(Pasta_recipesRepositoryInterface::class, Pasta_recipesRepository::class);

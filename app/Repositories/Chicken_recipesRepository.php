@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Chicken_recipes;
 use App\Repositories\Interface\Chicken_recipesRepositoryInterface;
 
+
 class Chicken_recipesRepository implements Chicken_recipesRepositoryInterface
 {
     public function create(array $data)

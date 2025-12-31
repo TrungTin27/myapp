@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Author_sections;
 use App\Repositories\Interface\Author_sectionsRepositoryInterface;
 
+
 class Author_sectionsRepository implements Author_sectionsRepositoryInterface
 {
     public function create(array $data)

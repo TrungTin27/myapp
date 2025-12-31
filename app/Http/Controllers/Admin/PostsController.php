@@ -7,17 +7,30 @@ use App\Models\Posts;
 use App\Services\PostsService;
 use App\Http\Requests\PostsRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
     public function __construct(public readonly PostsService $PostsService) {}
     // Hiển thị toàn bộ sản phẩm
-    public function index()
+    public function index(Request $request)
     {
-        $Posts = Posts::latest()->paginate(10);
+        $query = Posts::query()
+            ->when($request->search, function ($query) use ($request) {
+                $query->where(function ($q) use ($request) {
+                    $q->where('title', 'like', '%' . $request->search . '%');
+                });
+            })
+            ->when($request->filled('start_date'), function ($query) use ($request) {
+                $query->whereDate('created_at', '>=', $request->start_date);
+            })
+            ->when($request->filled('end_date'), function ($query) use ($request) {
+                $query->whereDate('created_at', '<=', $request->end_date);
+            });
+
+        $Posts = $query->latest()->paginate(10);
         return view('admin.Posts.index', compact('Posts'));
     }
-
     // Form tạo mới
     public function create()
     {
@@ -79,9 +92,11 @@ class PostsController extends Controller
     }
 
     // Xoá sản phẩm
-    public function destroy(Posts $Posts)
+    public function delete($id)
     {
+
+        $Posts = Posts::findOrFail($id);
         $Posts->delete();
-        return redirect()->route('Posts.index');
+        return redirect()->back();
     }
 }

@@ -7,17 +7,30 @@ use App\Models\Pasta_recipes;
 use App\Services\Pasta_recipesService;
 use App\Http\Requests\Pasta_recipesRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class Pasta_recipesController extends Controller
 {
-    public function __construct(public readonly Pasta_recipesService $pasta_recipesService) {}
+    public function __construct(public readonly Pasta_recipesService $Pasta_recipesService) {}
     // Hiển thị toàn bộ sản phẩm
-    public function index()
+    public function index(Request $request)
     {
-        $Pasta_recipes = Pasta_recipes::latest()->paginate(10);
+        $query = Pasta_recipes::query()
+            ->when($request->search, function ($query) use ($request) {
+                $query->where(function ($q) use ($request) {
+                    $q->where('title', 'like', '%' . $request->search . '%');
+                });
+            })
+            ->when($request->filled('start_date'), function ($query) use ($request) {
+                $query->whereDate('created_at', '>=', $request->start_date);
+            })
+            ->when($request->filled('end_date'), function ($query) use ($request) {
+                $query->whereDate('created_at', '<=', $request->end_date);
+            });
+
+        $Pasta_recipes = $query->latest()->paginate(10);
         return view('admin.Pasta_recipes.index', compact('Pasta_recipes'));
     }
-
     // Form tạo mới
     public function create()
     {
@@ -32,7 +45,7 @@ class Pasta_recipesController extends Controller
             if ($request->hasFile('thumbnail')) {
                 $data['thumbnail'] = $request->file('thumbnail')->store('avatars', 'public');
             }
-            $Pasta_recipes = $this->pasta_recipesService->store($data);
+            $Pasta_recipes = $this->Pasta_recipesService->store($data);
             if ($Pasta_recipes) {
                 flash('Thêm thành công')->success();
                 return redirect()->route('pasta_recipes.index');
@@ -71,7 +84,7 @@ class Pasta_recipesController extends Controller
 
             $Pasta_recipes->update($data);
             flash('Chỉnh sửa  thành công')->success();
-            return redirect()->route('Pasta_recipes.index');
+            return redirect()->route('Posts.index');
         } catch (\Exception $e) {
             flash('Chỉnh sửa thất bại')->error();
             return redirect()->back();
@@ -79,9 +92,11 @@ class Pasta_recipesController extends Controller
     }
 
     // Xoá sản phẩm
-    public function destroy(Pasta_recipes $Pasta_recipes)
+    public function delete($id)
     {
+
+        $Pasta_recipes = Pasta_recipes::findOrFail($id);
         $Pasta_recipes->delete();
-        return redirect()->route('Pasta_recipes.index');
+        return redirect()->back();
     }
 }

@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Chicken_recipes;
 use App\Repositories\Interface\Chicken_recipesRepositoryInterface;
 
+
 class Chicken_recipesService
 {
     protected $Chicken_recipesRepository;
@@ -30,5 +31,9 @@ class Chicken_recipesService
     public function store($data)
     {
         return Chicken_recipes::create($data);
+    }
+    public function search($keyword)
+    {
+        return $this->Chicken_recipesRepository->search($keyword);
     }
 }

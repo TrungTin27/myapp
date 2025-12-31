@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Author_sections;
 use App\Repositories\Interface\Author_sectionsRepositoryInterface;
 
+
 class Author_sectionsService
 {
     protected $Author_sectionsRepository;
@@ -30,5 +31,9 @@ class Author_sectionsService
     public function store($data)
     {
         return Author_sections::create($data);
+    }
+    public function search($keyword)
+    {
+        return $this->Author_sectionsRepository->search($keyword);
     }
 }

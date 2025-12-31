@@ -4,26 +4,34 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\How_tos;
-use Illuminate\Http\Request;
 use App\Services\How_tosService;
 use App\Http\Requests\How_tosRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class How_tosController extends Controller
 {
-    public function __construct(public readonly How_tosService $how_tosService) {}
+    public function __construct(public readonly How_tosService $How_tosService) {}
     // Hiển thị toàn bộ sản phẩm
-    public function index()
+    public function index(Request $request)
     {
-        $How_tos = How_tos::latest()->paginate(10);
+        $query = How_tos::query()
+            ->when($request->search, function ($query) use ($request) {
+                $query->where(function ($q) use ($request) {
+                    $q->where('first name', 'like', '%' . $request->search . '%');
+                });
+            })
+            ->when($request->filled('start_date'), function ($query) use ($request) {
+                $query->whereDate('created_at', '>=', $request->start_date);
+            })
+            ->when($request->filled('end_date'), function ($query) use ($request) {
+                $query->whereDate('created_at', '<=', $request->end_date);
+            });
+
+        $How_tos = $query->latest()->paginate(10);
         return view('admin.How_tos.index', compact('How_tos'));
     }
 
-    // Form tạo mới
-    public function create()
-    {
-        return view('admin.How_tos.create');
-    }
 
     // Lưu vào DB
     public function store(How_tosRequest $request)
@@ -33,8 +41,8 @@ class How_tosController extends Controller
             if ($request->hasFile('thumbnail')) {
                 $data['thumbnail'] = $request->file('thumbnail')->store('avatars', 'public');
             }
-            $How_tos = $this->how_tosService->store($data);
-            if ($How_tos) {
+            $How_tosService = $this->How_tosService->store($data);
+            if ($How_tosService) {
                 flash('Thêm thành công')->success();
                 return redirect()->route('how_tos.index');
             }
@@ -57,32 +65,14 @@ class How_tosController extends Controller
         return view('admin.How_tos.edit', compact('recipe'));
     }
 
-    // Update sản phẩm
-    public function update(How_tosRequest $request, $id)
-    {
-        try {
-            $How_tos = How_tos::findOrFail($id);
-            $data = $request->validated();
-            if ($request->hasFile('thumbnail')) {
-                if ($How_tos->thumbnail) {
-                    Storage::disk('public')->delete($How_tos->thumbnail);
-                }
-                $data['thumbnail'] = $request->file('thumbnail')->store('avatars', 'public');
-            }
 
-            $How_tos->update($data);
-            flash('Chỉnh sửa  thành công')->success();
-            return redirect()->route('How_tos.index');
-        } catch (\Exception $e) {
-            flash('Chỉnh sửa thất bại')->error();
-            return redirect()->back();
-        }
-    }
 
     // Xoá sản phẩm
-    public function destroy(How_tos $How_tos)
+    public function delete($id)
     {
+
+        $How_tos = How_tos::findOrFail($id);
         $How_tos->delete();
-        return redirect()->route('How_tos.index');
+        return redirect()->back();
     }
 }

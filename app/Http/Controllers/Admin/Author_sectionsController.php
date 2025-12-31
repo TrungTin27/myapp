@@ -4,21 +4,33 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Author_sections;
-use Illuminate\Http\Request;
 use App\Services\Author_sectionsService;
 use App\Http\Requests\Author_sectionsRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class Author_sectionsController extends Controller
 {
-    public function __construct(public readonly Author_sectionsService $author_sectionsService) {}
+    public function __construct(public readonly Author_sectionsService $Author_sectionsService) {}
     // Hiển thị toàn bộ sản phẩm
-    public function index()
+    public function index(Request $request)
     {
-        $Author_sections = Author_sections::latest()->paginate(10);
+        $query = Author_sections::query()
+            ->when($request->search, function ($query) use ($request) {
+                $query->where(function ($q) use ($request) {
+                    $q->where('title', 'like', '%' . $request->search . '%');
+                });
+            })
+            ->when($request->filled('start_date'), function ($query) use ($request) {
+                $query->whereDate('created_at', '>=', $request->start_date);
+            })
+            ->when($request->filled('end_date'), function ($query) use ($request) {
+                $query->whereDate('created_at', '<=', $request->end_date);
+            });
+
+        $Author_sections = $query->latest()->paginate(10);
         return view('admin.Author_sections.index', compact('Author_sections'));
     }
-
     // Form tạo mới
     public function create()
     {
@@ -30,10 +42,10 @@ class Author_sectionsController extends Controller
     {
         try {
             $data = $request->validated();
-            if ($request->hasFile('thumbnail')) {
-                $data['thumbnail'] = $request->file('thumbnail')->store('avatars', 'public');
+            if ($request->hasFile('image')) {
+                $data['image'] = $request->file('image')->store('avatars', 'public');
             }
-            $Author_sections = $this->author_sectionsService->store($data);
+            $Author_sections = $this->Author_sectionsService->store($data);
             if ($Author_sections) {
                 flash('Thêm thành công')->success();
                 return redirect()->route('author_sections.index');
@@ -63,11 +75,11 @@ class Author_sectionsController extends Controller
         try {
             $Author_sections = Author_sections::findOrFail($id);
             $data = $request->validated();
-            if ($request->hasFile('thumbnail')) {
-                if ($Author_sections->thumbnail) {
-                    Storage::disk('public')->delete($Author_sections->thumbnail);
+            if ($request->hasFile('image')) {
+                if ($Author_sections->image) {
+                    Storage::disk('public')->delete($Author_sections->image);
                 }
-                $data['thumbnail'] = $request->file('thumbnail')->store('avatars', 'public');
+                $data['image'] = $request->file('image')->store('avatars', 'public');
             }
 
             $Author_sections->update($data);
@@ -80,9 +92,11 @@ class Author_sectionsController extends Controller
     }
 
     // Xoá sản phẩm
-    public function destroy(Author_sections $Author_sections)
+    public function delete($id)
     {
+
+        $Author_sections = Author_sections::findOrFail($id);
         $Author_sections->delete();
-        return redirect()->route('Author_sections.index');
+        return redirect()->back();
     }
 }

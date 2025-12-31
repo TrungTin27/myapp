@@ -23,7 +23,7 @@ class PostsRepository implements PostsRepositoryInterface
         $Posts = Posts::findOrFail($id);
         return $Posts->delete($id);
     }
-    public function search($keyword)
+   public function search($keyword)
     {
         $query = Posts::query();
 

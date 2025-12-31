@@ -32,4 +32,9 @@ class PostsService
     {
         return Posts::create($data);
     }
+    public function search($keyword)
+    {
+        return $this->PostsRepository->search($keyword);
+
+    }
 }
