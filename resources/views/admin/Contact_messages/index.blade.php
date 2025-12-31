@@ -3,55 +3,97 @@
 @section('title', 'Contact')
 
 @section('content')
-
-<div class="aiz-titlebar mt-2 mb-3">
-    <h1 class="h3"><strong>Contact</strong></h1>
+<div class="aiz-titlebar text-left mt-2 mb-3">
+    <div class="align-items-center">
+        <h1 class="h3"><strong>Contact</strong></h1>
+    </div>
 </div>
 
-{{-- SEARCH ONLY --}}
-<div class="filter mb-3" style="display: flex;">
-    <div style="width: 70%">
-        <form action="{{ route('contact_messages.index') }}" method="GET">
-            <div class="row">
-                <div class="col-md-8">
-                    <input type="text"
-                        name="search"
-                        class="form-control"
-                        value="{{ request('search') }}"
-                        placeholder="Tìm theo First name hoặc Email">
+{{-- FILTER --}}
+<div class="filter mb-3">
+    <form action="{{ route('contact_messages.index') }}" method="GET">
+
+        {{-- HÀNG 1 --}}
+        <div class="row mb-2 align-items-end">
+
+            {{-- SEARCH --}}
+            <div class="col-md-8">
+                <label class="small mb-1">Tìm kiếm</label>
+                <input type="text"
+                    name="search"
+                    class="form-control"
+                    value="{{ request('search') }}"
+                    placeholder="Tìm theo First name hoặc Email">
+            </div>
+
+            {{-- EMPTY (KHÔNG ADD NEW) --}}
+            <div class="col-md-4"></div>
+        </div>
+
+        {{-- HÀNG 2 --}}
+        <div class="row align-items-end">
+
+            {{-- DATE FILTER --}}
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="small mb-1">Từ ngày</label>
+                        <input type="date"
+                            name="start_date"
+                            class="form-control"
+                            value="{{ request('start_date') }}">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="small mb-1">Đến ngày</label>
+                        <input type="date"
+                            name="end_date"
+                            class="form-control"
+                            value="{{ request('end_date') }}">
+                    </div>
                 </div>
             </div>
-        </form>
-    </div>
-    <div class="col-md-1" style="width: 30%;">
-        <button type="button"
-            class="btn btn-info btn-sm w-100 d-flex justify-content-center align-items-center"
-            disabled>
-            <i class="las la-search"></i>
-        </button>
-    </div>
+
+            {{-- ACTION --}}
+            <div class="col-md-4">
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary w-50">
+                        🔍 Tìm kiếm
+                    </button>
+
+                    <a href="{{ url()->current() }}" class="btn btn-secondary w-50">
+                        ♻ Làm mới
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </form>
 </div>
 
 {{-- TABLE --}}
 <div class="card">
     <div class="custom-overflow">
-        <table class="table table-bordered text-center">
+        <table class="table text-center">
             <thead>
                 <tr>
-                    <th class="w-60">STT</th>
+                    <th style="width:60px">STT</th>
                     <th>First name</th>
                     <th>Email address</th>
-                    <th>Tùy chỉnh</th>
+                    <th style="width:120px">Tùy chỉnh</th>
                 </tr>
             </thead>
             <tbody>
-                @php($stt = ($contacts->currentPage() - 1) * $contacts->perPage())
+                @php
+                $stt = ($contacts->currentPage() - 1) * $contacts->perPage();
+                @endphp
+
                 @forelse ($contacts as $item)
                 <tr>
                     <td>{{ ++$stt }}</td>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->email }}</td>
-                    <td class="text-center">
+                    <td>
                         <form action="{{ route('contact.delete', $item->id) }}"
                             method="POST"
                             class="d-inline"
@@ -67,12 +109,11 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="3">Không có dữ liệu</td>
+                    <td colspan="4">Không có dữ liệu</td>
                 </tr>
                 @endforelse
             </tbody>
         </table>
     </div>
 </div>
-
 @endsection

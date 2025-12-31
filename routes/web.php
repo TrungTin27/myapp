@@ -29,7 +29,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
     Route::post('/admin/change-password', [AdminController::class, 'changePassword'])->name('admin.changePassword');
     //Dashboard//
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     //Banner//
     Route::get('/banner', [BannersController::class, 'index'])->name('banners.index');
     Route::get('banner/create', [BannersController::class, 'create'])->name('banners.create');
@@ -39,6 +39,7 @@ Route::prefix('admin')->group(function () {
     Route::delete('/banner/{id}/delete', [BannersController::class, 'delete'])->name('banners.delete');
     //Contact_messages//
     Route::get('/contact_messages', [Contact_messagesController::class, 'index'])->name('contact_messages.index');
+    Route::post('/contact/store', [Contact_messagesController::class, 'store'])->name('contact.store');
     Route::delete('/contact/delete/{id}', [Contact_messagesController::class, 'destroy'])->name('contact.delete');
     //Chicken_recipes//
     Route::get('/chicken_recipes', [Chicken_recipesController::class, 'index'])->name('chicken_recipes.index');

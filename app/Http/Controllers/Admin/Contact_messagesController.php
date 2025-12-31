@@ -3,48 +3,64 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ContactRequest;
 use App\Models\Contact_messages;
 use Illuminate\Http\Request;
-use App\Services\ContactService;
 
-class contact_messagesController extends Controller
+class Contact_messagesController extends Controller
 {
-     private $contactService;
+    /**
+     * Danh sách + Search + Lọc ngày
+     */
+    public function index(Request $request)
+    {
+        $query = Contact_messages::query()
 
-    public function __construct(ContactService $contactService)
-    {
-        $this->contactService = $contactService;
-    }
-    // Hiển thị toàn bộ sản phẩm
-    public function index()
-    {
-        $contacts = Contact_messages::latest()->paginate(10);
+            // SEARCH: name hoặc email
+            ->when($request->search, function ($query) use ($request) {
+                $query->where(function ($q) use ($request) {
+                    $q->where('name', 'like', '%' . $request->search . '%')
+                        ->orWhere('email', 'like', '%' . $request->search . '%');
+                });
+            })
+
+            // FROM DATE
+            ->when($request->filled('start_date'), function ($query) use ($request) {
+                $query->whereDate('created_at', '>=', $request->start_date);
+            })
+
+            // TO DATE
+            ->when($request->filled('end_date'), function ($query) use ($request) {
+                $query->whereDate('created_at', '<=', $request->end_date);
+            });
+
+        $contacts = $query->latest()->paginate(10);
+
         return view('admin.contact_messages.index', compact('contacts'));
     }
 
-
-    // Lưu vào DB
-    public function store(ContactRequest $request)
+    /**
+     * Xoá contact
+     */
+    public function destroy($id)
     {
-        contact_messages::create($request->all());
-        return redirect()->route('home');
-    }
+        Contact_messages::findOrFail($id)->delete();
 
-    // Xoá sản phẩm
-   public function destroy($id)
+        return redirect()
+            ->route('contact_messages.index')
+            ->with('success', 'Xóa thành công');
+    }
+    public function store(Request $request)
     {
-        try {
-        $delete = $this->contactService->delete($id);
+        $request->validate([
+            'name'  => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+        ]);
 
-        if ($delete) {
-            return redirect()->route('contact_messages.index');
-        }
+        Contact_messages::create([
+            'name'  => $request->name,
+            'email' => $request->email,
+        ]);
 
-        return back()->with('error', 'Xóa thất bại');
-
-    } catch (\Throwable $e) {
-        return back()->with('error', $e->getMessage());
-    }
+        return back()->with('success', 'Gửi liên hệ thành công');
     }
 }

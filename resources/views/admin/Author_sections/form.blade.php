@@ -56,7 +56,7 @@
     </div>
 
     <button class="btn btn-info mt-4 w-100">
-        💾 Lưu How To
+        💾 Lưu
     </button>
 
 </div>

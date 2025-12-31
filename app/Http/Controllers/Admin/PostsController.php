@@ -58,9 +58,6 @@ class PostsController extends Controller
         }
     }
 
-    // Hiển thị chi tiết
-
-
     // Form chỉnh sửa
     public function edit($id)
     {

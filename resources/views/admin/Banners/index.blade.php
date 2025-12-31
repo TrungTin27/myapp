@@ -1,118 +1,156 @@
 @extends('admin.layout.app')
+
 @section('title')
 @lang('Banner')
 @endsection
+
 @section('content')
 <div class="aiz-titlebar text-left mt-2 mb-3">
     <div class="align-items-center">
         <h1 class="h3"><strong>@lang('Danh sách banner')</strong></h1>
     </div>
 </div>
-<div class="filter">
-    <form class="" id="food" action="{{ route('banners.index') }}" method="GET">
-        <div class="row gutters-5 mb-2 gap-4" style="row-gap: 10px">
-            <div class="col-md-8 d-flex search">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 search_icon" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-                <input type="text" class="form-control res-placeholder res-FormControl" id="search" name="search"
-                    value="{{ request('search') }}" placeholder="@lang('Tìm kiếm theo tên')">
-            </div>
-            <div class="col-md-4 text-md-right add-new ">
-                <a href="{{ route('banners.create') }}"
-                    class="btn btn-info btn-add-food d-flex justify-content-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>@lang('Thêm mới')</span>
-                </a>
-            </div>
-            <div class="col-md-2">
-                <input type="date" onkeypress='return event.charCode >=48 && event.charCode<=57' autocomplete="off"
-                    class="form-control custom-placeholder" name="joined_date" id="joined_date"
-                    placeholder="{{ __('Ngày tạo') }}" value="{{ request('joined_date') }}">
-            </div>
-            <div class="col-md-2">
-                <input type="date" onkeypress='return event.charCode >=48 && event.charCode<=57' autocomplete="off"
-                    class="form-control custom-placeholder" name="end_date" id="end_date"
-                    placeholder="{{ __('Ngày kết thúc') }}" value="{{ request('end_date') }}">
-            </div>
-            <div class="col-md-2 res-status">
-                <button type="submit" class="pl-0 pr-0 btn btn-info w-100 d-flex btn-responsive justify-content-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                    <span class="custom-FontSize">@lang('Tìm kiếm')</span>
-                </button>
-            </div>
-            <div class="col-md-2 res-status">
-                <a href="{{ url()->current() }}"
-                    class="pl-0 pr-0 w-25 btn btn-info d-flex btn-responsive justify-content-center w-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                    </svg>
-                    <span class="custom-FontSize">@lang('Làm mới')</span>
-                </a>
+
+{{-- FILTER --}}
+<div class="filter mb-3">
+    <form action="{{ route('banners.index') }}" method="GET">
+
+        {{-- HÀNG 1 --}}
+        <div class="row mb-2 align-items-end">
+
+            {{-- SEARCH --}}
+            <div class="col-md-8">
+                <label class="small mb-1">@lang('Tìm kiếm')</label>
+                <input type="text"
+                    class="form-control"
+                    name="search"
+                    value="{{ request('search') }}"
+                    placeholder="@lang('Tìm theo tên banner')">
             </div>
 
+            {{-- ADD NEW --}}
+            <div class="col-md-4 text-end">
+                <a href="{{ route('banners.create') }}"
+                    class="btn btn-info w-100">
+                    ➕ @lang('Thêm mới')
+                </a>
+            </div>
         </div>
+
+        {{-- HÀNG 2 --}}
+        <div class="row align-items-end">
+
+            {{-- DATE FILTER --}}
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="small mb-1">@lang('Từ ngày')</label>
+                        <input type="date"
+                            class="form-control"
+                            name="joined_date"
+                            value="{{ request('joined_date') }}">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="small mb-1">@lang('Đến ngày')</label>
+                        <input type="date"
+                            class="form-control"
+                            name="end_date"
+                            value="{{ request('end_date') }}">
+                    </div>
+                </div>
+            </div>
+
+            {{-- ACTION --}}
+            <div class="col-md-4">
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary w-50">
+                        🔍 @lang('Tìm kiếm')
+                    </button>
+
+                    <a href="{{ url()->current() }}"
+                        class="btn btn-secondary w-50">
+                        ♻ @lang('Làm mới')
+                    </a>
+                </div>
+            </div>
+        </div>
+
     </form>
 </div>
-<form action="" id="form-import" method="POST" enctype="multipart/form-data">
-    @csrf
-    <input type="file" accept=".csv,.xls,.xlsx" hidden name="file" class="form-control" id="file">
-</form>
+
+{{-- TABLE --}}
 <div class="card">
     <div class="custom-overflow repon">
-        <table class="table ">
+        <table class="table">
             <thead>
                 <tr class="text-center">
-                    <th class="w-60 font-weight-800">STT</th>
+                    <th style="width:60px">STT</th>
                     <th>@lang('Ảnh')</th>
                     <th>@lang('Tên')</th>
                     <th>@lang('Dòng phụ')</th>
                     <th>@lang('Link')</th>
-                    <th>@lang('Thứ tự hiển thị')</th>
-                    <th class="w-140">@lang('Trạng thái')</th>
-                    <th class="" style="width: 15%;">@lang('Điều chỉnh')</th>
+                    <th>@lang('Thứ tự')</th>
+                    <th>@lang('Trạng thái')</th>
+                    <th style="width:15%">@lang('Điều chỉnh')</th>
                 </tr>
             </thead>
+
             <tbody>
+                @php
+                $stt = ($Banners->currentPage() - 1) * $Banners->perPage();
+                @endphp
 
-                @php($stt = ($Banners->currentPage() - 1) * $Banners->perPage())
-                @forelse ($Banners as $key => $item)
+                @forelse ($Banners as $item)
                 <tr class="text-center">
+
+                    {{-- STT --}}
                     <td>{{ ++$stt }}</td>
-                    <td class="font-weight-400 align-middle"><img src="{{ asset('storage/' . $item->image) }}" alt="image" width="100"></td>
-                    <td class="font-weight-400 align-middle text-overflow">{{ $item->title }}</td>
-                    <td class="font-weight-400 align-middle">{{ $item->subtitle}}</td>
-                    <td class="font-weight-400 align-middle">{{$item->link}}</td>
-                    <td class="font-weight-400 align-middle">{{$item->sort_order}}</td>
 
-                    <td>{{ $item->is_active == 0 ? 'Không hoạt động' : 'Hoạt động' }}</td>
-                    <td class="text-center">
+                    {{-- IMAGE --}}
+                    <td>
+                        @if ($item->image)
+                        <img src="{{ asset('storage/'.$item->image) }}" width="80">
+                        @else
+                        —
+                        @endif
+                    </td>
 
-                        <a class="btn mb-1 btn-soft-primary btn-icon btn-circle btn-sm"
-                            href="{{ route('banners.edit', $item->id) }}" title="@lang('Chỉnh sửa')">
+                    {{-- TITLE --}}
+                    <td class="text-start">{{ $item->title }}</td>
+
+                    {{-- SUBTITLE --}}
+                    <td>{{ $item->subtitle ?? '—' }}</td>
+
+                    {{-- LINK --}}
+                    <td>{{ $item->link ?? '—' }}</td>
+
+                    {{-- SORT ORDER --}}
+                    <td>{{ $item->sort_order }}</td>
+
+                    {{-- STATUS --}}
+                    <td>
+                        {{ $item->is_active ? 'Hoạt động' : 'Không hoạt động' }}
+                    </td>
+
+                    {{-- ACTION --}}
+                    <td>
+                        <a class="btn btn-soft-primary btn-icon btn-circle btn-sm"
+                            href="{{ route('banners.edit', $item->id) }}">
                             <i class="las la-edit"></i>
                         </a>
-                        <a class="btn mb-1 btn-soft-danger btn-icon btn-circle click-modal-delete btn-sm" data-id="{{ $item->id }}"
-                            href="javascript:void(0);" title="@lang('Xóa')">
+
+                        <a class="btn btn-soft-danger btn-icon btn-circle btn-sm click-modal-delete"
+                            data-id="{{ $item->id }}"
+                            href="javascript:void(0);">
                             <i class="las la-trash"></i>
                         </a>
                     </td>
+
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6">Không có dữ liệu.</td>
+                    <td colspan="8">Không có dữ liệu</td>
                 </tr>
                 @endforelse
             </tbody>
@@ -120,6 +158,7 @@
     </div>
 </div>
 @endsection
+
 @section('script')
 <script>
     $(document).on('click', '.click-modal-delete', function() {

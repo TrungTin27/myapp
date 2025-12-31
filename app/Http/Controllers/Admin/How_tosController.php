@@ -18,7 +18,7 @@ class How_tosController extends Controller
         $query = How_tos::query()
             ->when($request->search, function ($query) use ($request) {
                 $query->where(function ($q) use ($request) {
-                    $q->where('first name', 'like', '%' . $request->search . '%');
+                    $q->where('title', 'like', '%' . $request->search . '%');
                 });
             })
             ->when($request->filled('start_date'), function ($query) use ($request) {
@@ -31,7 +31,11 @@ class How_tosController extends Controller
         $How_tos = $query->latest()->paginate(10);
         return view('admin.How_tos.index', compact('How_tos'));
     }
-
+    // Form tạo mới
+    public function create()
+    {
+        return view('admin.How_tos.create');
+    }
 
     // Lưu vào DB
     public function store(How_tosRequest $request)
@@ -41,8 +45,8 @@ class How_tosController extends Controller
             if ($request->hasFile('thumbnail')) {
                 $data['thumbnail'] = $request->file('thumbnail')->store('avatars', 'public');
             }
-            $How_tosService = $this->How_tosService->store($data);
-            if ($How_tosService) {
+            $Posts = $this->How_tosService->store($data);
+            if ($Posts) {
                 flash('Thêm thành công')->success();
                 return redirect()->route('how_tos.index');
             }
@@ -54,9 +58,6 @@ class How_tosController extends Controller
         }
     }
 
-    // Hiển thị chi tiết
-
-
     // Form chỉnh sửa
     public function edit($id)
     {
@@ -65,7 +66,27 @@ class How_tosController extends Controller
         return view('admin.How_tos.edit', compact('recipe'));
     }
 
+    // Update sản phẩm
+    public function update(How_tosRequest $request, $id)
+    {
+        try {
+            $How_tos = How_tos::findOrFail($id);
+            $data = $request->validated();
+            if ($request->hasFile('thumbnail')) {
+                if ($How_tos->thumbnail) {
+                    Storage::disk('public')->delete($How_tos->thumbnail);
+                }
+                $data['thumbnail'] = $request->file('thumbnail')->store('avatars', 'public');
+            }
 
+            $How_tos->update($data);
+            flash('Chỉnh sửa  thành công')->success();
+            return redirect()->route('Posts.index');
+        } catch (\Exception $e) {
+            flash('Chỉnh sửa thất bại')->error();
+            return redirect()->back();
+        }
+    }
 
     // Xoá sản phẩm
     public function delete($id)
