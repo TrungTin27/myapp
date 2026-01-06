@@ -29,15 +29,17 @@
                     <i class="las la-key me-1"></i> Đổi mật khẩu
                 </a>
 
-                <a href="{{ route('logout') }}"
+                <a href="#"
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                     class="d-block text-danger py-1">
                     <i class="las la-sign-out-alt me-1"></i> Logout
                 </a>
 
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display:none;">
                     @csrf
                 </form>
+
+
             </div>
         </div>
 

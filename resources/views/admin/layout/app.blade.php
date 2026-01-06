@@ -189,8 +189,6 @@
         .swal2-actions {
             gap: 20px
         }
-
-        
     </style>
     @yield('style')
 
@@ -200,9 +198,9 @@
 <body class="">
 
     @if (session()->has('flash_notification'))
-        <div class="flash-message {{ session('flash_notification.class') }}">
-            {{ session('flash_notification.message') }}
-        </div>
+    <div class="flash-message {{ session('flash_notification.class') }}">
+        {{ session('flash_notification.message') }}
+    </div>
     @endif
 
     <div class="load-wrapp" id="loadPage">
@@ -248,7 +246,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     @yield('script')
 
-    
+
 
     <!-- A friendly reminder to run on a server, remove this during the integration. -->
     <script>
@@ -286,6 +284,7 @@
             });
         }
     </script>
+
 </body>
-        
+
 </html>

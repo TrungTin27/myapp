@@ -23,36 +23,32 @@ class AdminController extends Controller
             'password' => 'required|min:6',
         ]);
 
-        $admin = Admin::where('email', $request->email)->first();
-        if ($admin && $admin->password === $request->password) {
+        if (Auth::guard('admin')->attempt([
+            'email' => $request->email,
+            'password' => $request->password,
+        ])) {
 
-            // Redirect tùy vai trò
-            return redirect()->route('admin.index'); // hoặc admin.dashboard.index
-
-
+            $request->session()->regenerate();
+            return redirect()->route('admin.index');
         }
-        return back()->withErrors(['email' => 'Email or password is incorrect']);
+
+        return back()->withErrors([
+            'email' => 'Email hoặc mật khẩu không đúng',
+        ]);
     }
 
     public function logout(Request $request)
     {
-        Auth::logout();
+        Auth::guard('admin')->logout(); // 🔥 QUAN TRỌNG
+
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/admin/login');
-    }
-    public function changePass(Request $request)
-    {
-        Auth::changePass();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return redirect('/admin/changePass');
+        return redirect()->route('admin.login');
     }
 
     public function index()
     {
-        return view('admin.layout.app');
+        return view('admin.dashboard.index');
     }
 }

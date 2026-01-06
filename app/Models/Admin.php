@@ -2,23 +2,24 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+// Quan trọng: Phải dùng lớp Authenticatable này
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-
-class Admin extends Model
+class Admin extends Authenticatable
 {
-     use Notifiable;
-    use HasFactory;
-    protected $table = 'admins';
+    use Notifiable;
 
+    // Các cột có thể thêm vào (fillable)
     protected $fillable = [
         'name',
-        'password',
         'email',
+        'password',
     ];
+
+    // Ẩn mật khẩu khi xuất dữ liệu
     protected $hidden = [
         'password',
+        'remember_token',
     ];
 }
