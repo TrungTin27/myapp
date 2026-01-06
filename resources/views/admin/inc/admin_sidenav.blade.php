@@ -95,7 +95,7 @@
                 <li class="aiz-side-nav-item mb-1">
                     <a href="{{ route('contact_messages.index') }}"
                         class="aiz-side-nav-link d-flex align-items-center gap-2 px-3 py-2 rounded
-                       {{ request()->is('contact_messages*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
+                       {{ request()->is('contact_messages.*') ? 'bg-white fw-semibold text-dark' : 'text-secondary' }}">
                         <i class="las la-comments aiz-side-nav-icon"></i>
                         <span class="aiz-side-nav-text">Contact Messages</span>
                     </a>
