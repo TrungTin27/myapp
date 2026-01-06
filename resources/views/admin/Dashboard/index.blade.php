@@ -48,7 +48,7 @@
     </ul>
     @else
     <div class="text-muted">
-        Không không có contact mới
+        Không có contact mới
     </div>
     @endif
 </div>
