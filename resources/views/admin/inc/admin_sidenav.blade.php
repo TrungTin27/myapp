@@ -1,19 +1,19 @@
 <div class="aiz-sidebar-wrap">
     <div class="aiz-sidebar left c-scrollbar">
 
-        <!-- LOGO -->
-        <div class="aiz-side-nav-logo-wrap">
-            <a href="#" class="d-block text-left px-3 py-2">
-                <img class="mw-100" src="{{ asset('storage/avatars/logo.png') }}" alt="Logo">
-            </a>
-        </div>
+
 
         <!-- USER INFO -->
         <div class="aiz-side-user px-3 py-3 border-bottom">
             <div class="d-flex align-items-center gap-2">
-                <img src="{{ asset('storage/avatars/admin.png') }}"
+                <img
+                    src="{{ asset('images/IMG_20251127_0001.jpg') }}"
                     class="rounded-circle"
-                    width="42" height="42" alt="Avatar">
+                    width="42"
+                    height="42"
+                    style="object-fit: cover;"
+                    alt="Avatar">
+
 
                 <div class="flex-grow-1">
                     <div class="fw-semibold text-dark">

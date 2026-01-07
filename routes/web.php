@@ -17,8 +17,6 @@ use App\Http\Controllers\Admin\Author_sectionsController;
 use App\Http\Controllers\Admin\How_tosController;
 use App\Http\Controllers\Admin\DashboardController;
 
-
-
 Route::get('/login', function () {
     return redirect()->route('admin.login');
 })->name('login');
@@ -43,10 +41,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
             ->name('changePassword');
     });
 });
-
-
-
-
 //Dashboard//
 Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 //Banner//
@@ -117,8 +111,6 @@ Route::post('/how_tos/store', [how_tosController::class, 'store'])->name('how_to
 Route::get('/how_tos/edit/{id}', [how_tosController::class, 'edit'])->name('how_tos.edit');
 Route::put('/how_tos/{id}', [how_tosController::class, 'update'])->name('how_tos.update');
 Route::delete('/how_tos/{id}/delete', [how_tosController::class, 'delete'])->name('how_tos.delete');
-
-
 //CMS//
 Route::get('/', [CMSController::class, 'index'])->name('home');
 Route::post('/contact_messages/store', [Contact_messagesController::class, 'store'])->name('contact.store');
