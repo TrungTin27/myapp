@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CMS\CMSController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\SearchesController;
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\SearchesController;
 use App\Http\Controllers\Admin\BannersController;
 use App\Http\Controllers\Admin\Contact_messagesController;
 use App\Http\Controllers\Admin\PostsController;
@@ -20,25 +20,13 @@ use App\Http\Controllers\Admin\DashboardController;
 Route::get('/login', function () {
     return redirect()->route('admin.login');
 })->name('login');
-
 Route::prefix('admin')->name('admin.')->group(function () {
-
-    Route::get('/login', [AdminController::class, 'showLogin'])
-        ->name('login');
-
-    Route::post('/login', [AdminController::class, 'login'])
-        ->name('login.post');
-
-    Route::post('/logout', [AdminController::class, 'logout'])
-        ->name('logout');
-
+    Route::get('/login', [AdminController::class, 'showLogin'])->name('login');
+    Route::post('/login', [AdminController::class, 'login'])->name('login.post');
+    Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
     Route::middleware('auth:admin')->group(function () {
-
-        Route::get('/', [AdminController::class, 'index'])
-            ->name('index');
-
-        Route::post('/change-password', [AdminController::class, 'changePassword'])
-            ->name('changePassword');
+        Route::get('/', [AdminController::class, 'index'])->name('index');
+        Route::post('/change-password', [AdminController::class, 'changePassword'])->name('changePassword');
     });
 });
 //Dashboard//

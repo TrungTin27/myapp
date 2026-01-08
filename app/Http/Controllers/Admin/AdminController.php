@@ -46,7 +46,7 @@ class AdminController extends Controller
 
         return redirect()->route('admin.login');
     }
-
+    
     public function index()
     {
         return view('admin.dashboard.index');
