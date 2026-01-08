@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CMS\CMSController;
-use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\SearchesController;
 use App\Http\Controllers\Admin\BannersController;
 use App\Http\Controllers\Admin\Contact_messagesController;
@@ -16,6 +16,14 @@ use App\Http\Controllers\Admin\Reader_favoritesController;
 use App\Http\Controllers\Admin\Author_sectionsController;
 use App\Http\Controllers\Admin\How_tosController;
 use App\Http\Controllers\Admin\DashboardController;
+//HOME//
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+
+
+
+
+
 
 Route::get('/login', function () {
     return redirect()->route('admin.login');
@@ -100,5 +108,5 @@ Route::get('/how_tos/edit/{id}', [how_tosController::class, 'edit'])->name('how_
 Route::put('/how_tos/{id}', [how_tosController::class, 'update'])->name('how_tos.update');
 Route::delete('/how_tos/{id}/delete', [how_tosController::class, 'delete'])->name('how_tos.delete');
 //CMS//
-Route::get('/', [CMSController::class, 'index'])->name('home');
+//Route::get('/', [CMSController::class, 'index'])->name('home');
 Route::post('/contact_messages/store', [Contact_messagesController::class, 'store'])->name('contact.store');
