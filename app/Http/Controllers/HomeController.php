@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Banner;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $banners = Banner::all(); // ĐỪNG where gì hết
+        $banner = Banner::latest()->first(); // banner mới nhất
 
-        return view('Frontend.index', compact('banners'));
+       return view('index', compact('banner'));
+
     }
 }

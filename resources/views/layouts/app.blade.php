@@ -100,17 +100,13 @@
 
 
 
-  <div class="content-section">
+  <div class="content-section"> 
+  <div class="left-content"> 
 
-    <!-- ảnh và text bên trái -->
-    <div class="left-content">
-      <img src="images/de08154ec3ced564eac1cf31aa22a03f172f2f8e (1).jpg" alt="Food Image" class="main-food-img">
+    {{-- BANNER --}}
+    @yield('banner')
 
-      <div class="food-box">
-        <h2>ROASTED BROCCOLI & CAULIFLOWER YOU NEED TO TRY THIS METHOD FOR ROASTING FROZEN VEGGIES, LIKE, YESTERDAY</h2>
-        <p>If you're wondering how to make frozen veggies actually crispy, this Liz Moody roasted broccoli recipe is for you.</p>
-      </div>
-    </div>
+  </div>
 
     <!-- phải có trending now -->
     <div class="trending-box">

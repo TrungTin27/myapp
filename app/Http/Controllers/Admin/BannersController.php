@@ -84,8 +84,9 @@ class BannersController extends Controller
             }
 
             $Banner->update($data);
-            flash('Chỉnh sửa  thành công')->success();
-            return redirect()->route('Banners.index');
+            flash('Chỉnh sửa thành công')->success();
+            return redirect()->route('banners.index');
+
         } catch (\Exception $e) {
             flash('Chỉnh sửa thất bại')->error();
             return redirect()->back();
@@ -93,11 +94,30 @@ class BannersController extends Controller
     }
 
     // Xoá sản phẩm
-    public function delete($id)
-    {
+   public function delete($id)
+{
+    try {
+        $banner = Banner::findOrFail($id);
 
-        $Banner = Banner::findOrFail($id);
-        $Banner->delete();
-        return redirect()->back();
+        // Xoá ảnh nếu có
+        if ($banner->image && Storage::disk('public')->exists($banner->image)) {
+            Storage::disk('public')->delete($banner->image);
+        }
+
+        // Xoá DB (qua service)
+        $this->BannerService->delete($id);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Xóa thành công'
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => $e->getMessage()
+        ], 500);
     }
+}
+
+
 }

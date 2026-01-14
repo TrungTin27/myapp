@@ -27,11 +27,11 @@ class BannerRequest extends FormRequest
     {
         return [
             'title'=>'Tiêu đề',
-            'sort_order'=>'Thứ tự hiển thị',
             'link' =>'Đường dẫn',
             'is_active'=>"Trạng thái ẩn/hiển",
             'image'=>'Ảnh banner',
-            'subtitle'=>'Nội dung phụ'
+            'subtitle'=>'Nội dung phụ',
+            'sort_order'=>'Thứ tự hiển thị'
         ];
     }
 }

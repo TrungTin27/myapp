@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CMS\CMSController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Admin\SearchesController;
+use App\Http\Controllers\SearchesController;
 use App\Http\Controllers\Admin\BannersController;
 use App\Http\Controllers\Admin\Contact_messagesController;
 use App\Http\Controllers\Admin\PostsController;
@@ -16,25 +16,29 @@ use App\Http\Controllers\Admin\Reader_favoritesController;
 use App\Http\Controllers\Admin\Author_sectionsController;
 use App\Http\Controllers\Admin\How_tosController;
 use App\Http\Controllers\Admin\DashboardController;
-//HOME//
-Route::get('/', [HomeController::class, 'index'])->name('home');
-
-
-
-
-
 
 
 Route::get('/login', function () {
     return redirect()->route('admin.login');
 })->name('login');
+
 Route::prefix('admin')->name('admin.')->group(function () {
+
+    //  Login admin
     Route::get('/login', [AdminController::class, 'showLogin'])->name('login');
     Route::post('/login', [AdminController::class, 'login'])->name('login.post');
+
+    //  Logout admin
     Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+
+    //  TẤT CẢ ROUTE ADMIN (BẮT BUỘC LOGIN)
     Route::middleware('auth:admin')->group(function () {
+
+        //  Dashboard (trang chính admin)
         Route::get('/', [AdminController::class, 'index'])->name('index');
-        Route::post('/change-password', [AdminController::class, 'changePassword'])->name('changePassword');
+
+        //  Nếu bạn muốn /admin/dashboard
+        Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     });
 });
 //Dashboard//
@@ -104,9 +108,12 @@ Route::delete('/author_sections/{id}/delete', [author_sectionsController::class,
 Route::get('/how_tos', [How_tosController::class, 'index'])->name('how_tos.index');
 Route::get('/how_tos/create', [how_tosController::class, 'create'])->name('how_tos.create');
 Route::post('/how_tos/store', [how_tosController::class, 'store'])->name('how_tos.store');
-Route::get('/how_tos/edit/{id}', [how_tosController::class, 'edit'])->name('how_tos.edit');
-Route::put('/how_tos/{id}', [how_tosController::class, 'update'])->name('how_tos.update');
-Route::delete('/how_tos/{id}/delete', [how_tosController::class, 'delete'])->name('how_tos.delete');
+Route::get('/how_tos/edit/{id}', action: [how_tosController::class, 'edit'])->name('how_tos.edit');
+Route::put('/how_tos/{id}', action: [how_tosController::class, 'update'])->name('how_tos.update');
+Route::delete('/how_tos/{id}/delete', action: [how_tosController::class, 'delete'])->name('how_tos.delete');
+
 //CMS//
-//Route::get('/', [CMSController::class, 'index'])->name('home');
-Route::post('/contact_messages/store', [Contact_messagesController::class, 'store'])->name('contact.store');
+Route::get('/', [CMSController::class, 'index'])->name('home');
+
+Route::post('/contact_messages/store', action: [Contact_messagesController::class, 'store'])->name('contact.store');
+

@@ -161,26 +161,27 @@
 
 @section('script')
 <script>
-    $(document).on('click', '.click-modal-delete', function() {
-        let id = $(this).data('id');
+$(document).on('click', '.click-modal-delete', function () {
+    let id = $(this).data('id');
 
-        if (!confirm('Bạn có chắc chắn muốn xóa banner này?')) return;
+    if (!confirm('Bạn có chắc chắn muốn xóa banner này?')) return;
 
-        $.ajax({
-            url: "{{ url('admin/banner') }}/" + id + "/delete",
-            type: "POST",
-            data: {
-                _method: "DELETE",
-                _token: "{{ csrf_token() }}"
-            },
-            success: function() {
-                location.reload();
-            },
-            error: function(err) {
-                console.error(err);
-                alert('Xóa thất bại');
-            }
-        });
+    $.ajax({
+        url: "{{ route('banners.delete', ':id') }}".replace(':id', id),
+        type: "POST",
+        data: {
+            _method: "DELETE",
+            _token: "{{ csrf_token() }}"
+        },
+        success: function (res) {
+            location.reload();
+        },
+        error: function (xhr) {
+            console.log(xhr.responseText);
+            alert('Xóa thất bại');
+        }
     });
+});
 </script>
+
 @endsection

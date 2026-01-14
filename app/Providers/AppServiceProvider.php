@@ -6,9 +6,6 @@ use Illuminate\Support\ServiceProvider;
 //Banner//
 use App\Repositories\BannerRepository;
 use App\Repositories\Interface\BannerRepositoryInterface;
-//Product//
-//use App\Repositories\Interface\ProductRepositoryInterface;
-//use App\Repositories\ProductRepository;
 //Chicken recipes//
 use App\Repositories\Chicken_recipesRepository;
 use App\Repositories\Interface\Chicken_recipesRepositoryInterface;

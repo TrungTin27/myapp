@@ -19,10 +19,11 @@ class BannerRepository implements BannerRepositoryInterface
         return $Banner;
     }
     public function delete($id)
-    {
-        $Banner = Banner::findOrFail($id);
-        return $Banner->delete($id);
-    }
+{
+    $banner = Banner::findOrFail($id);
+    return $banner->delete(); // delete() KHÔNG NHẬN THAM SỐ
+}
+
     public function search($keyword)
     {
         $query = Banner::query();
