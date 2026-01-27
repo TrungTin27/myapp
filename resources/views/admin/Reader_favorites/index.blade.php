@@ -89,7 +89,6 @@
                     <th>@lang('Rating')</th>
                     <th>@lang('Mô tả')</th>
                     <th>@lang('Hiển thị')</th>
-                    <th>@lang('Thứ tự')</th>
                     <th style="width:15%">@lang('Điều chỉnh')</th>
                 </tr>
             </thead>
@@ -126,8 +125,6 @@
                         {{ $item->is_active ? 'Hiển thị' : 'Ẩn' }}
                     </td>
 
-                    <td>{{ $item->sort_order }}</td>
-
                     <td>
                         <a class="btn btn-soft-primary btn-icon btn-circle btn-sm"
                             href="{{ route('reader_favorites.edit', $item->id) }}">
@@ -155,26 +152,27 @@
 
 @section('script')
 <script>
-    $(document).on('click', '.click-modal-delete', function() {
-        let id = $(this).data('id');
+$(document).on('click', '.click-modal-delete', function () {
+    let id = $(this).data('id');
 
-        if (!confirm('Bạn có chắc chắn muốn xóa banner này?')) return;
+    if (!confirm('Bạn có chắc chắn muốn xóa mục này?')) return;
 
-        $.ajax({
-            url: "{{ url('admin/reader_favorites') }}/" + id + "/delete",
-            type: "POST",
-            data: {
-                _method: "DELETE",
-                _token: "{{ csrf_token() }}"
-            },
-            success: function() {
-                location.reload();
-            },
-            error: function(err) {
-                console.error(err);
-                alert('Xóa thất bại');
-            }
-        });
+    $.ajax({
+        url: "{{ route('reader_favorites.destroy', ':id') }}".replace(':id', id),
+        type: "POST",
+        data: {
+            _method: "DELETE",
+            _token: "{{ csrf_token() }}"
+        },
+        success: function () {
+            location.reload();
+        },
+        error: function (xhr) {
+            console.error(xhr.responseText);
+            alert('Xóa thất bại');
+        }
     });
+});
 </script>
+
 @endsection

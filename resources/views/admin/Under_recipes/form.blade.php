@@ -53,18 +53,6 @@
             class="form-control"
             value="{{ old('serving_price', $recipe->serving_price ?? '') }}">
     </div>
-
-    {{-- FEATURED --}}
-    <div class="form-group mt-3">
-        <label>
-            <input type="checkbox"
-                name="is_featured"
-                value="1"
-                {{ old('is_featured', $recipe->is_featured ?? false) ? 'checked' : '' }}>
-            Công thức nổi bật
-        </label>
-    </div>
-
     {{-- STATUS --}}
     <div class="form-group mt-3">
         <label>Trạng thái</label>

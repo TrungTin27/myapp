@@ -7,7 +7,7 @@ use App\Models\chicken_recipes;
 use App\Models\Contact_messages;
 use App\Models\how_tos;
 use App\Models\pasta_recipes;
-use App\Models\posts;
+use App\Models\post;
 use App\Models\reader_favorites;
 use App\Models\under_recipes;
 use Carbon\Carbon;
@@ -19,7 +19,7 @@ class DashboardController extends Controller
     public function index()
     {
         // 🔹 CARD THỐNG KÊ
-        $postCount = posts::count();
+        $postCount = post::count();
         $recipeCount = pasta_recipes::count();
         $recipeCount = chicken_recipes::count();
         $recipeCount = pasta_recipes::count();

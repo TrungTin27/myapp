@@ -89,11 +89,17 @@ class How_tosController extends Controller
     }
 
     // Xoá sản phẩm
-    public function delete($id)
-    {
+   public function destroy($id)
+{
+    $how_tos = How_tos::findOrFail($id);
 
-        $How_tos = How_tos::findOrFail($id);
-        $How_tos->delete();
-        return redirect()->back();
+    if ($how_tos->thumbnail) {
+        \Storage::disk('public')->delete($how_tos->thumbnail);
     }
+
+    $how_tos->delete();
+
+    return response()->json(['success' => true]);
+}
+
 }

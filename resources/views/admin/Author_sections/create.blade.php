@@ -16,7 +16,6 @@
     "button_text" => old('button_text'),
     "button_link" => old('button_link'),
     "is_active"=>old("is_active"),
-    "sort_order"=>old("sort_order"),
     ])
 </form>
 @endsection

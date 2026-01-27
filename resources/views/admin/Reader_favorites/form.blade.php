@@ -67,15 +67,6 @@
         </label>
     </div>
 
-    {{-- ================= SORT ORDER ================= --}}
-    <div class="form-group mt-3">
-        <label>Thứ tự hiển thị</label>
-        <input type="number"
-            name="sort_order"
-            class="form-control"
-            value="{{ old('sort_order', $post->sort_order ?? 0) }}"
-            min="0">
-    </div>
 
     {{-- ================= BUTTON ================= --}}
     <button class="btn btn-info mt-4 w-100">

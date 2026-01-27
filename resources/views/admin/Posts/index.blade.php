@@ -38,7 +38,7 @@
 
         {{-- HÀNG 2 --}}
         <div class="row align-items-end">
-            {{-- DATE FILTER --}}
+            {{-- DATE FILTER (GIỮ FORM, KHÔNG DÙNG HIỂN THỊ) --}}
             <div class="col-md-8">
                 <div class="row">
                     <div class="col-md-6">
@@ -88,7 +88,6 @@
                     <th>@lang('Ảnh')</th>
                     <th>@lang('Trending')</th>
                     <th>@lang('Trạng thái')</th>
-                    <th>@lang('Ngày đăng')</th>
                     <th style="width:15%">@lang('Điều chỉnh')</th>
                 </tr>
             </thead>
@@ -113,9 +112,9 @@
                     {{-- THUMBNAIL --}}
                     <td>
                         @if ($item->thumbnail)
-                        <img src="{{ asset('storage/'.$item->thumbnail) }}" width="80">
+                            <img src="{{ asset('storage/'.$item->thumbnail) }}" width="80">
                         @else
-                        —
+                            —
                         @endif
                     </td>
 
@@ -129,11 +128,6 @@
                         {{ ucfirst($item->status) }}
                     </td>
 
-                    {{-- PUBLISHED DATE --}}
-                    <td>
-                        {{ $item->published_at ? $item->published_at->format('d/m/Y') : '—' }}
-                    </td>
-
                     {{-- ACTION --}}
                     <td>
                         <a class="btn btn-soft-primary btn-icon btn-circle btn-sm"
@@ -141,8 +135,9 @@
                             <i class="las la-edit"></i>
                         </a>
 
-                        <a class="btn mb-1 btn-soft-danger btn-icon btn-circle click-modal-delete btn-sm" data-id="{{ $item->id }}"
-                            href="javascript:void(0);" title="@lang('Xóa')">
+                        <a class="btn mb-1 btn-soft-danger btn-icon btn-circle click-modal-delete btn-sm"
+                           data-id="{{ $item->id }}"
+                           href="javascript:void(0);" title="@lang('Xóa')">
                             <i class="las la-trash"></i>
                         </a>
                     </td>
@@ -150,7 +145,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="8">Không có dữ liệu</td>
+                    <td colspan="7">Không có dữ liệu</td>
                 </tr>
                 @endforelse
             </tbody>
@@ -161,25 +156,27 @@
 
 @section('script')
 <script>
-    $(document).on('click', '.click-modal-delete', function() {
-        let id = $(this).data('id');
+$(document).on('click', '.click-modal-delete', function () {
+    let id = $(this).data('id');
 
-        if (!confirm('Bạn có chắc chắn muốn xóa bài viết này?')) return;
+    if (!confirm('Bạn có chắc chắn muốn xóa bài viết này?')) return;
 
-        $.ajax({
-            url: "admin/posts/" + id + "/delete",
-            type: "POST",
-            data: {
-                _method: "DELETE",
-                _token: $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function() {
-                location.reload();
-            },
-            error: function(err) {
-                console.error(err);
-            }
-        });
+    $.ajax({
+        url: "/posts/" + id + "/delete", // ✅ ĐÚNG ROUTE
+        type: "POST",
+        data: {
+            _method: "DELETE",
+            _token: $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function () {
+            location.reload();
+        },
+        error: function (xhr) {
+            console.error(xhr.responseText);
+            alert('Xóa thất bại');
+        }
     });
+});
 </script>
+
 @endsection

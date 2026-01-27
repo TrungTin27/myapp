@@ -26,7 +26,6 @@ return new class extends Migration
             $table->decimal('serving_price', 8, 2)->nullable();
 
             // Trạng thái
-            $table->boolean('is_featured')->default(false);
             $table->enum('status', ['draft', 'published'])->default('draft');
 
             $table->timestamps();

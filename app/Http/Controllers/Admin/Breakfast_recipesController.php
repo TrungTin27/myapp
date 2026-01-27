@@ -92,11 +92,20 @@ class Breakfast_recipesController extends Controller
     }
 
     // Xoá sản phẩm
-    public function delete($id)
-    {
+    public function destroy($id)
+{
+    $item = Breakfast_recipes::findOrFail($id);
 
-        $Breakfast_recipes = Breakfast_recipes::findOrFail($id);
-        $Breakfast_recipes->delete();
-        return redirect()->back();
+    // nếu có ảnh thì xoá luôn
+    if ($item->thumbnail && \Storage::exists($item->thumbnail)) {
+        \Storage::delete($item->thumbnail);
     }
+
+    $item->delete();
+
+    return response()->json([
+        'success' => true
+    ]);
+}
+
 }

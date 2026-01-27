@@ -92,11 +92,17 @@ class Under_recipesController extends Controller
     }
 
     // Xoá sản phẩm
-    public function delete($id)
-    {
+    public function destroy($id)
+{
+    $item = Under_recipes::findOrFail($id);
 
-        $Under_recipes = Under_recipes::findOrFail($id);
-        $Under_recipes->delete();
-        return redirect()->back();
+    if ($item->thumbnail && Storage::exists($item->thumbnail)) {
+        Storage::delete($item->thumbnail);
     }
+
+    $item->delete();
+
+    return response()->json(['success' => true]);
+}
+
 }

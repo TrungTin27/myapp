@@ -11,15 +11,16 @@ use Illuminate\Http\Request;
 
 class Pasta_recipesController extends Controller
 {
-    public function __construct(public readonly Pasta_recipesService $Pasta_recipesService) {}
-    // Hiển thị toàn bộ sản phẩm
+    public function __construct(
+        public readonly Pasta_recipesService $Pasta_recipesService
+    ) {}
+
+    // ================= LIST =================
     public function index(Request $request)
     {
         $query = Pasta_recipes::query()
             ->when($request->search, function ($query) use ($request) {
-                $query->where(function ($q) use ($request) {
-                    $q->where('title', 'like', '%' . $request->search . '%');
-                });
+                $query->where('title', 'like', '%' . $request->search . '%');
             })
             ->when($request->filled('start_date'), function ($query) use ($request) {
                 $query->whereDate('created_at', '>=', $request->start_date);
@@ -31,72 +32,73 @@ class Pasta_recipesController extends Controller
         $Pasta_recipes = $query->latest()->paginate(10);
         return view('admin.Pasta_recipes.index', compact('Pasta_recipes'));
     }
-    // Form tạo mới
+
+    // ================= CREATE =================
     public function create()
     {
         return view('admin.Pasta_recipes.create');
     }
 
-    // Lưu vào DB
     public function store(Pasta_recipesRequest $request)
     {
         try {
             $data = $request->validated();
+
             if ($request->hasFile('thumbnail')) {
-                $data['thumbnail'] = $request->file('thumbnail')->store('avatars', 'public');
+                $data['thumbnail'] = $request->file('thumbnail')
+                    ->store('avatars', 'public');
             }
-            $Pasta_recipes = $this->Pasta_recipesService->store($data);
-            if ($Pasta_recipes) {
-                flash('Thêm thành công')->success();
-                return redirect()->route('pasta_recipes.index');
-            }
-            flash('Thêm  thất bại')->error();
-            return redirect()->back();
+
+            $this->Pasta_recipesService->store($data);
+
+            flash('Thêm thành công')->success();
+            return redirect()->route('pasta_recipes.index');
+
         } catch (\Exception $e) {
             flash('Thêm thất bại')->error();
             return redirect()->back();
         }
     }
 
-    // Hiển thị chi tiết
-
-
-    // Form chỉnh sửa
+    // ================= EDIT =================
     public function edit($id)
     {
         $recipe = Pasta_recipes::findOrFail($id);
-
         return view('admin.Pasta_recipes.edit', compact('recipe'));
     }
 
-    // Update sản phẩm
     public function update(Pasta_recipesRequest $request, $id)
     {
         try {
-            $Pasta_recipes = Pasta_recipes::findOrFail($id);
+            $recipe = Pasta_recipes::findOrFail($id);
             $data = $request->validated();
+
             if ($request->hasFile('thumbnail')) {
-                if ($Pasta_recipes->thumbnail) {
-                    Storage::disk('public')->delete($Pasta_recipes->thumbnail);
+                if ($recipe->thumbnail) {
+                    Storage::disk('public')->delete($recipe->thumbnail);
                 }
-                $data['thumbnail'] = $request->file('thumbnail')->store('avatars', 'public');
+                $data['thumbnail'] = $request->file('thumbnail')
+                    ->store('avatars', 'public');
             }
 
-            $Pasta_recipes->update($data);
-            flash('Chỉnh sửa  thành công')->success();
-            return redirect()->route('Posts.index');
+            $recipe->update($data);
+
+            flash('Chỉnh sửa thành công')->success();
+            return redirect()->route('pasta_recipes.index');
+
         } catch (\Exception $e) {
             flash('Chỉnh sửa thất bại')->error();
             return redirect()->back();
         }
     }
 
-    // Xoá sản phẩm
-    public function delete($id)
-    {
+ public function destroy($id)
+{
+    $pasta = Pasta_recipes::findOrFail($id);
+    $pasta->delete();
 
-        $Pasta_recipes = Pasta_recipes::findOrFail($id);
-        $Pasta_recipes->delete();
-        return redirect()->back();
-    }
+    return response()->json(['message' => 'Deleted successfully']);
+}
+
+
 }

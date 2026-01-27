@@ -28,7 +28,7 @@ return new class extends Migration
             // Trạng thái
             $table->boolean('is_featured')->default(false);
             $table->enum('status', ['draft', 'published'])->default('draft');
-
+            
             $table->timestamps();
         });
     }

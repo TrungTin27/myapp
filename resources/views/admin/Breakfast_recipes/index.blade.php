@@ -88,7 +88,6 @@
                     <th>@lang('Ảnh')</th>
                     <th>@lang('Giá công thức')</th>
                     <th>@lang('Giá serving')</th>
-                    <th>@lang('Món nổi bật')</th>
                     <th>@lang('Trạng thái')</th>
                     <th style="width:15%">@lang('Điều chỉnh')</th>
                 </tr>
@@ -120,8 +119,6 @@
 
                     <td>{{ $item->serving_price ?? '—' }}</td>
 
-                    <td>{{ $item->is_featured ? 'Có' : 'Không' }}</td>
-
                     <td>{{ ucfirst($item->status) }}</td>
 
                     <td>
@@ -151,26 +148,27 @@
 
 @section('script')
 <script>
-    $(document).on('click', '.click-modal-delete', function() {
-        let id = $(this).data('id');
+$(document).on('click', '.click-modal-delete', function () {
+    let id = $(this).data('id');
 
-        if (!confirm('Bạn có chắc chắn muốn xóa banner này?')) return;
+    if (!confirm('Bạn có chắc chắn muốn xóa món này?')) return;
 
-        $.ajax({
-            url: "{{ url('admin/breakfast_recipes') }}/" + id + "/delete",
-            type: "POST",
-            data: {
-                _method: "DELETE",
-                _token: "{{ csrf_token() }}"
-            },
-            success: function() {
-                location.reload();
-            },
-            error: function(err) {
-                console.error(err);
-                alert('Xóa thất bại');
-            }
-        });
+    $.ajax({
+        url: "{{ url('admin/breakfast_recipes') }}/" + id,
+        type: "POST",
+        data: {
+            _method: "DELETE",
+            _token: "{{ csrf_token() }}"
+        },
+        success: function () {
+            location.reload();
+        },
+        error: function (err) {
+            console.error(err);
+            alert('Xóa thất bại');
+        }
     });
+});
 </script>
+
 @endsection

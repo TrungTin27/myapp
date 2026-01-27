@@ -15,7 +15,6 @@
     "thumbnail" => old('thumbnail'),
     "recipe_price" => old('recipe_price'),
     "serving_price" => old('serving_price'),
-    "is_featured"=>old("is_featured"),
     "status"=>old("status"),
     ])
 </form>

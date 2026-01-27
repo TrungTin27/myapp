@@ -92,11 +92,14 @@ class Reader_favoritesController extends Controller
     }
 
     // Xoá sản phẩm
-    public function delete($id)
-    {
+    public function destroy($id)
+{
+    $reader_favorite = reader_favorites::findOrFail($id);
+    $reader_favorite->delete();
 
-        $Reader_favorites = Reader_favorites::findOrFail($id);
-        $Reader_favorites->delete();
-        return redirect()->back();
-    }
+    return response()->json([
+        'message' => 'Deleted successfully'
+    ]);
+}
+
 }

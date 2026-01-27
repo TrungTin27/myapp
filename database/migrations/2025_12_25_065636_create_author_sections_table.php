@@ -23,18 +23,8 @@ return new class extends Migration
             // Ảnh tác giả / ảnh giới thiệu
             $table->string('image')->nullable();
 
-            // Text của nút (ví dụ: Learn more)
-            $table->string('button_text')->nullable();
-
-            // Link của nút (ví dụ: /about)
-            $table->string('button_link')->nullable();
-
             // Bật / tắt hiển thị ngoài frontend
             $table->boolean('is_active')->default(true);
-
-            // Thứ tự hiển thị (nếu sau này có nhiều section)
-            $table->integer('sort_order')->default(0);
-
             $table->timestamps();
         });
     }

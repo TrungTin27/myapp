@@ -1,17 +1,17 @@
 <div class="card p-3">
 
-    {{-- ================= TIÊU ĐỀ BÀI VIẾT ================= --}}
+    {{-- ================= TIÊU ĐỀ ================= --}}
     <div class="form-group">
         <label>Tiêu đề</label>
         <input
             type="text"
-            name="title" {{-- tên field, khớp DB --}}
+            name="title"
             class="form-control"
-            value="{{ old('title', $post->title ?? '') }}" {{-- lấy lại dữ liệu khi lỗi --}}
+            value="{{ old('title', $post->title ?? '') }}"
             required>
     </div>
 
-    {{-- ================= SLUG (URL) ================= --}}
+    {{-- ================= SLUG ================= --}}
     <div class="form-group mt-3">
         <label>Slug (URL)</label>
         <input
@@ -23,41 +23,55 @@
 
     {{-- ================= ẢNH ĐẠI DIỆN ================= --}}
     <div class="form-group mt-3">
-        <label>Hình ảnh</label>
+        <label>Ảnh đại diện</label>
         <input
             type="file"
-            name="thumbnail" {{-- khớp request --}}
+            name="thumbnail"
             class="form-control"
             accept="image/*">
 
-        {{-- HIỂN THỊ ẢNH CŨ KHI EDIT --}}
-        @if (!empty($post->thumbnail))
-        <img
-            src="{{ asset('storage/' . $post->thumbnail) }}"
-            width="120"
-            class="mt-2">
+        @if (!empty($post?->thumbnail))
+            <img
+                src="{{ asset('storage/' . $post->thumbnail) }}"
+                width="120"
+                class="mt-2">
         @endif
+    </div>
+
+    {{-- ================= MÔ TẢ NGẮN ================= --}}
+    <div class="form-group mt-3">
+        <label>Mô tả ngắn</label>
+        <input
+            type="text"
+            name="excerpt"
+            class="form-control"
+            value="{{ old('excerpt', $post->excerpt ?? '') }}">
     </div>
 
     {{-- ================= NỘI DUNG ================= --}}
     <div class="form-group mt-3">
         <label>Nội dung</label>
         <textarea
-            name="content" {{-- field nội dung --}}
+            name="content"
             rows="5"
             class="form-control">{{ old('content', $post->content ?? '') }}</textarea>
     </div>
 
-    {{-- ================= BÀI VIẾT NỔI BẬT ================= --}}
+    {{-- ================= TRENDING NOW (FIX CHUẨN) ================= --}}
     <div class="form-group mt-3">
-        <label>
+        <label>Bài viết Trending</label>
+
+        {{-- hidden để luôn gửi giá trị --}}
+        <input type="hidden" name="is_trending" value="0">
+
+        <div>
             <input
                 type="checkbox"
-                name="is_featured"
+                name="is_trending"
                 value="1"
-                {{ old('is_featured', $post->is_featured ?? false) ? 'checked' : '' }}>
-            Bài viết nổi bật
-        </label>
+                {{ old('is_trending', $post->is_trending ?? 0) == 1 ? 'checked' : '' }}>
+            Hiển thị ở TRENDING NOW
+        </div>
     </div>
 
     {{-- ================= TRẠNG THÁI ================= --}}
@@ -70,12 +84,11 @@
             </option>
 
             <option value="published"
-                @selected(old('status', $post->status ?? '') == 'published')>
+                @selected(old('status', $post->status ?? 'published') == 'published')>
                 Xuất bản
             </option>
         </select>
     </div>
-
     {{-- ================= NÚT LƯU ================= --}}
     <button class="btn btn-info mt-4 w-100">
         Lưu bài viết

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Posts;
+use App\Models\Post; // ✅ MODEL ĐÚNG
 use App\Services\PostsService;
 use App\Http\Requests\PostsRequest;
 use Illuminate\Support\Facades\Storage;
@@ -12,14 +12,13 @@ use Illuminate\Http\Request;
 class PostsController extends Controller
 {
     public function __construct(public readonly PostsService $PostsService) {}
-    // Hiển thị toàn bộ sản phẩm
+
+    // LIST
     public function index(Request $request)
     {
-        $query = Posts::query()
+        $query = Post::query()
             ->when($request->search, function ($query) use ($request) {
-                $query->where(function ($q) use ($request) {
-                    $q->where('title', 'like', '%' . $request->search . '%');
-                });
+                $query->where('title', 'like', '%' . $request->search . '%');
             })
             ->when($request->filled('start_date'), function ($query) use ($request) {
                 $query->whereDate('created_at', '>=', $request->start_date);
@@ -31,69 +30,60 @@ class PostsController extends Controller
         $Posts = $query->latest()->paginate(10);
         return view('admin.Posts.index', compact('Posts'));
     }
-    // Form tạo mới
+
+    // CREATE
     public function create()
     {
         return view('admin.Posts.create');
     }
 
-    // Lưu vào DB
+    // STORE
     public function store(PostsRequest $request)
     {
-        try {
-            $data = $request->validated();
-            if ($request->hasFile('thumbnail')) {
-                $data['thumbnail'] = $request->file('thumbnail')->store('avatars', 'public');
-            }
-            $Posts = $this->PostsService->store($data);
-            if ($Posts) {
-                flash('Thêm thành công')->success();
-                return redirect()->route('posts.index');
-            }
-            flash('Thêm  thất bại')->error();
-            return redirect()->back();
-        } catch (\Exception $e) {
-            flash('Thêm thất bại')->error();
-            return redirect()->back();
+        $data = $request->validated();
+
+        if ($request->hasFile('thumbnail')) {
+            $data['thumbnail'] = $request->file('thumbnail')->store('avatars', 'public');
         }
+
+        $this->PostsService->store($data);
+
+        flash('Thêm thành công')->success();
+        return redirect()->route('posts.index');
     }
 
-    // Form chỉnh sửa
+    // EDIT
     public function edit($id)
     {
-        $recipe = Posts::findOrFail($id);
-
-        return view('admin.Posts.edit', compact('recipe'));
+        $post = Post::findOrFail($id);
+        return view('admin.Posts.edit', compact('post'));
     }
 
-    // Update sản phẩm
+    // UPDATE
     public function update(PostsRequest $request, $id)
     {
-        try {
-            $Posts = Posts::findOrFail($id);
-            $data = $request->validated();
-            if ($request->hasFile('thumbnail')) {
-                if ($Posts->thumbnail) {
-                    Storage::disk('public')->delete($Posts->thumbnail);
-                }
-                $data['thumbnail'] = $request->file('thumbnail')->store('avatars', 'public');
-            }
+        $post = Post::findOrFail($id);
+        $data = $request->validated();
 
-            $Posts->update($data);
-            flash('Chỉnh sửa  thành công')->success();
-            return redirect()->route('Posts.index');
-        } catch (\Exception $e) {
-            flash('Chỉnh sửa thất bại')->error();
-            return redirect()->back();
+        if ($request->hasFile('thumbnail')) {
+            if ($post->thumbnail) {
+                Storage::disk('public')->delete($post->thumbnail);
+            }
+            $data['thumbnail'] = $request->file('thumbnail')->store('avatars', 'public');
         }
+
+        $post->update($data);
+
+        flash('Chỉnh sửa thành công')->success();
+        return redirect()->route('posts.index');
     }
 
-    // Xoá sản phẩm
+    // DELETE (AJAX)
     public function delete($id)
     {
+        $post = Post::findOrFail($id);
+        $post->delete();
 
-        $Posts = Posts::findOrFail($id);
-        $Posts->delete();
-        return redirect()->back();
+        return response()->json(['success' => true]); // ✅ AJAX CHUẨN
     }
 }

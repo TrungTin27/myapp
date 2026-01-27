@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Posts;
+use App\Models\Post;
 use App\Repositories\Interface\PostsRepositoryInterface;
 
 
@@ -19,6 +19,7 @@ class PostsService
         return $this->PostsRepository->create($data);
     }
 
+
     public function update($id, array $data)
     {
         return $this->PostsRepository->update($id, $data);
@@ -30,7 +31,7 @@ class PostsService
     }
     public function store($data)
     {
-        return Posts::create($data);
+        return Post::create($data);
     }
     public function search($keyword)
     {

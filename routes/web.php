@@ -67,21 +67,21 @@ Route::get('/pasta_recipes/create', [pasta_recipesController::class, 'create'])-
 Route::post('/pasta_recipes/store', [pasta_recipesController::class, 'store'])->name('pasta_recipes.store');
 Route::get('/pasta_recipes/edit/{id}', [pasta_recipesController::class, 'edit'])->name('pasta_recipes.edit');
 Route::put('/pasta_recipes/{id}', [pasta_recipesController::class, 'update'])->name('pasta_recipes.update');
-Route::delete('/pasta_recipes/{id}/delete', [pasta_recipesController::class, 'delete'])->name('pasta_recipes.delete');
+Route::delete('/pasta_recipes/{id}', [pasta_recipesController::class, 'destroy'])->name('pasta_recipes.destroy');
 //Breakfast_recipes//
 Route::get('/breakfast_recipes', [Breakfast_recipesController::class, 'index'])->name('breakfast_recipes.index');
 Route::get('/breakfast_recipes/create', [breakfast_recipesController::class, 'create'])->name('breakfast_recipes.create');
 Route::post('/breakfast_recipes/store', [breakfast_recipesController::class, 'store'])->name('breakfast_recipes.store');
 Route::get('/breakfast_recipes/edit/{id}', [breakfast_recipesController::class, 'edit'])->name('breakfast_recipes.edit');
 Route::put('/breakfast_recipes/{id}', [breakfast_recipesController::class, 'update'])->name('breakfast_recipes.update');
-Route::delete('/breakfast_recipes/{id}/delete', [breakfast_recipesController::class, 'delete'])->name('breakfast_recipes.delete');
+Route::delete('admin/breakfast_recipes/{id}',[breakfast_recipesController::class, 'destroy'])->name('breakfast_recipes.destroy');
 //Under_recipes//
 Route::get('/under_recipes', [Under_recipesController::class, 'index'])->name('under_recipes.index');
 Route::get('/under_recipes/create', [under_recipesController::class, 'create'])->name('under_recipes.create');
 Route::post('/under_recipes/store', [under_recipesController::class, 'store'])->name('under_recipes.store');
 Route::get('/under_recipes/edit/{id}', [under_recipesController::class, 'edit'])->name('under_recipes.edit');
 Route::put('/under_recipes/{id}', [under_recipesController::class, 'update'])->name('under_recipes.update');
-Route::delete('/under_recipes/{id}/delete', [under_recipesController::class, 'delete'])->name('under_recipes.delete');
+Route::delete('/under_recipes/{id}/', [under_recipesController::class, 'destroy'])->name('under_recipes.destroy');
 //Trending now//latest posts//post//
 Route::resource('posts', PostsController::class);
 Route::get('/posts', [PostsController::class, 'index'])->name('posts.index');
@@ -96,21 +96,21 @@ Route::get('/reader_favorites/create', [Reader_favoritesController::class, 'crea
 Route::post('/reader_favorites/store', [Reader_favoritesController::class, 'store'])->name('reader_favorites.store');
 Route::get('/reader_favorites/edit/{id}', [Reader_favoritesController::class, 'edit'])->name('reader_favorites.edit');
 Route::put('/reader_favorites/{id}', [Reader_favoritesController::class, 'update'])->name('reader_favorites.update');
-Route::delete('/reader_favorites/{id}/delete', [Reader_favoritesController::class, 'delete'])->name('reader_favorites.delete');
+Route::delete('/reader_favorites/{id}',[Reader_favoritesController::class, 'destroy'])->name('reader_favorites.destroy');
 //Author_sections//
 Route::get('/author_sections', [Author_sectionsController::class, 'index'])->name('author_sections.index');
 Route::get('/author_sections/create', [author_sectionsController::class, 'create'])->name('author_sections.create');
 Route::post('/author_sections/store', [author_sectionsController::class, 'store'])->name('author_sections.store');
 Route::get('/author_sections/edit/{id}', [author_sectionsController::class, 'edit'])->name('author_sections.edit');
 Route::put('/author_sections/{id}', [author_sectionsController::class, 'update'])->name('author_sections.update');
-Route::delete('/author_sections/{id}/delete', [author_sectionsController::class, 'delete'])->name('author_sections.delete');
+Route::delete('author_sections/{id}',[author_sectionsController::class, 'destroy'])->name('author_sections.destroy');
 //How_tos//
 Route::get('/how_tos', [How_tosController::class, 'index'])->name('how_tos.index');
 Route::get('/how_tos/create', [how_tosController::class, 'create'])->name('how_tos.create');
 Route::post('/how_tos/store', [how_tosController::class, 'store'])->name('how_tos.store');
 Route::get('/how_tos/edit/{id}', action: [how_tosController::class, 'edit'])->name('how_tos.edit');
 Route::put('/how_tos/{id}', action: [how_tosController::class, 'update'])->name('how_tos.update');
-Route::delete('/how_tos/{id}/delete', action: [how_tosController::class, 'delete'])->name('how_tos.delete');
+Route::delete('admin/how_tos/{id}', [how_tosController::class,'destroy'])->name('how_tos.destroy');
 
 //CMS//
 Route::get('/', [CMSController::class, 'index'])->name('home');

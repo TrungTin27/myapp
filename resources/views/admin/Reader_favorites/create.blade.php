@@ -16,7 +16,6 @@
     "rating" => old('rating'),
     "excerpt" => old('excerpt'),
     "is_active"=>old("is_active"),
-    "sort_order"=>old("sort_order"),
     ])
 </form>
 @endsection
