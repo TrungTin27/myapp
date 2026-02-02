@@ -285,10 +285,92 @@
       <span class="share-icon"></span>
     </button>
   </footer>
-  <script src="{{ asset('js/js.js') }}">
-  </script>
-  @yield('script')
+<script src="{{ asset('js/js.js') }}"></script>
+
+@yield('script')
+
+<script>
+/* ===== BANNERS ===== */
+fetch('/api/banners')
+    .then(res => res.json())
+    .then(res => {
+        console.log("BANNERS:", res.data);
+    })
+    .catch(err => console.error(err));
+
+
+/* ===== POSTS ===== */
+
+ fetch('/api/posts')
+    .then(res => res.json())
+    .then(res => {
+        let html = '';
+        res.data.forEach(post => {
+            html += `
+                <div>
+                    <h3>${post.title}</h3>
+                    <p>${post.content}</p>
+                </div>
+            `;
+        });
+
+        document.getElementById('post-list').innerHTML = html;
+    });
+
+
+    /* ===== Chicken_recipes ===== */
+    fetch('/api/chicken_recipes')
+  .then(res => res.json())
+  .then(res => {
+      console.log(res.data);
+  });
+/* ===== Pasta_recipes ===== */
+  fetch('/api/pasta_recipes')
+  .then(res => res.json())
+  .then(res => {
+      console.log(res.data);
+  });
+/* ===== Breakfast_recipes ===== */
+fetch('/api/breakfast_recipes')
+  .then(res => res.json())
+  .then(res => {
+      console.log(res.data);
+  });
+/* ===== Under_recipes ===== */
+fetch('/api/under_recipes')
+  .then(res => res.json())
+  .then(res => {
+      console.log(res.data);
+  });
+/* ===== Author_sections ===== */
+fetch('/api/author_sections')
+  .then(res => res.json())
+  .then(res => {
+      console.log(res.data);
+  });
+/* ===== How_tos ===== */
+fetch('/api/how_tos')
+  .then(res => res.json())
+  .then(res => {
+      console.log(res.data);
+  });
+  /* ===== Reader_favorites ===== */
+fetch('/api/reader_favorites')
+  .then(res => res.json())
+  .then(res => {
+      console.log(res.data);
+  });
+  /* ===== Contact_messages ===== */
+fetch('/api/contact_messages')
+  .then(res => res.json())
+  .then(res => {
+      console.log(res.data);
+  });
+</script>
+
 
 </body>
 
-</html>
+</html>     
+
+

@@ -44,3 +44,4 @@ function updateLayout() {
 }
 window.addEventListener("resize", updateLayout);
 updateLayout();
+
