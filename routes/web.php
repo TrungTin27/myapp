@@ -17,7 +17,6 @@ use App\Http\Controllers\Admin\Author_sectionsController;
 use App\Http\Controllers\Admin\How_tosController;
 use App\Http\Controllers\Admin\DashboardController;
 
-
 Route::get('/login', function () {
     return redirect()->route('admin.login');
 })->name('login');
@@ -34,7 +33,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     //  TẤT CẢ ROUTE ADMIN (BẮT BUỘC LOGIN)
     Route::middleware('auth:admin')->group(function () {
 
-        //  Dashboard (trang chính admin)
+        //  Dashboard (trang chính admin)   
         Route::get('/', [AdminController::class, 'index'])->name('index');
 
         //  Nếu bạn muốn /admin/dashboard
@@ -117,3 +116,4 @@ Route::get('/', [CMSController::class, 'index'])->name('home');
 
 Route::post('/contact_messages/store', action: [Contact_messagesController::class, 'store'])->name('contact.store');
 
+   

@@ -45,7 +45,7 @@
 
         <!-- MENU -->
         <div class="aiz-side-nav-wrap">
-            <ul class="aiz-side-nav-list" id="main-menu" data-toggle="aiz-side-menu">
+<ul class="aiz-side-nav-list" id="main-menu" data-toggle="aiz-side-menu">
 
                 <!-- DASHBOARD -->
 <li class="aiz-side-nav-item mb-1">
@@ -156,13 +156,9 @@
         <span class="aiz-side-nav-text">UNDER 10$</span>
     </a>
 </li>
-
-
-
-
-            </ul>
-        </div>
+    </ul>
     </div>
+</div>
 
     <div class="aiz-sidebar-overlay"></div>
 </div>
