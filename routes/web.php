@@ -116,4 +116,4 @@ Route::get('/', [CMSController::class, 'index'])->name('home');
 
 Route::post('/contact_messages/store', action: [Contact_messagesController::class, 'store'])->name('contact.store');
 
-   
+
