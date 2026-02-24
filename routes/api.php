@@ -69,6 +69,7 @@ Route::prefix('author-sections')->name('api.author_sections.')->group(function (
     Route::put('/{id}', [Author_sectionsController::class, 'update'])->name('update');
     Route::delete('/{id}', [Author_sectionsController::class, 'destroy'])->name('destroy');
 });
+
 // How_tos //
 Route::prefix('how-tos')->name('api.how_tos.')->group(function () {
     Route::get('/', [How_tosController::class, 'index'])->name('index');
@@ -91,5 +92,5 @@ Route::prefix('contact-messages')->name('api.contact_messages.')->group(function
     Route::post('/', [Contact_messagesController::class, 'store'])->name('store');
     Route::delete('/{id}', [Contact_messagesController::class, 'destroy'])->name('destroy');
 });
-//  
+
 

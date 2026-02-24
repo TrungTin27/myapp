@@ -75,7 +75,7 @@ class breakfast_recipesController extends Controller
     public function destroy($id)
     {
         $recipe = breakfast_recipes::find($id);
-
+        
         if (!$recipe) {
             return response()->json([
                 'status' => false,

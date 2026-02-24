@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class Under_recipesController extends Controller
+
 {
     public function __construct(public readonly Under_recipesService $PostsService) {}
     // Hiển thị toàn bộ sản phẩm
